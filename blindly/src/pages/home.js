@@ -13,8 +13,9 @@ const Home = () => {
         <Nav/>
         <div className="home">
             <h1>Blindly</h1>
+            <h2>Love Blindly, Meet Truly</h2>
             <button className="primary-button" onClick={handleClick}>
-                {authToken ? 'Signout' : 'Create Account'}
+                {authToken ? 'Sign Out' : 'Create Account'}
             </button>
         </div>
         </div>
