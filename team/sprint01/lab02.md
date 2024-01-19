@@ -1,27 +1,27 @@
 Attendance: All
 
 Emily
-    COmpleted hello world MVP, created the license
+    Completed hello world MVP, created the license
     Gettings started on lab 2
     No Blocks
 
 Palvu
-    Competed hello world
+    Completed hello world MVP
     Getting started on lab 2
     No blocks
 
 Koray
-    Tried workign on hello world
-    Wokring on getting hello world react app to work
-    TRouble getting 'hello world' show up on screen
+    Completed hello world MVP
+    Getting started on lab 2
+    No blocks
 
 Xinyab
-    COmpleted MVP
+    Completed MVP
     Getting started on lab 2
     No blocks
 
 Emre
-    COmplted MVP, added sign out button, bakcground, Title
+    Complted MVP, added sign out button, bakcground, Title
     Getting started on lab 2
     No blocks
 
