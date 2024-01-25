@@ -1,0 +1,10 @@
+.header {
+    display: flex;
+    border-bottom: 1px solid hsl(173, 17%, 63%);
+    align-items: center;
+}
+
+.header__icon{
+    padding: 20px;
+    font-size: 50px;
+}
