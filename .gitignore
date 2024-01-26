@@ -3,3 +3,6 @@
 
 # But not the src directory and its contents
 !src/
+
+# And except every file and directory inside the src directory
+!src/**
