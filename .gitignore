@@ -1,1 +1,5 @@
-/team
+# Ignore everything
+*
+
+# But not the src directory and its contents
+!src/
