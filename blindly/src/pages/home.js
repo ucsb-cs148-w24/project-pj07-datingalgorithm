@@ -11,11 +11,13 @@ const Home = () => {
     return (
         <div className='overlay'>
         <Nav/>
-        <div className="home">
+        <div className="container">
             <h1>Blindly</h1>
             <h2>Love Blindly, Meet Truly</h2>
+            <h3>👻</h3>
+            <h4>©</h4>
             <button className="primary-button" onClick={handleClick}>
-                {authToken ? 'Sign Out' : 'Create Account'}
+                {authToken ? 'Log In' : 'Create Account'}
             </button>
         </div>
         </div>
