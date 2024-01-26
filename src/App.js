@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import Header from './Header';
+import Cards from './Cards';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 function App() {
@@ -10,7 +11,7 @@ function App() {
       <Header />
       <Router >
         <Routes>
-          <Route path='/' element={<h1>Yo</h1>} />
+          <Route path='/' element={<Cards/>}/>
         </Routes>
       </Router>
     </div>

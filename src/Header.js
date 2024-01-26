@@ -7,13 +7,15 @@ const Header = () => {
     return (
         <div className='header'>
             <IconButton>
-                <HomeIcon className='header__icon' />
+                <img src={require("./res/eye-mask.png")}
+                    width = {50}
+                    height = {50}
+                    float = "right"
+                />
             </IconButton>
             
             <h1>Blindly</h1>
-            <IconButton>
-                <img src={'./res/eye-mask.png'} />
-            </IconButton>
+            
         </div>
     );
 }
