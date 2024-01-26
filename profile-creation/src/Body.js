@@ -7,20 +7,20 @@ function Body() {
     return (
         <div className="Body">
             <form action="/action_page.php">
+                <p>First Name</p>
                 <div className="input-group">
-                    <label for="fname">First Name</label>
                     <input type="text" id="fname" name="firstname" placeholder="First Name"/>
                 </div>
+                <p>Last Name</p>
                 <div className="input-group">
-                    <label for="lname">Last Name</label>
                     <input type="text" id="lname" name="lastname" placeholder="Last Name"/>
                 </div>
+                <p>Birthday</p>
                 <div className="input-group">
-                    <label htmlFor="bday">Birthday</label>
                     <input type="date" id="bday" /> 
                     
                 </div>
-                <label for="gender">Gender</label>
+                <p>Gender</p>
                 <select id="gender" name="gender">
                     <option value="" disabled selected>Select</option>
                     <option value="man">Man</option>
@@ -43,8 +43,8 @@ function Body() {
                     <option value="other">Other</option>
                 </select>
 
+                <p>Interested in</p>
                 <div>
-                    <label for="sexual_ori">Interested In</label>
                     <select id="sexual_ori" name="sexual_ori">
                         <option value="" disabled selected>Select</option>
                         <option value="men">Men</option>
