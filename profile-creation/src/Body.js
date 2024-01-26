@@ -6,7 +6,7 @@ import './Body.css';
 function Body() {
     return (
         <div className="Body">
-            <form>
+            <form action="/action_page.php">
                 <div className="input-group">
                     <label for="fname">First Name</label>
                     <input type="text" id="fname" name="firstname" placeholder="First Name"/>
