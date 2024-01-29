@@ -1,9 +1,29 @@
 // src/Body.js
 
-import React from 'react'
+import React from 'react';
+import { useState } from 'react';
 import './Body.css';
 
 function Body() {
+    const [selectedHobbies, setSelectedHobbies] = useState([]);
+
+    const hobbies = [
+        'Reading',
+        'Watching Movies',
+        'Listening to Music',
+        'Playing Sports',
+        'Cooking',
+        'Traveling',
+        'Gaming',
+        'Art and Crafts',
+        // Add more hobbies as needed
+    ];
+
+    const handleHobbiesChange = (e) => {
+        const selectedValues = Array.from(e.target.selectedOptions, (option) => option.value);
+        setSelectedHobbies(selectedValues);
+    };
+
     return (
         <div className="Body">
             <form action="/action_page.php">
@@ -53,12 +73,34 @@ function Body() {
                     </select>
                 </div>
 
+                <p>Tell me about yourself</p>
+                <div className="input-group">
+                    <input type="text" id="bio" name="" placeholder="What would you like your potential matches to know about you?"/>
+                </div>
+
+                <p>What do you enjoy in your spare time? Please select your top 2 options</p>
+                <div className="input-group">
+                    <select
+                        id="hobbies"
+                        name="hobbies"
+                        multiple
+                        value={selectedHobbies}
+                        onChange={handleHobbiesChange}
+                    >
+                        {hobbies.map((hobby) => (
+                            <option key={hobby} value={hobby}>
+                                {hobby}
+                            </option>
+                        ))}
+                    </select>
+                </div>
+
                 <div>
                     <input type="submit" value="Submit"></input>
                 </div>
             </form>
         </div>
-    )
+    );
 }
 
 export default Body
