@@ -149,3 +149,10 @@ so that we can get more work done in the same amount of time
 
 X
 
+
+## Retro Assessment
+We used the start/stop/continue method to figure out some things that people wanted us to change on continue doing. We then voted on which things were most important, and decided to make a plan to address these things.
+
+It went very well. We heard lots of useful advice on how we can improve our development process. We created expiriements to try to fix the issues during our next sprint.
+
+I would reccomend the next person leading a retro to only listen and remain nuetral the entire time. It is difficult to avoid voicing your opinion; however, it is very beneficial for the team to approach the issues from a nuetral perspective.
