@@ -11,7 +11,7 @@ function Cards() {
     const [people, setPeople] = useState([
         {
             name: "Tony Stark",
-            hobby: ":)",
+            hobby: "Flying high and fast cars",
             image: require("./res/tonyStark.jpg"),
             score: "90%"
         },

@@ -15,19 +15,28 @@
     background-position: center; */
 
     position: fixed;
-    padding: 20px;
     max-width: 85vw;
-    z-index: -1;
+    
     width: 800px;
-    height: 70vh;
+    height: 80vh;
     background-size: cover;
     background-position: center;
+    z-index: -1;
     filter: blur(22px);
+    border-style: solid;
+    margin: -20px -5px -5px -5px;
 }
 
 
 .swipe{
     position: absolute;
+    max-width: 85vw;
+    
+    width: 800px;
+    height: 80vh;
+    
+    overflow: hidden;
+    border-radius: 40px;
 }
 
 .image{
