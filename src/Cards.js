@@ -40,9 +40,13 @@ function Cards() {
                     <div
                         className="content"
                     >
-                        <h3>{person.name}</h3>
+                        <h3 style={{fontSize: 50}}>
+                            {person.name}
+                        </h3>
                         <p>{person.hobby}</p>
-                        <p>{person.score}</p>
+                        <p style={{fontSize: 150, position: "absolute", bottom: 40, left: 260}}>
+                            {person.score}
+                        </p>
                     </div>
                     
                 </TinderCard>
