@@ -11,3 +11,6 @@ Nirmit has a little bit of React Native experience, used Firebase before, he wil
 Palvi has no previous experience, will commit to working through tutorials and learn about React and Node.js during week 3 and 4.
 
 Emily has no previous experience, will work together with Palvi to learn about React and Node.js through tutorials during week 3 and 4.
+
+Week 4 1/31
+Palvi, Emily, and Koray posted in react_native_help and js_help a tutorial.
