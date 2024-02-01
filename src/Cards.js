@@ -38,8 +38,8 @@ function Cards() {
                             {person.name}
                         </h3>
                         <p>{person.tagline}</p>
-                        <p style={{fontSize: 150, position: "absolute", bottom: 40, left: 260}}>
-                            {90}
+                        <p style={{fontSize: 150, position: "absolute", bottom: 40, left: 300}}>
+                            {"90%"}
                         </p>
                     </div>
                     
