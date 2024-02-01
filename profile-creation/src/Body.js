@@ -3,6 +3,7 @@
 import React from 'react';
 import './Body.css';
 
+
 var checks = document.querySelectorAll(".check");
 var max = 2;
 for (var i = 0; i < checks.length; i++)
@@ -70,7 +71,7 @@ function Body() {
                 <br></br>
                 <p><b>Tell me about yourself</b></p>
                 <div className="input-group">
-                    <input type="text" id="bio" name="" placeholder="What would you like your potential matches to know about you?"/>
+                    <textarea id="bio" name="bio" placeholder="What would you like your potential matches to know about you?"></textarea>
                 </div>
                 <br></br>    
                 <p><b>What do you enjoy in your spare time? Please select your top three choices.</b></p>

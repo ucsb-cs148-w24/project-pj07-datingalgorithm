@@ -8,8 +8,11 @@
         border-radius: 4px;
         box-sizing: border-box;
     }
-    input[type=text], select multiple{
-        width: 40%;
+    
+    .input-group #bio {
+        width: 570px;
+        height: 200px;
+        vertical-align: top;
         padding: 12px 20px;
         margin: 8px 0;
         display: inline-block;
