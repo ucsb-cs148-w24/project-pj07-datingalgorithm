@@ -9,3 +9,13 @@
     background-color: rgb(219, 203, 234);
     color: #000000;
   }
+
+.logo {
+    width: 50px; 
+    margin-right: 10px; 
+    margin-top: 0px;  
+}
+
+h1 {
+  margin: 0; 
+}
