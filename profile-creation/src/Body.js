@@ -1,23 +1,23 @@
 // src/Body.js
 
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import './Body.css';
+import data from "./data";
 
-
-var checks = document.querySelectorAll(".check");
-var max = 2;
-for (var i = 0; i < checks.length; i++)
-    checks[i].onclick = selectiveCheck;
-function selectiveCheck (event) {
-    var checkedChecks = document.querySelectorAll(".check:checked");
-    if (checkedChecks.length >= max + 1)
-        return false;
-}
 
 function Body() {
+
+    const [allQues, setAllQues] = useState([]);
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        console.log('Selected options: ' + allQues);
+        console.log('Number of selected options: ' + allQues.length);
+    };
+
     return (
         <div className="Body">
-            <form action="/action_page.php">
+            <form action="/action_page.php" onSubmit={handleSubmit}>
                 <br></br>
                 <p><b>First Name</b></p>
                 <div className="input-group">
@@ -73,38 +73,20 @@ function Body() {
                 <div className="input-group">
                     <textarea id="bio" name="bio" placeholder="What would you like your potential matches to know about you?"></textarea>
                 </div>
-                <br></br>    
-                <p><b>What do you enjoy in your spare time? Please select your top three choices.</b></p>
-                <div class='checkboxes-container'>
-                    <label><input type="checkbox" class="check" />Reading</label> <p></p>
-                    <label><input type="checkbox" class="check" />Watching to Movies</label> <p></p>
-                    <label><input type="checkbox" class="check" />Listening to Music</label> <p></p>
-                    <label><input type="checkbox" class="check" />Playing Sports</label> <p></p>
-                    <label><input type="checkbox" class="check" />Cooking</label> <p></p>
-                    <label><input type="checkbox" class="check" />Traveling</label> <p></p>
-                    <label><input type="checkbox" class="check" />Gaming</label> <p></p>
-                    <label><input type="checkbox" class="check" />Arts and Crafts</label>
-                </div>
                 <br></br>
-                <p><b>What traits best describe you? Please select your top three choices.</b></p>
-                <div class='checkboxes-container'>
-                    <label><input type="checkbox" class="check" />Adventurous</label> <p></p>
-                    <label><input type="checkbox" class="check" />Ambitious</label> <p></p>
-                    <label><input type="checkbox" class="check" />Easygoing</label> <p></p>
-                    <label><input type="checkbox" class="check" />Empathetic</label> <p></p>
-                    <label><input type="checkbox" class="check" />Optimistic</label> <p></p>
-                    <label><input type="checkbox" class="check" />Romantic</label> <p></p>
-                    <label><input type="checkbox" class="check" />Open-minded</label> <p></p>
-                    <label><input type="checkbox" class="check" />Family-oriented</label>
-                </div>
-                <br></br>
-                <p><b>What are your love languages? Please select your top two choices.</b></p>
-                <div class='checkboxes-container'>
-                    <label><input type="checkbox" class="check" />Acts of service</label> <p></p>
-                    <label><input type="checkbox" class="check" />Physical touch</label> <p></p>
-                    <label><input type="checkbox" class="check" />Receiving gifts</label> <p></p>
-                    <label><input type="checkbox" class="check" />Quality time</label> <p></p>
-                    <label><input type="checkbox" class="check" />Words of affirmation</label> <p></p>
+                <div className="group">
+                    <form onSubmit={handleSubmit}>
+                        {data.map((ques, index) => {
+                        return (
+                            <SingleGroup
+                            key={index}
+                            data={ques}
+                            setAllQues={setAllQues}
+                            allQues={allQues}
+                            />
+                        );
+                        })}
+                    </form>
                 </div>
                 <br></br>
                 <div>
@@ -114,5 +96,61 @@ function Body() {
         </div>
     );
 }
+
+
+const SingleGroup = ({ data, setAllQues, allQues }) => {
+    const [values, setValues] = useState([]);
+    const handleChange = (e) => {
+        if (e.target.checked) {
+            if (data.group == "love-lang") {
+                if (values.length < 2) {
+                    setValues((prev) => [...prev, e.target.value]);
+                    setAllQues((prev) => [...prev, e.target.value]);
+                } else {
+                    e.target.checked = false;
+
+                    alert("You can select only 2 choices");
+                }
+            }
+            else {
+                if (values.length < 3) {
+                    setValues((prev) => [...prev, e.target.value]);
+                    setAllQues((prev) => [...prev, e.target.value]);
+                } else {
+                    e.target.checked = false;
+
+                    alert("You can select only 3 choices");
+                }
+            }
+        } else {
+        let newArr = values.filter((d) => d !== e.target.value);
+        setValues(newArr);
+        let rm = allQues.filter((item) => item !== e.target.value);
+        setAllQues(rm);
+        }
+    };
+
+    return (
+        <div>
+        <br></br>
+          <p><b>{data.prompt}</b></p>
+          {data.questions.map((ques, index) => {
+            return (
+              <label key={index}>
+                <p>
+                <input
+                  type="checkbox"
+                  name={ques.label}
+                  value={ques.label}
+                  onChange={(e) => handleChange(e)}
+                />
+                {ques.label}
+                </p>
+              </label>
+            );
+          })}
+        </div>
+      );
+    };
 
 export default Body

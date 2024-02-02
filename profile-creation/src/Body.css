@@ -42,4 +42,9 @@
         cursor: pointer;
     }
 
+    .selection {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
   }
