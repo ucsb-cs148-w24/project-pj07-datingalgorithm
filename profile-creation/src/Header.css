@@ -3,19 +3,23 @@
     width: 100%;
     display: flex;
     justify-content: left;
-    align-items: baseline;
+    
     padding: 1em;
     margin-bottom: 1em;
     background-color: rgb(219, 203, 234);
     color: #000000;
+    
   }
 
-.logo {
-    width: 50px; 
-    margin-right: 10px; 
-    margin-top: 0px;  
+h1{
+    margin-top: 0px; 
+    margin-bottom: 0px;
 }
 
-h1 {
-  margin: 0; 
+.logo {
+    width: 40px; 
+    margin-right: 10px; 
+    margin-top: 0px; 
+    margin-bottom: 0px;
+    float: left; 
 }
