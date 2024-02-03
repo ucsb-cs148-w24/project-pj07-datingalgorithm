@@ -1,20 +1,15 @@
 import React from 'react';
-import Home from './pages/home'
-import Dashboard from './pages/dashboard'
-import Login from './pages/login'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Home from './Home'; // Ensure this import path matches your file structure
 
 const App = () => {
   return (
     <BrowserRouter>
-    <Routes>
-      <Route path="/" element = {<Home/>}/>
-      <Route path="/dashboard" element = {<Dashboard/>}/>
-      <Route path="/login" element = {<Login/>}/>
-    </Routes>
-    
+      <Routes>
+        <Route path="/" element={<Home />} />
+      </Routes>
     </BrowserRouter>
   );
-}
+};
 
-export default App
+export default App;

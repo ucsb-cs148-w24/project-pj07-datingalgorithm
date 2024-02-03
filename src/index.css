@@ -10,48 +10,8 @@ html, body {
 * {
     font-family: 'IBM Plex Sans', sans-serif; /* Corrected the font family to the imported one */
 }
-.container {
-    display: flex;
-    flex-direction:row;
-    justify-content: center; /* Align items vertically */
-    align-items: center; /* Align items horizontally */
-    position:absolute; /* Use relative for child absolute positioning */
-    margin: auto;
-    padding: 50px; /* Add padding inside the container */
-    background: #000000;
-    width: 25%;
-    height: 33%;
-    max-width: 350px; /* Set the maximum width as you prefer */
-    border-radius: 40px; /* Optional: rounds the corners */
-    top: 50%; /* Center the container */
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 2; /* Ensures that the container is above the overlay */
-}
-.primary-button {
-    display: block;
-    margin: 80px auto;
-    color:azure;
-    text-transform: uppercase;
-    font-size: 30px;
-    font-family:'IBM Plex Sans', sans-serif;
-    background: linear-gradient(13deg,#000000, #525252, #000000);
-    padding: 12px 50px;
-    width: 73%;
-    height: 20%;
-    border-radius: 30px;
-    border: none;
-    cursor: pointer; 
-    position: absolute;
-    top: 55%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;/* Makes it clear the button is clickable */
-}
 
-.primary-button:hover {
-    background: linear-gradient(260deg, #525252, #000000);
-}
+
 
 body {
     display: flex; /* Use flexbox to center children */
@@ -70,9 +30,12 @@ body {
         to bottom,
         rgba(0,0,0,0.65) 0%,
         rgba(0,0,0,0) 100%
-    ), url('images/background.png') no-repeat center center fixed; /* Centers the background image and prevents repeating */
+    ), url('images/blindly3.png') no-repeat center center fixed; /* Centers the background image and prevents repeating */
     background-size: cover; /* Ensures the image covers the entire element */
-    z-index: -1; /* Ensure the overlay is behind the content */
+    
+}
+.primary-button{
+    position: absolute;
 }
 h1{
     font-size: 48px;
@@ -80,34 +43,49 @@ h1{
     color: azure;
     position:absolute 0;
     height: 35vh;
-    
-    
 }
 h2{
-    position:static;
-    transform: none;
-    margin-top:1px 2px;
+    position: absolute; /* or 'relative' to a positioned container */
+    font-size: 5vmin; /* Scales with the viewport, adjust as needed */
+    top: 20vh; /* Position the element in relation to the heart's position */
+    left: 50vw; /* Adjust 'top' and 'left' as needed */
+    transform: translate(-50%, -50%); /* Center `h2` on the specified point */
     color: azure;
-    position: absolute ;
-    font-size: large;
-    height: 20vh;
 }
-h3{
-    position:static;
-    transform: none;
-    margin-top:1px;
-    color: azure;
-    position: absolute ;
-    font-size: 75px;
-    height: 3.4vh;
-}
-h4{
-    position:static;
-    transform: none;
-    margin-top:1px;
-    color: azure;
-    font-size: 22px;
+.primary-button {
+    background-color: black; /* Button background color */
+    color: white; /* Text color */
+    border: none; /* Remove button border */
+    border-radius: 5px; /* Add rounded corners */
+    padding: 10px 20px; /* Add some padding around the text */
+    font-size: 3vmin; /* Adjust font size */
+    position: absolute;
+    top: 65vh;
+    transform: translate(-50%, -50%); /* Center `h2` on the specified point */
 
-    height: 32vh;
-    width:0vw;
+    
+}
+
+/* Add a hover effect for the button */
+.primary-button:hover {
+    background-color: black; /* Change background color on hover */
+}
+.error-popup {
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    background-color: black;
+    padding: 10px 20px;
+    border-radius: 5px;
+
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
 }
