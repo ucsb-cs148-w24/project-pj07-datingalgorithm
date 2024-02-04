@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from "react";
-import "./ProfileCard.css";
 import TinderCard from "react-tinder-card";
 import "./Cards.css";
 import db from "./firebase";

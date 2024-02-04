@@ -1,5 +1,6 @@
 import React from 'react';
 import Home from './Home'; // Ensure this import path matches your file structure
+import ProfileCreation from './ProfileCreation'; // Ensure this import path matches your file structure
 import logo from './logo.svg';
 import './App.css';
 import Header from './Header';
@@ -16,6 +17,8 @@ function App() {
           <Route path='/swipe' element={<Cards/>}/>
 
           <Route path="/" element={<Home />} />
+
+          <Route path='/makeProfile' element={<ProfileCreation/>}/>
         </Routes>
       </Router>
     </div>

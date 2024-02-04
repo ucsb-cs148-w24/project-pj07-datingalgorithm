@@ -1,23 +1,16 @@
-import React from 'react';
-import './Header.css';
-import HomeIcon from '@material-ui/icons/Home';
-import IconButton from '@material-ui/core/IconButton';
+// src/Header.js
 
-const Header = () => {
+import React from 'react'
+import './Header.css';
+import logo from './res/eye-mask.png';
+
+function Header() {
     return (
-        <div className='header'>
-            <IconButton>
-                <img src={require("./res/eye-mask.png")}
-                    width = {50}
-                    height = {50}
-                    float = "right"
-                />
-            </IconButton>
-            
+        <div className="Header">
+            <img src={logo} alt="Blindly Logo" className="logo" />
             <h1>Blindly</h1>
-            
         </div>
-    );
+    )
 }
 
-export default Header;
+export default Header
