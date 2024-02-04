@@ -8,17 +8,14 @@ html, body {
 }
 
 * {
-    font-family: 'IBM Plex Sans', sans-serif; /* Corrected the font family to the imported one */
+    font-family: 'IBM Plex Sans', sans-serif;  /*Corrected the font family to the imported one */ 
 }
 
 
 
 body {
-    display: flex; /* Use flexbox to center children */
-    justify-content: center; /* Center horizontally */
-    align-items:flex-end; /* Center vertically */
-    text-align: center; /* Center text for any inline elements or text inside divs */
-
+    
+    
     /* margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -28,6 +25,13 @@ body {
 }
 
 .overlay {
+
+    
+    display: flex; /* Use flexbox to center children */
+    justify-content: center; /* Center horizontally */
+    align-items:flex-end; /* Center vertically */
+    text-align: center; /*Center text for any inline elements or text inside divs */
+
     position: absolute; /* Makes overlay cover the entire body */
     top: 0;
     left: 0;

@@ -3,6 +3,7 @@ import "./ProfileCard.css";
 import TinderCard from "react-tinder-card";
 import "./Cards.css";
 import db from "./firebase";
+import Header from './Header';
 
 const Cards = () =>{
     const [people, setPeople] = useState([]);
@@ -15,6 +16,8 @@ const Cards = () =>{
 
     return (
         <div className="cards">
+            <Header/>
+            <Header/>
             {people.map(person => (
                 <TinderCard
                     className="swipe"
