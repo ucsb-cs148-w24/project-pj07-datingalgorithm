@@ -1,0 +1,25 @@
+.Header {
+    box-sizing: border-box;
+    width: 100%;
+    display: flex;
+    justify-content: left;
+    
+    padding: 1em;
+    margin-bottom: 1em;
+    background-color: rgb(219, 203, 234);
+    color: #000000;
+    
+  }
+
+h1{
+    margin-top: 0px; 
+    margin-bottom: 0px;
+}
+
+.logo {
+    width: 40px; 
+    margin-right: 10px; 
+    margin-top: 0px; 
+    margin-bottom: 0px;
+    float: left; 
+}
