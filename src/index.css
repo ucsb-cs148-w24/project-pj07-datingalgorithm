@@ -4,7 +4,7 @@ html, body {
     height: 100%;
     margin: 0;
     padding: 0;
-    overflow: hidden; /* Prevents scrollbars if the overlay is exactly viewport size */
+    overflow: auto; /* Prevents scrollbars if the overlay is exactly viewport size */
 }
 
 * {
@@ -48,13 +48,17 @@ body {
 .primary-button{
     position: absolute;
 }
-h1{
+.home-h1{
     font-size: 48px;
     font-weight: 700;
     color: azure;
-    position:absolute 0;
+    position: absolute;
+    top: 20vh; /* Center vertically */
+    left: 50vw; /* Center horizontally */
+    transform: translate(-50%, -50%); /* Adjust position to true center */
     height: 35vh;
 }
+
 h2{
     position: absolute; /* or 'relative' to a positioned container */
     font-size: 5vmin; /* Scales with the viewport, adjust as needed */
@@ -89,6 +93,7 @@ h2{
     background-color: black;
     padding: 10px 20px;
     border-radius: 5px;
+    top: 40%;
 
 }
 

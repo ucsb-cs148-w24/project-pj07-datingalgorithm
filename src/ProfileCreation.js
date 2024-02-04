@@ -6,7 +6,7 @@ const ProfileCreation = () => {
     return (
         <div>
             <Header />
-            <h1>Create Profile</h1>
+            <h1 className='profile-header'>Create Profile</h1>
             <Body />
         </div>
     );

@@ -16,7 +16,6 @@ const Cards = () =>{
     return (
         <div className="cards">
             <Header/>
-            <Header/>
             {people.map(person => (
                 <TinderCard
                     className="swipe"

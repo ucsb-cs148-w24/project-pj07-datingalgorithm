@@ -11,9 +11,10 @@
     
   }
 
-h1{
+.profile-header{
     margin-top: 0px; 
     margin-bottom: 0px;
+    color: #000000;
 }
 
 .logo {
