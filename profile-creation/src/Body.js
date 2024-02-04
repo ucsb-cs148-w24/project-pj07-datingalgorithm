@@ -1,13 +1,24 @@
 // src/Body.js
 
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import './Body.css';
 import data from "./data";
 
 
-function Body() {
 
-    const [allQues, setAllQues] = useState([]);
+function Body() {
+    const [file, setFile] = useState();  //Upload image
+    function handleChange(e) {
+        if (e.target.files.length !== 0) {
+            console.log(e.target.files);
+            setFile(URL.createObjectURL(e.target.files[0]));
+        }
+        else {
+            console.log("No files selected.");
+        }
+    }
+
+    const [allQues, setAllQues] = useState([]);  //Submit limit
     const handleSubmit = (e) => {
         e.preventDefault();
 
@@ -74,7 +85,7 @@ function Body() {
                     <textarea id="bio" name="bio" placeholder="What would you like your potential matches to know about you?"></textarea>
                 </div>
                 <br></br>
-                <div className="group">
+                <div className="checkbox">
                     <form onSubmit={handleSubmit}>
                         {data.map((ques, index) => {
                         return (
@@ -90,6 +101,12 @@ function Body() {
                 </div>
                 <br></br>
                 <div>
+                    <p><b>Add Image:</b></p>
+                    <input type="file" onChange={handleChange} accept="image/*" />
+                    <img style={{ width: "20%", height: "20%" }} src={file} alt="Missing" />
+                </div>
+                <br></br>
+                <div>
                     <input type="submit" value="Submit"></input>
                 </div>
             </form>
@@ -98,11 +115,11 @@ function Body() {
 }
 
 
-const SingleGroup = ({ data, setAllQues, allQues }) => {
+const SingleGroup = ({ data, setAllQues, allQues }) => { //Checkbox limit
     const [values, setValues] = useState([]);
     const handleChange = (e) => {
         if (e.target.checked) {
-            if (data.group == "love-lang") {
+            if (data.group === "love-lang") {
                 if (values.length < 2) {
                     setValues((prev) => [...prev, e.target.value]);
                     setAllQues((prev) => [...prev, e.target.value]);
