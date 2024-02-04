@@ -1,14 +1,10 @@
-import { Card } from "@material-ui/core";
 import React, {useEffect, useState} from "react";
-import ProfileCard from "./ProfileCard";
 import "./ProfileCard.css";
 import TinderCard from "react-tinder-card";
 import "./Cards.css";
 import db from "./firebase";
 
-//import "./Cards.css";
-
-function Cards() {
+const Cards = () =>{
     const [people, setPeople] = useState([]);
 
     useEffect(() => {

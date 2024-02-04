@@ -13,9 +13,9 @@ function App() {
       
       <Router >
         <Routes>
-          <Route path='/' element={<Cards/>}/>
+          <Route path='/swipe' element={<Cards/>}/>
 
-          <Route path="/login" element={<Home />} />
+          <Route path="/" element={<Home />} />
         </Routes>
       </Router>
     </div>
