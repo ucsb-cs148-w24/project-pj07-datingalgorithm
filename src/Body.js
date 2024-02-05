@@ -56,18 +56,6 @@ function Body() {
         else if (document.getElementById('bio').value === "") {
             alert("Please fill out the text box bio.")
         }
-        else if (allHobbies.length === 0) {
-            alert("Please select at least one option for what you enjoy in your spare time.")
-        }
-        else if (allTraits.length === 0) {
-            alert("Please select at least one option for what trait describes you best.")
-        }
-        else if (allLoveLang.length === 0) {
-            alert("Please select at least one option for your love language.")
-        }
-        else if (file.length === 0) {
-            alert("Please upload an image.")
-        }
         else {
             const firstName = document.getElementById('fname').value;
             const lastName = document.getElementById('lname').value;
