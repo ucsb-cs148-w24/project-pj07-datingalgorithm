@@ -24,7 +24,11 @@ const Home = () => {
             signInWithGoogle()
                 .then(() => {
                     console.log("User signed in");
+                
                     // Additional sign-in logic here if necessary
+
+                    // go to profile creation page
+                    window.location.href = '/makeProfile';
                 })
                 .catch((error) => {
                     console.error("Error during sign-in:", error);
