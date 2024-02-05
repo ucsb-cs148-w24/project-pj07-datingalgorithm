@@ -1,0 +1,64 @@
+.cards{
+    display: flex;
+    justify-content: center;
+    margin-top: 5vh;
+}
+
+.card{
+    /* position: relative;
+    width: 800px;
+    padding: 20px;
+    max-width: 85vw;
+    height: 70vh;
+    border-radius: 20px;
+    background-size: cover;
+    background-position: center; */
+
+    position: fixed;
+    max-width: 85vw;
+    
+    width: 800px;
+    height: 80vh;
+    background-size: cover;
+    background-position: center;
+    z-index: -1;
+    filter: blur(22px);
+    border-style: solid;
+    margin: -20px -5px -5px -5px;
+    
+}
+
+
+.swipe{
+    position: absolute;
+    max-width: 85vw;
+    
+    width: 800px;
+    height: 80vh;
+    
+    overflow: hidden;
+    border-radius: 40px;
+}
+
+.image{
+    width: 800px;
+    height: 70vh;
+    user-select: none;
+}
+
+.content{
+    color: white;
+    z-index: 9999;
+
+    /* position: absolute;
+    width: 500px; */
+    /* padding: 100px; */
+    text-align: center;
+}
+
+/* .card > h3 {
+    position: fixed;
+    color: black;
+    text-align: center;
+    filter: blur(0px);
+} */

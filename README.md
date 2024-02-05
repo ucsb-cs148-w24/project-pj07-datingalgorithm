@@ -1,5 +1,5 @@
 # Blind Dating App
-Dating app where users can find genuine connections through interests and preferences. Users will match by being attracted to each other's interests and personalities rather than their faces. This will form deeper connections through our matches.
+Dating app where users can find genuine connections through interests and preferance. Users will match by being attracted to each others interests and personality rather than their face. This will form deeper connections through our matches.
 
 ## Team Members:
 - Emre Cikisir @emrecikisir

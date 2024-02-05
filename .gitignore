@@ -1,3 +1,12 @@
+# # Ignore everything
+# *
+
+# # But not the src directory and its contents
+# !src/
+
+# # And except every file and directory inside the src directory
+# !src/**
+
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
