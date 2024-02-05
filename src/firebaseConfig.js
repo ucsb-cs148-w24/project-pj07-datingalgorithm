@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth";
-import { getFirestore, doc, setDoc } from "firebase/firestore"; // Import Firestore and methods for document handling
+import { getFirestore, doc, setDoc, getDoc } from "firebase/firestore"; // Import Firestore and methods for document handling
 
 const firebaseConfig = {
     apiKey: "AIzaSyBVz6ewF6axN18sp7wZuRZ0NLNMAWcytm4",
@@ -24,23 +24,32 @@ provider.setCustomParameters({
 
 export const signInWithGoogle = () => {
     return signInWithPopup(auth, provider)
-        .then(async (result) => { // Mark function as async to use await inside
+        .then(async (result) => {
             const user = result.user;
             if (user.email.endsWith("@ucsb.edu")) {
-                console.log("Sign-in successful", result);
+                const userRef = doc(db, "users", user.uid);
 
-                // Store user data in Firestore
-                const userRef = doc(db, "users", user.uid); // Use UID as the document ID
-                await setDoc(userRef, {
-                    name: user.displayName,
-                    email: user.email,
-                    picUrl: user.photoURL,
-                    // Add other user data as needed
-                }, { merge: true }); // Merge ensures that existing data is not overwritten
+                // Check if user document already exists
+                const docSnap = await getDoc(userRef);
+                if (docSnap.exists()) {
+                    // User exists, so we might redirect to swiping screen
+                    console.log("User already exists, redirecting...");
+                    window.location.href = '/swipe'; // Or use your app's routing logic
+                } else {
+                    // New user, create the document and redirect to profile creation
+                    console.log("New user, creating document...");
+                    await setDoc(userRef, {
+                        name: user.displayName,
+                        email: user.email,
+                        picUrl: user.photoURL,
+                        // Add other user data as needed
+                    }, { merge: true });
 
+                    window.location.href = '/makeProfile'; // Or use your app's routing logic
+                }
                 return result;
             } else {
-                await signOut(auth); // Make sure to await the signOut operation
+                await signOut(auth); // Sign out if not UCSB email
                 throw new Error("Only UCSB students are accepted");
             }
         })
