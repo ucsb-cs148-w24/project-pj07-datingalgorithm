@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { auth, signInWithGoogle, signOutUser } from './firebaseConfig';
 import { onAuthStateChanged } from 'firebase/auth';
+import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
     const [user, setUser] = useState(null); // Track user state
     const [errorMessage, setErrorMessage] = useState(null);
-    const [errorTimer, setErrorTimer] = useState(null);
+    // const [errorTimer, setErrorTimer] = useState(null);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -24,6 +26,7 @@ const Home = () => {
             signInWithGoogle()
                 .then(() => {
                     console.log("User signed in");
+                    navigate('/makeProfile')
                     // Additional sign-in logic here if necessary
                 })
                 .catch((error) => {
@@ -31,7 +34,7 @@ const Home = () => {
                     // Show the error message
                     setErrorMessage("Only UCSB students are accepted");
 
-                    // Clear the error message after 5 seconds
+                    // Clear the error message after 2 seconds
                     const timer = setTimeout(() => {
                         setErrorMessage(null);
                     }, 2000);
