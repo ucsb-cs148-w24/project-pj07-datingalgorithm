@@ -3,7 +3,9 @@
 import React, {useState} from 'react';
 import './Body.css';
 import data from "./data";
-
+import { db } from './firebaseConfig'; // Adjust the path as necessary
+import { doc, setDoc } from "firebase/firestore";
+import { auth } from './firebaseConfig';
 
 
 function Body() {
@@ -19,13 +21,41 @@ function Body() {
     }
 
     const [allQues, setAllQues] = useState([]);  //Submit limit
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-
-        console.log('Selected options: ' + allQues);
-        console.log('Number of selected options: ' + allQues.length);
+        
+        // Retrieve the current user's UID
+        const uid = auth.currentUser ? auth.currentUser.uid : null;
+        if (!uid) {
+            console.error("No user signed in");
+            return;
+        }
+    
+        const firstName = document.getElementById('fname').value;
+        const lastName = document.getElementById('lname').value;
+        // Combine first name and last name with a space
+        const fullName = `${firstName} ${lastName}`;
+    
+        const userProfileDetails = {
+            name: fullName, // Use the combined name here
+            birthday: document.getElementById('bday').value,
+            gender: document.getElementById('gender').value,
+            interestedIn: document.getElementById('sexual_ori').value,
+            bio: document.getElementById('bio').value,
+            interests: allQues, // Assuming this captures all the interests or other details collected
+            // Include any other fields captured from the form
+        };
+    
+        try {
+            await setDoc(doc(db, "users", uid), userProfileDetails, { merge: true });
+            console.log("Profile updated successfully");
+            // Redirect or show success message as needed
+        } catch (error) {
+            console.error("Error updating profile:", error);
+            // Handle the error appropriately
+        }
     };
-
+    
     return (
         <div className="Body">
             <form action="/action_page.php" onSubmit={handleSubmit}>

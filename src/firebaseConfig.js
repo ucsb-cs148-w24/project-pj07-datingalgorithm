@@ -39,7 +39,6 @@ export const signInWithGoogle = () => {
                     // New user, create the document and redirect to profile creation
                     console.log("New user, creating document...");
                     await setDoc(userRef, {
-                        name: user.displayName,
                         email: user.email,
                         picUrl: user.photoURL,
                         // Add other user data as needed
