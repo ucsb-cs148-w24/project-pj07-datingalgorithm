@@ -9,18 +9,25 @@ import { auth } from './firebaseConfig';
 
 
 function Body() {
-    const [file, setFile] = useState();  //Upload image
+    //Upload image
+    const [file, setFile] = useState();
     function handleChange(e) {
         if (e.target.files.length !== 0) {
-            console.log(e.target.files);
             setFile(URL.createObjectURL(e.target.files[0]));
         }
         else {
-            console.log("No files selected.");
+            setFile([]);
+            alert("Image removed from upload.")
         }
     }
 
-    const [allQues, setAllQues] = useState([]);  //Submit limit
+    //store user's answers to questions with checkboxes
+    const [allQues, setAllQues] = useState([]);
+    const [allHobbies, setAllHobbies] = useState([]);
+    const [allTraits, setAllTraits] = useState([]);
+    const [allLoveLang, setAllLoveLang] = useState([]);
+
+    //Submit limits
     const handleSubmit = async (e) => {
         e.preventDefault();
         
@@ -30,30 +37,67 @@ function Body() {
             console.error("No user signed in");
             return;
         }
-    
-        const firstName = document.getElementById('fname').value;
-        const lastName = document.getElementById('lname').value;
-        // Combine first name and last name with a space
-        const fullName = `${firstName} ${lastName}`;
-    
-        const userProfileDetails = {
-            name: fullName, // Use the combined name here
-            birthday: document.getElementById('bday').value,
-            gender: document.getElementById('gender').value,
-            interestedIn: document.getElementById('sexual_ori').value,
-            bio: document.getElementById('bio').value,
-            interests: allQues, // Assuming this captures all the interests or other details collected
-            // Include any other fields captured from the form
-        };
-    
-        try {
-            await setDoc(doc(db, "users", uid), userProfileDetails, { merge: true });
-            console.log("Profile updated successfully");
-            // Redirect or show success message as needed
-        } catch (error) {
-            console.error("Error updating profile:", error);
-            // Handle the error appropriately
+
+        if (document.getElementById('fname').value === "") {
+            alert("Please fill out first name.")
         }
+        else if (document.getElementById('lname').value === "") {
+            alert("Please fill out last name.")
+        }
+        else if (document.getElementById('bday').value === "") {
+            alert("Please fill out birthday.")
+        }
+        else if (document.getElementById('gender').value === "") {
+            alert("Please fill out gender.")
+        }
+        else if (document.getElementById('sexual_ori').value === "") {
+            alert("Please fill out who you are interested in.")
+        }
+        else if (document.getElementById('bio').value === "") {
+            alert("Please fill out the text box bio.")
+        }
+        else if (allHobbies.length === 0) {
+            alert("Please select at least one option for what you enjoy in your spare time.")
+        }
+        else if (allTraits.length === 0) {
+            alert("Please select at least one option for what trait describes you best.")
+        }
+        else if (allLoveLang.length === 0) {
+            alert("Please select at least one option for your love language.")
+        }
+        else if (file.length === 0) {
+            alert("Please upload an image.")
+        }
+        else {
+            const firstName = document.getElementById('fname').value;
+            const lastName = document.getElementById('lname').value;
+            // Combine first name and last name with a space
+            const fullName = `${firstName} ${lastName}`;
+        
+            const userProfileDetails = {
+                name: fullName, // Use the combined name here
+                birthday: document.getElementById('bday').value,
+                gender: document.getElementById('gender').value,
+                interestedIn: document.getElementById('sexual_ori').value,
+                bio: document.getElementById('bio').value,
+                hobbies: allHobbies,
+                traits: allTraits,
+                lovelang: allLoveLang,
+                // Include any other fields captured from the form
+            };
+
+            try {
+                await setDoc(doc(db, "users", uid), userProfileDetails, { merge: true });
+                console.log("Profile updated successfully");
+                alert("Profile updated.")
+                // Redirect or show success message as needed
+            } catch (error) {
+                console.error("Error updating profile:", error);
+                // Handle the error appropriately
+            }
+        }
+    
+        
     };
     
     return (
@@ -116,24 +160,28 @@ function Body() {
                 </div>
                 <br></br>
                 <div className="checkbox">
-                    <form onSubmit={handleSubmit}>
-                        {data.map((ques, index) => {
+                    {data.map((ques, index) => {
                         return (
                             <SingleGroup
                             key={index}
                             data={ques}
                             setAllQues={setAllQues}
                             allQues={allQues}
+                            setAllHobbies={setAllHobbies}
+                            allHobbies={allHobbies}
+                            setAllTraits={setAllTraits}
+                            allTraits={allTraits}
+                            setAllLoveLang={setAllLoveLang}
+                            allLoveLang={allLoveLang}
                             />
                         );
-                        })}
-                    </form>
+                    })}
                 </div>
                 <br></br>
                 <div>
                     <p><b>Add Image:</b></p>
                     <input type="file" onChange={handleChange} accept="image/*" />
-                    <img style={{ width: "20%", height: "20%" }} src={file} alt="Missing" />
+                    <img style={{ width: "20%", height: "20%" }} src={file} alt="" />
                 </div>
                 <br></br>
                 <div>
@@ -145,7 +193,7 @@ function Body() {
 }
 
 
-const SingleGroup = ({ data, setAllQues, allQues }) => { //Checkbox limit
+const SingleGroup = ({ data, setAllQues, allQues, setAllHobbies, allHobbies, setAllTraits, allTraits, setAllLoveLang, allLoveLang }) => { //Checkbox limit
     const [values, setValues] = useState([]);
     const handleChange = (e) => {
         if (e.target.checked) {
@@ -153,6 +201,7 @@ const SingleGroup = ({ data, setAllQues, allQues }) => { //Checkbox limit
                 if (values.length < 2) {
                     setValues((prev) => [...prev, e.target.value]);
                     setAllQues((prev) => [...prev, e.target.value]);
+                    setAllLoveLang((allLoveLang) => [...allLoveLang, e.target.value]);
                 } else {
                     e.target.checked = false;
 
@@ -163,6 +212,12 @@ const SingleGroup = ({ data, setAllQues, allQues }) => { //Checkbox limit
                 if (values.length < 3) {
                     setValues((prev) => [...prev, e.target.value]);
                     setAllQues((prev) => [...prev, e.target.value]);
+                    if (data.group === "hobbies") {
+                        setAllHobbies((allHobbies) => [...allHobbies, e.target.value]);
+                    }
+                    else {
+                        setAllTraits((allTraits) => [...allTraits, e.target.value]);
+                    }
                 } else {
                     e.target.checked = false;
 
@@ -174,6 +229,9 @@ const SingleGroup = ({ data, setAllQues, allQues }) => { //Checkbox limit
         setValues(newArr);
         let rm = allQues.filter((item) => item !== e.target.value);
         setAllQues(rm);
+        setAllHobbies(allHobbies.filter((item) => item !== e.target.value));
+        setAllTraits(allTraits.filter((item) => item !== e.target.value));
+        setAllLoveLang(allLoveLang.filter((item) => item !== e.target.value));
         }
     };
 
