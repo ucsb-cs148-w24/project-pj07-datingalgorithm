@@ -3,15 +3,22 @@ import TinderCard from "react-tinder-card";
 import "./Cards.css";
 import { db, auth, signInAnonymously } from './firebase';
 import Header from './Header';
+import {collection, onSnapshot, query, where, getDocs, doc, getDoc} from "firebase/firestore";
 
 const Cards = () =>{
     const [people, setPeople] = useState([]);
 
-    useEffect(() => {
-        db.collection("users").onSnapshot((snapshot) => (
-            setPeople(snapshot.docs.map((doc) => doc.data()))
-        ))
-    }, [])
+    const q = query(collection(db, "users"));
+
+    const querySnapshot =  getDocs(q);
+
+    useEffect(() => onSnapshot(q, (querySnapshot) => {
+        setPeople(querySnapshot.docs.map(doc => doc.data()))
+    }
+    ), [db]);
+
+    // print the data
+    console.log(people);
 
     return (
         <div className="cards">
