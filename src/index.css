@@ -65,7 +65,7 @@ h2{
     top: 20vh; /* Position the element in relation to the heart's position */
     left: 50vw; /* Adjust 'top' and 'left' as needed */
     transform: translate(-50%, -50%); /* Center `h2` on the specified point */
-    color: azure;
+    /* color: azure; */
 }
 .primary-button {
     background-color: black; /* Button background color */
