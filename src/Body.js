@@ -1,12 +1,10 @@
-// src/Body.js
-
 import React, {useState} from 'react';
 import './Body.css';
 import data from "./data";
 import { db } from './firebaseConfig'; // Adjust the path as necessary
 import { doc, setDoc } from "firebase/firestore";
 import { auth } from './firebaseConfig';
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
 
 function Body() {
     const navigate = useNavigate();
@@ -78,7 +76,7 @@ function Body() {
                 await setDoc(doc(db, "users", uid), userProfileDetails, { merge: true });
                 console.log("Profile updated successfully");
                 alert("Profile updated.")
-                navigate('/swipe')
+                navigate('/swipe');
                 // Redirect or show success message as needed
             } catch (error) {
                 console.error("Error updating profile:", error);

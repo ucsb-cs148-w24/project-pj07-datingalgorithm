@@ -1,4 +1,4 @@
-# Date of Retrosepctve: 01/26/2024
+# Date of Retrospective: 01/26/2024
 
 * Led by Vedant Shah
 * Present: Palvi, Koray, Emre, Xinyan, Vedant, Nirmit(Zoom), Emily(Zoom)
@@ -9,7 +9,7 @@ Experiment: Assign someone as lab leader to help everyone on track for tasks tha
 Measurement: By how many points we lose on the lab
 
 Goal: Check up on each other and use the group chat more
-Experiment:Every has to react to the message, send update after every session
+Experiment: Every has to react to the message, send update after every session
 Measurement: How many messages are in chat
 
 ## Optional
@@ -21,7 +21,7 @@ Rationale
 Votes
 Stop
 Being too personal
-so that the groupwork is better
+so that the group work is better
 
 
 Start
@@ -69,7 +69,7 @@ Working without communication
 so that we can have some meetings to update our progress and ask questions.
 XX
 Start
-Having a discussion about what we should do for next steps and clear the blocks.
+Having a discussion about what we should do for the next steps and clear the blocks.
 so that 
 We can clearly know what part of the project we are assigned.
 
@@ -153,6 +153,10 @@ X
 ## Retro Assessment
 We used the start/stop/continue method to figure out some things that people wanted us to change on continue doing. We then voted on which things were most important, and decided to make a plan to address these things.
 
-It went very well. We heard lots of useful advice on how we can improve our development process. We created expiriements to try to fix the issues during our next sprint.
+It went very well. We heard lots of useful advice on how we can improve our development process. We created experiments to try to fix the issues during our next sprint.
 
-I would reccomend the next person leading a retro to only listen and remain nuetral the entire time. It is difficult to avoid voicing your opinion; however, it is very beneficial for the team to approach the issues from a nuetral perspective.
+I would recommend the next person leading a retro to only listen and remain neutral the entire time. It is difficult to avoid voicing your opinion; however, it is very beneficial for the team to approach the issues from a neutral perspective.
+
+
+## Retro Experiment Reflection
+One of our experiments was to assign someone as lab leader to help everyone on track for tasks that are due. We tested out this experiment this week for lab 03, which has helped us complete the tasks on time. As a group, we decided that Emily would act as the lab leader and send reminders in our group chat to keep us on track for each part of the assignment.
