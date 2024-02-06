@@ -1,31 +1,92 @@
-// src/Body.js
-
 import React, {useState} from 'react';
 import './Body.css';
 import data from "./data";
-
-
+import { db } from './firebaseConfig'; // Adjust the path as necessary
+import { doc, setDoc } from "firebase/firestore";
+import { auth } from './firebaseConfig';
+import { useNavigate } from 'react-router-dom';
 
 function Body() {
-    const [file, setFile] = useState();  //Upload image
+    const navigate = useNavigate();
+    const [file, setFile] = useState();
     function handleChange(e) {
         if (e.target.files.length !== 0) {
-            console.log(e.target.files);
             setFile(URL.createObjectURL(e.target.files[0]));
         }
         else {
-            console.log("No files selected.");
+            setFile([]);
+            alert("Image removed from upload.")
         }
     }
 
-    const [allQues, setAllQues] = useState([]);  //Submit limit
-    const handleSubmit = (e) => {
+    //store user's answers to questions with checkboxes
+    const [allQues, setAllQues] = useState([]);
+    const [allHobbies, setAllHobbies] = useState([]);
+    const [allTraits, setAllTraits] = useState([]);
+    const [allLoveLang, setAllLoveLang] = useState([]);
+
+    //Submit limits
+    const handleSubmit = async (e) => {
         e.preventDefault();
+        
+        // Retrieve the current user's UID
+        const uid = auth.currentUser ? auth.currentUser.uid : null;
+        if (!uid) {
+            console.error("No user signed in");
+            return;
+        }
 
-        console.log('Selected options: ' + allQues);
-        console.log('Number of selected options: ' + allQues.length);
+        if (document.getElementById('fname').value === "") {
+            alert("Please fill out first name.")
+        }
+        else if (document.getElementById('lname').value === "") {
+            alert("Please fill out last name.")
+        }
+        else if (document.getElementById('bday').value === "") {
+            alert("Please fill out birthday.")
+        }
+        else if (document.getElementById('gender').value === "") {
+            alert("Please fill out gender.")
+        }
+        else if (document.getElementById('sexual_ori').value === "") {
+            alert("Please fill out who you are interested in.")
+        }
+        else if (document.getElementById('bio').value === "") {
+            alert("Please fill out the text box bio.")
+        }
+        else {
+            const firstName = document.getElementById('fname').value;
+            const lastName = document.getElementById('lname').value;
+            // Combine first name and last name with a space
+            const fullName = `${firstName} ${lastName}`;
+        
+            const userProfileDetails = {
+                name: fullName, // Use the combined name here
+                birthday: document.getElementById('bday').value,
+                gender: document.getElementById('gender').value,
+                interestedIn: document.getElementById('sexual_ori').value,
+                bio: document.getElementById('bio').value,
+                hobbies: allHobbies,
+                traits: allTraits,
+                lovelang: allLoveLang,
+                // Include any other fields captured from the form
+            };
+
+            try {
+                await setDoc(doc(db, "users", uid), userProfileDetails, { merge: true });
+                console.log("Profile updated successfully");
+                alert("Profile updated.")
+                navigate('/swipe');
+                // Redirect or show success message as needed
+            } catch (error) {
+                console.error("Error updating profile:", error);
+                // Handle the error appropriately
+            }
+        }
+    
+        
     };
-
+    
     return (
         <div className="Body">
             <form action="/action_page.php" onSubmit={handleSubmit}>
@@ -86,24 +147,28 @@ function Body() {
                 </div>
                 <br></br>
                 <div className="checkbox">
-                    <form onSubmit={handleSubmit}>
-                        {data.map((ques, index) => {
+                    {data.map((ques, index) => {
                         return (
                             <SingleGroup
                             key={index}
                             data={ques}
                             setAllQues={setAllQues}
                             allQues={allQues}
+                            setAllHobbies={setAllHobbies}
+                            allHobbies={allHobbies}
+                            setAllTraits={setAllTraits}
+                            allTraits={allTraits}
+                            setAllLoveLang={setAllLoveLang}
+                            allLoveLang={allLoveLang}
                             />
                         );
-                        })}
-                    </form>
+                    })}
                 </div>
                 <br></br>
                 <div>
                     <p><b>Add Image:</b></p>
                     <input type="file" onChange={handleChange} accept="image/*" />
-                    <img style={{ width: "20%", height: "20%" }} src={file} alt="Missing" />
+                    <img style={{ width: "20%", height: "20%" }} src={file} alt="" />
                 </div>
                 <br></br>
                 <div>
@@ -115,7 +180,7 @@ function Body() {
 }
 
 
-const SingleGroup = ({ data, setAllQues, allQues }) => { //Checkbox limit
+const SingleGroup = ({ data, setAllQues, allQues, setAllHobbies, allHobbies, setAllTraits, allTraits, setAllLoveLang, allLoveLang }) => { //Checkbox limit
     const [values, setValues] = useState([]);
     const handleChange = (e) => {
         if (e.target.checked) {
@@ -123,6 +188,7 @@ const SingleGroup = ({ data, setAllQues, allQues }) => { //Checkbox limit
                 if (values.length < 2) {
                     setValues((prev) => [...prev, e.target.value]);
                     setAllQues((prev) => [...prev, e.target.value]);
+                    setAllLoveLang((allLoveLang) => [...allLoveLang, e.target.value]);
                 } else {
                     e.target.checked = false;
 
@@ -133,6 +199,12 @@ const SingleGroup = ({ data, setAllQues, allQues }) => { //Checkbox limit
                 if (values.length < 3) {
                     setValues((prev) => [...prev, e.target.value]);
                     setAllQues((prev) => [...prev, e.target.value]);
+                    if (data.group === "hobbies") {
+                        setAllHobbies((allHobbies) => [...allHobbies, e.target.value]);
+                    }
+                    else {
+                        setAllTraits((allTraits) => [...allTraits, e.target.value]);
+                    }
                 } else {
                     e.target.checked = false;
 
@@ -144,6 +216,9 @@ const SingleGroup = ({ data, setAllQues, allQues }) => { //Checkbox limit
         setValues(newArr);
         let rm = allQues.filter((item) => item !== e.target.value);
         setAllQues(rm);
+        setAllHobbies(allHobbies.filter((item) => item !== e.target.value));
+        setAllTraits(allTraits.filter((item) => item !== e.target.value));
+        setAllLoveLang(allLoveLang.filter((item) => item !== e.target.value));
         }
     };
 

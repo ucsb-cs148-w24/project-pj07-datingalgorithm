@@ -1,6 +1,6 @@
 import React from 'react';
-import Home from './Home'; // Ensure this import path matches your file structure
-import ProfileCreation from './ProfileCreation'; // Ensure this import path matches your file structure
+import Home from './Home'; 
+import ProfileCreation from './ProfileCreation'; 
 import './App.css';
 import Cards from './Cards';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
@@ -12,7 +12,6 @@ import Chats from './Chats';
 function App() {
   return (
     <div className="App">
-      {/* Header */}
       
       <Router >
         <Routes>
