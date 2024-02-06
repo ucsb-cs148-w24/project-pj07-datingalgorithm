@@ -6,10 +6,10 @@ import data from "./data";
 import { db } from './firebaseConfig'; // Adjust the path as necessary
 import { doc, setDoc } from "firebase/firestore";
 import { auth } from './firebaseConfig';
-
+import {useNavigate} from 'react-router-dom'
 
 function Body() {
-    //Upload image
+    const navigate = useNavigate();
     const [file, setFile] = useState();
     function handleChange(e) {
         if (e.target.files.length !== 0) {
@@ -78,6 +78,7 @@ function Body() {
                 await setDoc(doc(db, "users", uid), userProfileDetails, { merge: true });
                 console.log("Profile updated successfully");
                 alert("Profile updated.")
+                navigate('/swipe')
                 // Redirect or show success message as needed
             } catch (error) {
                 console.error("Error updating profile:", error);
