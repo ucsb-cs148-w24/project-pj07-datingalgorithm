@@ -21,35 +21,36 @@ const Cards = () =>{
     console.log(people);
 
     return (
-        <div className="cards">
-            <Header/>
-            {people.map(person => (
-                <TinderCard
-                    className="swipe"
-                    key={person.name}
-                    preventSwipe={["up"]}
-                >
-                    <div 
-                    className="card"
-                    style = {{backgroundImage: `url(${person.picUrl})`}}
-                    >   
-                    </div>
-
-                    <div
-                        className="content"
+        <><Header /><>
+            <div className="cards">
+                {people.map(person => (
+                    <TinderCard
+                        className="swipe"
+                        key={person.name}
+                        preventSwipe={["up"]}
                     >
-                        <h3 style={{fontSize: 50}}>
-                            {person.name}
-                        </h3>
-                        <p>{person.tagline}</p>
-                        <p style={{fontSize: 150, position: "absolute", bottom: 40, left: 300}}>
-                            {"90%"}
-                        </p>
-                    </div>
-                    
-                </TinderCard>
-            ))}
-        </div>
+                        <div
+                            className="card"
+                            style={{ backgroundImage: `url(${person.picUrl})` }}
+                        >
+                        </div>
+
+                        <div
+                            className="content"
+                        >
+                            <h3 style={{ fontSize: 55 }}>
+                                {person.name}
+                            </h3>
+                            <p>{person.tagline}</p>
+                            <p style={{ fontSize: 145, position: "absolute", bottom: 25, left: 210 }}>
+                                {"90%"}
+                            </p>
+                        </div>
+
+                    </TinderCard>
+                ))}
+            </div>
+        </></>
     )
 }
 
