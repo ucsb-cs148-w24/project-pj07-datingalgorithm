@@ -5,10 +5,14 @@ import { db, auth, signInAnonymously } from './firebase';
 import Header from './Header';
 import {collection, onSnapshot, query, where, getDocs, doc, getDoc, addDoc} from "firebase/firestore";
 import { getAuth, onAuthStateChanged} from 'firebase/auth';
+import { useNavigate } from 'react-router-dom'; // Added import for useNavigate
+import "./ChatButton.css";
 const Cards = () =>{
     const [people, setPeople] = useState([]);
     const [user, setUser] = useState(null); // Add state to track the current user
     const [userChats, setUserChats] = useState([]);
+    const navigate = useNavigate(); // Initialize useNavigate
+
     // UseEffect to listen for auth state changes and set the user
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -16,6 +20,7 @@ const Cards = () =>{
         });
         return () => unsubscribe(); // Cleanup subscription
     }, []);
+
     // Update useEffect hooks to include user in their dependency arrays
     useEffect(() => {
         if (user) { // Check if user is loaded
@@ -25,6 +30,7 @@ const Cards = () =>{
             });
         }
     }, [db, user]); // Include user in dependency array
+
     useEffect(() => {
         if (user) { // Check if user is loaded
             const usersQuery = query(collection(db, 'chats'), where('users', 'array-contains', user.email));
@@ -33,6 +39,7 @@ const Cards = () =>{
             });
         }
     }, [db, user]); // Include user in dependency array
+
     const chatAlreadyExists = (recEmail) =>{
         return(
         !!userChats.find(
@@ -58,6 +65,11 @@ const Cards = () =>{
             console.log("swiped left");
         }
     }
+
+    const goToChatScreen = () => {
+        navigate('/chats'); // Assuming your chat screen route is '/chat'
+    };
+
     return (
         <div className="cards">
             <Header/>
@@ -86,6 +98,7 @@ const Cards = () =>{
                     </div>
                 </TinderCard>
             ))}
+            <button onClick={goToChatScreen} className="goToChatButton">Go to Chat</button>
         </div>
     )
 }
