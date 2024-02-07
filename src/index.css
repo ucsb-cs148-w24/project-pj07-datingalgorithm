@@ -65,7 +65,7 @@ h2{
     top: 20vh; /* Position the element in relation to the heart's position */
     left: 50vw; /* Adjust 'top' and 'left' as needed */
     transform: translate(-50%, -50%); /* Center `h2` on the specified point */
-    /* color: azure; */
+    color: azure;
 }
 .primary-button {
     background-color: black; /* Button background color */
@@ -77,15 +77,13 @@ h2{
     position: absolute;
     top: 65vh;
     transform: translate(-50%, -50%); /* Center `h2` on the specified point */
-    cursor: pointer;
-    transition: background-color 0.2s ease-in-out;
 
     
 }
 
 /* Add a hover effect for the button */
 .primary-button:hover {
-    background-color: grey; /* Change background color on hover */
+    background-color: black; /* Change background color on hover */
 }
 .error-popup {
     position: fixed;

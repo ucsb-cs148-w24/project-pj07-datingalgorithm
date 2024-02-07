@@ -5,32 +5,40 @@ import { db, auth, signInAnonymously } from './firebase';
 import Header from './Header';
 import {collection, onSnapshot, query, where, getDocs, doc, getDoc, addDoc} from "firebase/firestore";
 import { getAuth, onAuthStateChanged} from 'firebase/auth';
-
+import { useNavigate } from 'react-router-dom'; // Added import for useNavigate
+import "./ChatButton.css";
 const Cards = () =>{
     const [people, setPeople] = useState([]);
+    const [user, setUser] = useState(null); // Add state to track the current user
+    const [userChats, setUserChats] = useState([]);
+    const navigate = useNavigate(); // Initialize useNavigate
 
-    const profilesQuery = query(collection(db, "users"));
-    const querySnapshot =  getDocs(profilesQuery);
+    // UseEffect to listen for auth state changes and set the user
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+            setUser(currentUser);
+        });
+        return () => unsubscribe(); // Cleanup subscription
+    }, []);
 
-    useEffect(() => onSnapshot(profilesQuery, (querySnapshot) => {
-        setPeople(querySnapshot.docs.map(doc => doc.data()))
-    }
-    ), [db]);
+    // Update useEffect hooks to include user in their dependency arrays
+    useEffect(() => {
+        if (user) { // Check if user is loaded
+            const profilesQuery = query(collection(db, "users"));
+            onSnapshot(profilesQuery, (querySnapshot) => {
+                setPeople(querySnapshot.docs.map(doc => doc.data()));
+            });
+        }
+    }, [db, user]); // Include user in dependency array
 
-    const user = getAuth().currentUser;
-
-    const [userChats, setUserChats] = useState([])
-
-    console.log(user.email);
-
-    const usersQuery = query(collection(db, 'chats'), where('users', 'array-contains', user?.email))
-
-    
-
-    useEffect(() => onSnapshot(usersQuery, snapshot=>{
-        setUserChats(snapshot.docs)
-      })
-    , [db]);
+    useEffect(() => {
+        if (user) { // Check if user is loaded
+            const usersQuery = query(collection(db, 'chats'), where('users', 'array-contains', user.email));
+            onSnapshot(usersQuery, snapshot => {
+                setUserChats(snapshot.docs);
+            });
+        }
+    }, [db, user]); // Include user in dependency array
 
     const chatAlreadyExists = (recEmail) =>{
         return(
@@ -64,6 +72,10 @@ const Cards = () =>{
         }
     }
 
+    const goToChatScreen = () => {
+        navigate('/chats'); // Assuming your chat screen route is '/chat'
+    };
+
     return (
         <div className="cards">
             <Header/>
@@ -94,6 +106,7 @@ const Cards = () =>{
                     
                 </TinderCard>
             ))}
+            <button onClick={goToChatScreen} className="goToChatButton">Go to Chat</button>
         </div>
     )
 }
