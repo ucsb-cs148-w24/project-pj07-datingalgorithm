@@ -5,33 +5,34 @@ import { db, auth, signInAnonymously } from './firebase';
 import Header from './Header';
 import {collection, onSnapshot, query, where, getDocs, doc, getDoc, addDoc} from "firebase/firestore";
 import { getAuth, onAuthStateChanged} from 'firebase/auth';
-
 const Cards = () =>{
     const [people, setPeople] = useState([]);
-
-    const profilesQuery = query(collection(db, "users"));
-    const querySnapshot =  getDocs(profilesQuery);
-
-    useEffect(() => onSnapshot(profilesQuery, (querySnapshot) => {
-        setPeople(querySnapshot.docs.map(doc => doc.data()))
-    }
-    ), [db]);
-
-    const user = getAuth().currentUser;
-
-    const [userChats, setUserChats] = useState([])
-
-    console.log(user.email);
-
-    const usersQuery = query(collection(db, 'chats'), where('users', 'array-contains', user?.email))
-
-    
-
-    useEffect(() => onSnapshot(usersQuery, snapshot=>{
-        setUserChats(snapshot.docs)
-      })
-    , [db]);
-
+    const [user, setUser] = useState(null); // Add state to track the current user
+    const [userChats, setUserChats] = useState([]);
+    // UseEffect to listen for auth state changes and set the user
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+            setUser(currentUser);
+        });
+        return () => unsubscribe(); // Cleanup subscription
+    }, []);
+    // Update useEffect hooks to include user in their dependency arrays
+    useEffect(() => {
+        if (user) { // Check if user is loaded
+            const profilesQuery = query(collection(db, "users"));
+            onSnapshot(profilesQuery, (querySnapshot) => {
+                setPeople(querySnapshot.docs.map(doc => doc.data()));
+            });
+        }
+    }, [db, user]); // Include user in dependency array
+    useEffect(() => {
+        if (user) { // Check if user is loaded
+            const usersQuery = query(collection(db, 'chats'), where('users', 'array-contains', user.email));
+            onSnapshot(usersQuery, snapshot => {
+                setUserChats(snapshot.docs);
+            });
+        }
+    }, [db, user]); // Include user in dependency array
     const chatAlreadyExists = (recEmail) =>{
         return(
         !!userChats.find(
@@ -40,10 +41,7 @@ const Cards = () =>{
         )
         )
     }
-
-
     const onSwipe = async (direction, personEmail) => {
-        
         if (direction === "right"){
             // check if current chat already exists
             const exists = chatAlreadyExists(personEmail);
@@ -51,19 +49,15 @@ const Cards = () =>{
                 console.log("Chat already exists");
                 return;
             }
-            
             const docRef = await addDoc(collection(db, "chats"), {
                 users: [user?.email, personEmail]
-                
             });
             console.log("You swiped: " + direction + " to " + personEmail + "from" + user?.email);
-
         }
         else if (direction === "left"){
             console.log("swiped left");
         }
     }
-
     return (
         <div className="cards">
             <Header/>
@@ -74,12 +68,11 @@ const Cards = () =>{
                     preventSwipe={["up", "down"]}
                     onSwipe={(dir) => onSwipe(dir, person.email)}
                 >
-                    <div 
+                    <div
                     className="card"
                     style = {{backgroundImage: `url(${person.picUrl})`}}
-                    >   
+                    >
                     </div>
-
                     <div
                         className="content"
                     >
@@ -91,12 +84,9 @@ const Cards = () =>{
                             {"90%"}
                         </p>
                     </div>
-                    
                 </TinderCard>
             ))}
         </div>
     )
 }
-
-
 export default Cards;
