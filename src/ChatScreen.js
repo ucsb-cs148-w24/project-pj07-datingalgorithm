@@ -6,6 +6,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { doc, getDoc } from "firebase/firestore"; // Ensure this import is added
 import Avatar from "@material-ui/core/Avatar";
 import "./ChatScreen.css";
+import Header from './Header';
 import { fetchUserName, fetchUserIdByEmail } from './utils/userUtils';
 
 function ChatScreen() {
@@ -90,7 +91,6 @@ function ChatScreen() {
 
   return (
     <div className="chatScreen">
-
       <p className="chatScreen__timestamp">You matched with {otherUserName || "Loading..."}</p>
       {messages.map((message) => (
         <div key={message.id} className="chatScreen__message">

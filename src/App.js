@@ -31,10 +31,10 @@ function App() {
       
       <Router >
         <Routes>
-          <Route path='/swipe' element={<Cards/>}/>
+          
 
           <Route path="/" element={<Home />} />
-
+          <Route path='/swipe' element={<Cards/>}/>
           <Route path='/makeProfile' element={<ProfileCreation/>}/>
           <Route path="/chats" element={<Chats />} />
           <Route path="/chat" element={<Chat />} />
