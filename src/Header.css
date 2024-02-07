@@ -1,5 +1,5 @@
 .Header {
-    position: sticky;
+    position: relative;
     top: 0;
     box-sizing: border-box;
     width: 100%;
