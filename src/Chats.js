@@ -53,8 +53,8 @@ function Chats() {
           key={chat.chatId}
           id={chat.chatId}
           name={chat.otherUserName}
-          message="Last message placeholder"
-          timestamp="Timestamp placeholder"
+          message=""
+          timestamp=""
           profilePic="..."
         />
       ))}
