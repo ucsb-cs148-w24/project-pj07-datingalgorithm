@@ -1,21 +1,30 @@
 import React, { useEffect, useState } from 'react';
-import { db, auth, signInAnonymously } from './firebase';
-import { collection, addDoc, query, orderBy, onSnapshot } from "firebase/firestore";
+import { db, auth, signInWithGoogle } from './firebase';
+import { collection, addDoc, query, orderBy, onSnapshot, where } from "firebase/firestore";
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { useNavigate, useParams } from 'react-router-dom';
+import { doc, getDoc } from "firebase/firestore"; // Ensure this import is added
 import Avatar from "@material-ui/core/Avatar";
 import "./ChatScreen.css";
+import { fetchUserName, fetchUserIdByEmail } from './utils/userUtils';
 
 function ChatScreen() {
   const [user] = useAuthState(auth);
+  const navigate = useNavigate();
+  const { chatId } = useParams();
+  const [userNames, setUserNames] = useState({}); // New state to store user names
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState([]);
+  const [otherUserName, setOtherUserName] = useState(""); // Add state for otherUserName
 
   useEffect(() => {
-    if (!user) {
-      signInAnonymously(auth);
+    if (!user || !chatId) {
+      navigate("/")
+      return;
     }
+    console.log(user, chatId)
 
-    const q = query(collection(db, "messages"), orderBy("timestamp"));
+    const q = query(collection(db, "chats", chatId, "messages"), orderBy("timestamp"));
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
       const messages = querySnapshot.docs.map(doc => ({
         id: doc.id,
@@ -25,17 +34,53 @@ function ChatScreen() {
     });
 
     return () => unsubscribe();
-  }, [user]);
+  }, [user, navigate, chatId]);
+
+  useEffect(() => {
+    // Existing useEffect code...
+    // After fetching messages:
+    const fetchUserNames = async () => {
+      const names = {};
+      for (const message of messages) {
+        if (message.uid !== user.uid && !names[message.uid]) {
+          names[message.uid] = await fetchUserName(message.uid);
+        }
+      }
+      setUserNames(names);
+    };
+
+    if (messages.length > 0) {
+      fetchUserNames();
+    }
+  }, [messages, user.uid]);
+
+  useEffect(() => {
+    const fetchOtherUserName = async () => {
+      const chatRef = doc(db, "chats", chatId);
+      const chatSnap = await getDoc(chatRef);
+      if (chatSnap.exists()) {
+        const otherUserEmail = chatSnap.data().users.find(email => email !== user.email);
+        const otherUserId = await fetchUserIdByEmail(otherUserEmail);
+        const otherUserName = await fetchUserName(otherUserId);
+        setOtherUserName(otherUserName);
+      } else {
+        console.log("No such chat!");
+      }
+    };
+
+    fetchOtherUserName();
+  }, [chatId, user.email]);
 
   const handleSend = async (e) => {
     e.preventDefault();
     if (input.trim() === '') return;
 
     try {
-      await addDoc(collection(db, "messages"), {
+      await addDoc(collection(db, "chats", chatId, "messages"), {
         text: input,
         timestamp: Date.now(),
-        uid: user.uid
+        uid: user.uid,
+        chatId: chatId
       });
       setInput('');
     } catch (error) {
@@ -45,14 +90,15 @@ function ChatScreen() {
 
   return (
     <div className="chatScreen">
-      <p className="chatScreen__timestamp">YOU MATCHED WITH ELLEN ON 10/08/20</p>
+
+      <p className="chatScreen__timestamp">You matched with {otherUserName || "Loading..."}</p>
       {messages.map((message) => (
         <div key={message.id} className="chatScreen__message">
           {message.uid === user.uid ? (
             <p className="chatScreen__textUser">{message.text}</p>
           ) : (
             <>
-              <Avatar className="chatScreen__image" alt="Ellen" src="..." />
+              <Avatar className="chatScreen__image" alt={userNames[message.uid] || "Loading..."} src="..." />
               <p className="chatScreen__text">{message.text}</p>
             </>
           )}
@@ -73,3 +119,4 @@ function ChatScreen() {
 }
 
 export default ChatScreen;
+
