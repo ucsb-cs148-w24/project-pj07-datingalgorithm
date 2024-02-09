@@ -1,23 +1,60 @@
 import React, {useState} from 'react';
 import './Body.css';
 import data from "./data";
-import { db } from './firebaseConfig'; // Adjust the path as necessary
+import { db, storage } from './firebaseConfig'; // Adjust the path as necessary
 import { doc, setDoc } from "firebase/firestore";
 import { auth } from './firebaseConfig';
 import { useNavigate } from 'react-router-dom';
+import { ref, uploadBytesResumable, getDownloadURL } from"firebase/storage";
 
 function Body() {
     const navigate = useNavigate();
     const [file, setFile] = useState();
+    const [percent, setPercent] = useState(0);
+//    function handleChange(e) {
+//        if (e.target.files.length !== 0) {
+//            setFile(URL.createObjectURL(e.target.files[0]));
+//        }
+//        else {
+//            setFile([]);
+ //           alert("Image removed from upload.")
+//        }
+ //   }
+
     function handleChange(e) {
-        if (e.target.files.length !== 0) {
-            setFile(URL.createObjectURL(e.target.files[0]));
-        }
-        else {
-            setFile([]);
-            alert("Image removed from upload.")
-        }
+        setFile(e.target.files[0]);
     }
+    const handleUpload = () => {
+        if (!file) {
+            alert("Please upload an image first!");
+            return;
+        }
+ 
+        const storageRef = ref(storage, `/files/${file.name}`);
+ 
+        // progress can be paused and resumed. It also exposes progress updates.
+        // Receives the storage reference and the file to upload.
+        const uploadTask = uploadBytesResumable(storageRef, file);
+ 
+        uploadTask.on(
+            "state_changed",
+            (snapshot) => {
+                const percent = Math.round(
+                    (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+                );
+ 
+                // update progress
+                setPercent(percent);
+            },
+            (err) => console.log(err),
+            () => {
+                // download url
+                getDownloadURL(uploadTask.snapshot.ref).then((url) => {
+                    console.log(url);
+                });
+            }
+        );
+    };
 
     //store user's answers to questions with checkboxes
     const [allQues, setAllQues] = useState([]);
@@ -169,6 +206,8 @@ function Body() {
                     <p><b>Add Image:</b></p>
                     <input type="file" onChange={handleChange} accept="image/*" />
                     <img style={{ width: "20%", height: "20%" }} src={file} alt="" />
+                    <button onClick={handleUpload}>Upload to Firebase</button>
+                    <p>{percent} "% done"</p>
                 </div>
                 <br></br>
                 <div>
