@@ -4,7 +4,6 @@ import { collection, addDoc, query, orderBy, onSnapshot, where } from "firebase/
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useNavigate, useParams } from 'react-router-dom';
 import { doc, getDoc } from "firebase/firestore"; // Ensure this import is added
-import Avatar from "@material-ui/core/Avatar";
 import "./ChatScreen.css";
 import { fetchUserName, fetchUserIdByEmail } from './utils/userUtils';
 
@@ -98,7 +97,6 @@ function ChatScreen() {
             <p className="chatScreen__textUser">{message.text}</p>
           ) : (
             <>
-              <Avatar className="chatScreen__image" alt={userNames[message.uid] || "Loading..."} src="..." />
               <p className="chatScreen__text">{message.text}</p>
             </>
           )}

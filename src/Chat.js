@@ -6,7 +6,6 @@ function Chat({ id, name, message, profilePic, timestamp }) {
     return (
         <Link to={`/chat/${id}`}>
         <div className="chat">
-            <Avatar className="chat_image" srcc = {profilePic} />
             <div className="chat__details">
                 <h2>{name}</h2>
                 <p>{message}</p>
