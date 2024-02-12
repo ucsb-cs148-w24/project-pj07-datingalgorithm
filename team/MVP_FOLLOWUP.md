@@ -9,6 +9,6 @@
 - Put an about page and how the apps work, potentially a tutorial
 - Have match percent done in real time
 ## Response Actions
-- 
+- Add them to Kanban Board and prioritize them by how important or easy they are to implement
 ## Next Step
-- 
+- Have people assign themselves into the issues/user story they can work on
