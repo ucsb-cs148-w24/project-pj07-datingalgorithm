@@ -12,3 +12,6 @@ I used Vercel v0.dev to generate code that allows me to customize the button to 
 Vedant:
 I used Codeium to write test cases for the swipingScreen page. We've been having issues with pulling dat from firebase, so being able to write test cases has been very helpful. I was very amazed by how it's able to read through the entire codebase in order to generate the best code possible. I plan on continuing to use to generate many more unit tests.
 I also used chat GPT to generate CSS code for the swipe screen. As someone without much expirience with CSS, it's a very useful tool to have.
+
+Emre:
+I used Vercel's v0.dev to create new UI designs for our project. after getting the designs I liked I ised ChatGPT to help me integrate these design to our existing project. There were a lot of errors but it was great how it looked in the end. 
