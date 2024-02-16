@@ -52,9 +52,9 @@ function Chats() {
         <Chat
           key={chat.chatId}
           id={chat.chatId}
-          // name={chat.otherUserName}
-          message={chat.otherUserName}
-          timestamp="Timestamp placeholder"
+          name={chat.otherUserName}
+          message=""
+          timestamp=""
           profilePic="..."
         />
       ))}
