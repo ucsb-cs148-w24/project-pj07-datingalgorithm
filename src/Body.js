@@ -9,7 +9,8 @@ import { ref, uploadBytesResumable, getDownloadURL } from"firebase/storage";
 
 function Body() {
     const navigate = useNavigate();
-    const [file, setFile] = useState();
+    const [file, setFile] = useState("");
+    const [seeImage, setImage] = useState();
     const [percent, setPercent] = useState(0);
 //    function handleChange(e) {
 //        if (e.target.files.length !== 0) {
@@ -22,39 +23,16 @@ function Body() {
  //   }
 
     function handleChange(e) {
-        setFile(e.target.files[0]);
-    }
-    const handleUpload = () => {
-        if (!file) {
-            alert("Please upload an image first!");
-            return;
+        if (e.target.files[0]) {
+            setFile(e.target.files[0]);
+            setImage(URL.createObjectURL(e.target.files[0]));
         }
- 
-        const storageRef = ref(storage, `/files/${file.name}`);
- 
-        // progress can be paused and resumed. It also exposes progress updates.
-        // Receives the storage reference and the file to upload.
-        const uploadTask = uploadBytesResumable(storageRef, file);
- 
-        uploadTask.on(
-            "state_changed",
-            (snapshot) => {
-                const percent = Math.round(
-                    (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-                );
- 
-                // update progress
-                setPercent(percent);
-            },
-            (err) => console.log(err),
-            () => {
-                // download url
-                getDownloadURL(uploadTask.snapshot.ref).then((url) => {
-                    console.log(url);
-                });
-            }
-        );
-    };
+        else {
+            setFile([]);
+            setImage([]);
+            alert("Image removed from upload.")
+        }
+    }
 
     //store user's answers to questions with checkboxes
     const [allQues, setAllQues] = useState([]);
@@ -91,7 +69,36 @@ function Body() {
         else if (document.getElementById('bio').value === "") {
             alert("Please fill out the text box bio.")
         }
+        else if (!file) {
+            alert("Please upload an image first.");
+        }
         else {
+            const storageRef = ref(storage, `/files/${file.name}`);
+ 
+            // progress can be paused and resumed. It also exposes progress updates.
+            // Receives the storage reference and the file to upload.
+            //const uploadResult = await storageRef.put(file);
+            const uploadTask = uploadBytesResumable(storageRef, file);
+ 
+            uploadTask.on(
+                "state_changed",
+                (snapshot) => {
+                    const percent = Math.round(
+                        (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+                    );
+        
+                    // update progress
+                    setPercent(percent);
+                },
+                (err) => console.log(err),
+                () => {
+                    // download url
+                    getDownloadURL(uploadTask.snapshot.ref).then((url) => {
+                        console.log(url);
+                    });
+                }
+            ); 
+
             const firstName = document.getElementById('fname').value;
             const lastName = document.getElementById('lname').value;
             // Combine first name and last name with a space
@@ -205,9 +212,7 @@ function Body() {
                 <div>
                     <p><b>Add Image:</b></p>
                     <input type="file" onChange={handleChange} accept="image/*" />
-                    <img style={{ width: "20%", height: "20%" }} src={file} alt="" />
-                    <button onClick={handleUpload}>Upload to Firebase</button>
-                    <p>{percent} "% done"</p>
+                    <img style={{ width: "20%", height: "20%" }} src={seeImage} alt="" />
                 </div>
                 <br></br>
                 <div>

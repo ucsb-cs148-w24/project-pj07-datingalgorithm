@@ -109,6 +109,7 @@ const Cards = () =>{
                         <p style={{fontSize: 150, position: "absolute", bottom: 40, left: 250}}>
                             {"90%"}
                         </p>
+                        <p style={{fontSize: 30, position: "absolute", bottom: 60, left: 300}}> Bio: {person.bio}</p>
                         <p style={{fontSize: 50, position: "absolute", bottom: 10, left: 10}}> Age: {getAge(person.birthday)}</p>
                     </div>
                 </TinderCard>
