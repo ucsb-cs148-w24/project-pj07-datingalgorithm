@@ -87,8 +87,15 @@ function ChatScreen() {
     }
   };
 
+  const goBackToChatList = () => {
+    navigate("/chats");
+  }
+
   return (
     <div className="chatScreen">
+      <div className="chatScreen__header">
+        <button onClick={goBackToChatList} className="goBackToChatList">Back</button>
+      </div>
 
       <p className="chatScreen__timestamp">You matched with {otherUserName || "Loading..."}</p>
       {messages.map((message) => (

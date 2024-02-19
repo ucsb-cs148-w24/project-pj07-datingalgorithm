@@ -5,10 +5,12 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import Chat from "./Chat";
 import { fetchUserName, fetchUserIdByEmail } from '../utils/userUtils';
 import './Chat.css';
+import { useNavigate } from 'react-router-dom'; // Added import for useNavigate
 
 function Chats() {
   const [user, loading, error] = useAuthState(auth);
   const [chatDetails, setChatDetails] = useState([]);
+  const navigate = useNavigate(); // Initialize useNavigate
 
   useEffect(() => {
     const fetchChats = async () => {
@@ -45,8 +47,13 @@ function Chats() {
     fetchChats();
   }, [user, loading]);
 
+  const goToSwipeScreen = () => {
+    navigate('/swipe');
+  }
+
   return (
     <div className="chats">
+      <button onClick={goToSwipeScreen} className="goToSwipeScreen">Keep swiping</button>
       {chatDetails.map((chat) => (
         <Chat
           key={chat.chatId}
