@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { db, auth, signInWithGoogle } from './firebase';
+import { db, auth, signInWithGoogle } from '../firebase';
 import { collection, addDoc, query, orderBy, onSnapshot, where } from "firebase/firestore";
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useNavigate, useParams } from 'react-router-dom';
 import { doc, getDoc } from "firebase/firestore"; // Ensure this import is added
 import "./ChatScreen.css";
-import { fetchUserName, fetchUserIdByEmail } from './utils/userUtils';
+import { fetchUserName, fetchUserIdByEmail } from '../utils/userUtils';
 
 function ChatScreen() {
   const [user] = useAuthState(auth);

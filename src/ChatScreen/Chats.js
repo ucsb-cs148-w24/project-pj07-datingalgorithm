@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { db, auth } from './firebase';
+import { db, auth } from '../firebase';
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { useAuthState } from 'react-firebase-hooks/auth';
 import Chat from "./Chat";
-import { fetchUserName, fetchUserIdByEmail } from './utils/userUtils';
+import { fetchUserName, fetchUserIdByEmail } from '../utils/userUtils';
 
 
 

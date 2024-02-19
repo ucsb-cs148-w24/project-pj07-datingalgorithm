@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import './Body.css';
 import data from "./data";
-import { db } from './firebaseConfig'; // Adjust the path as necessary
+import { db } from '../firebaseConfig'; // Adjust the path as necessary
 import { doc, setDoc } from "firebase/firestore";
-import { auth } from './firebaseConfig';
+import { auth } from '../firebaseConfig';
 import { useNavigate } from 'react-router-dom';
 
 function Body() {

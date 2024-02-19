@@ -2,7 +2,7 @@
 
 import React from 'react'
 import './Header.css';
-import logo from './res/eye-mask.png';
+import logo from './images/eye-mask.png';
 import SignOutButton from './SignOutButton';
 
 function Header() {
