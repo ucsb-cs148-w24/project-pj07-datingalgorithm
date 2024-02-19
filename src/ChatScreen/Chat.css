@@ -1,0 +1,50 @@
+.chat {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    height: 70px;
+    border-bottom: 1px solid #fafafa;
+
+}
+
+/* Chat.css */
+.chats {
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+}
+
+/* Adjust the color and alignment of the chat text */
+.chat {
+color: black; /* Change the color to black */
+text-align: left; /* Adjust the text alignment */
+margin-bottom: 10px; /* Add some margin to separate the chat elements */
+}
+
+/* Style the profile picture */
+.profilePic {
+width: 50px; /* Adjust the width of the profile picture */
+height: 50px; /* Adjust the height of the profile picture */
+border-radius: 50%; /* Make the profile picture round */
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.chat__details {
+    flex: 1;
+}
+.chat__details > p {
+    color: gray;
+}
+
+.chat__timestamp {
+    color: lightgray;
+}
+
+.chat__image {
+    margin-right: 20px;
+}
