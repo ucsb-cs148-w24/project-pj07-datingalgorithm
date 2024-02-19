@@ -4,8 +4,7 @@ import { collection, query, where, getDocs } from "firebase/firestore";
 import { useAuthState } from 'react-firebase-hooks/auth';
 import Chat from "./Chat";
 import { fetchUserName, fetchUserIdByEmail } from '../utils/userUtils';
-
-
+import './Chat.css';
 
 function Chats() {
   const [user, loading, error] = useAuthState(auth);

@@ -8,6 +8,27 @@
 
 }
 
+/* Chat.css */
+.chats {
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+}
+
+/* Adjust the color and alignment of the chat text */
+.chat {
+color: black; /* Change the color to black */
+text-align: left; /* Adjust the text alignment */
+margin-bottom: 10px; /* Add some margin to separate the chat elements */
+}
+
+/* Style the profile picture */
+.profilePic {
+width: 50px; /* Adjust the width of the profile picture */
+height: 50px; /* Adjust the height of the profile picture */
+border-radius: 50%; /* Make the profile picture round */
+}
+
 a {
     text-decoration: none;
     color: inherit;

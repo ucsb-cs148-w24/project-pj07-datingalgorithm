@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { auth, signInWithGoogle, signOutUser } from '../firebaseConfig';
 import { onAuthStateChanged } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
+import './Home.css';
 
 const Home = () => {
     const [user, setUser] = useState(null); // Track user state
@@ -52,7 +53,7 @@ const Home = () => {
         <div className='overlay'>
             <div className="container">
                 <h1 className='home-h1'>Blindly</h1>
-                <h2>Love Blindly, Meet Truly</h2>
+                <h2 className='text1'>Love Blindly, Meet Truly</h2>
                 <button onClick={handleAuthAction} className="primary-button">
                     {user ? 'Sign Out' : 'Sign In with Google'}
                 </button>
