@@ -140,11 +140,11 @@ const Cards = () =>{
                             {person.name}
                         </h3>
                         <p>{person.tagline}</p>
-                        <p style={{fontSize: 150, position: "absolute", bottom: 40, left: 250}}>
+                        <p className="match_percent" style={{fontSize: 150}}>
                             {"90%"}
                         </p>
-                        <p style={{fontSize: 30, position: "absolute", bottom: 60, left: 300}}> Bio: {person.bio}</p>
-                        <p style={{fontSize: 50, position: "absolute", bottom: 10, left: 10}}> Age: {getAge(person.birthday)}</p>
+                        <p className="bio" style={{fontSize: 26}}> Bio: {person.bio}</p>
+                        <p style={{fontSize: 50, position: "absolute", bottom: 0, left: 10}}> Age: {getAge(person.birthday)}</p>
                     </div>
                 </TinderCard>
             ))}

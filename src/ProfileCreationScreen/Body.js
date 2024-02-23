@@ -1,19 +1,16 @@
 import React, {useState } from 'react';
 import './Body.css';
 import data from "./data";
-import { db } from '../firebaseConfig'; // Adjust the path as necessary
-import { collection, doc, setDoc, serverTimestamp } from "firebase/firestore";
-import { auth, storage, ref } from '../firebaseConfig';
+import { auth, storage, ref, db } from '../firebaseConfig';
+import { doc, setDoc } from "firebase/firestore";
 import { useNavigate } from 'react-router-dom';
 import { getDownloadURL, uploadBytes } from "firebase/storage";
 
 function Body() {
     const navigate = useNavigate();
-    const [file, setFile] = useState(null);
-    const [percent, setPercent] = useState(0);
+    const [file, setFile] = useState([]);
     function handleFileChange(e) {
         if (e.target.files[0]) {
-            //setFile(URL.createObjectURL(e.target.files[0]));
             setFile(e.target.files[0]);
         }
         else {
@@ -21,26 +18,8 @@ function Body() {
             alert("Image removed from upload.")
         }
     }
-    //const [image, setImage] = useState(null);
-      
-    //function handleChange(e) {
-    //    if (e.target.files[0]) {
-    //        setFile(e.target.files[0]);
-    //    }
-    //    else {
-    //        setFile([]);
-    //        alert("Image removed from upload.")
-    //    }
-    //};
 
-    //const [image, setImage] = useState(null);
     const [uploading, setUploading] = useState(false);
-  
-    //const handleFileChange = (e) => {
-    //  const selectedFile = e.target.files[0];
-    //  setImage(selectedFile);
-    //};
-
 
     //store user's answers to questions with checkboxes
     const [allQues, setAllQues] = useState([]);
@@ -61,21 +40,43 @@ function Body() {
 
         if (document.getElementById('fname').value === "") {
             alert("Please fill out first name.")
+            return;
         }
         else if (document.getElementById('lname').value === "") {
             alert("Please fill out last name.")
+            return;
         }
         else if (document.getElementById('bday').value === "") {
             alert("Please fill out birthday.")
+            return;
         }
         else if (document.getElementById('gender').value === "") {
             alert("Please fill out gender.")
+            return;
         }
         else if (document.getElementById('sexual_ori').value === "") {
             alert("Please fill out who you are interested in.")
+            return;
         }
         else if (document.getElementById('bio').value === "") {
             alert("Please fill out the text box bio.")
+            return;
+        }
+        else if (allHobbies.length === 0) {
+            alert("Please add at least one hobby.");
+            return;
+        }
+        else if (allTraits.length === 0) {
+            alert("Please add at least one trait.");
+            return;
+        }
+        else if (allLoveLang.length === 0) {
+            alert("Please add at least one love language.");
+            return;
+        }
+        else if (file.length === 0) {
+            alert("Please select an image before submitting.");
+            return;
         }
         else {
             setUploading(true);
@@ -84,11 +85,6 @@ function Body() {
             // Combine first name and last name with a space
             const fullName = `${firstName} ${lastName}`;
 
-            const fileName = `${firstName}_${lastName}_${file.name}`;
-
- 
-            // progress can be paused and resumed. It also exposes progress updates.
-            // Receives the storage reference and the file to upload.
 
             const userProfileDetails = {
                 name: fullName, // Use the combined name here
@@ -103,10 +99,10 @@ function Body() {
             };
 
             try {
-                //await setDoc(doc(db, "users", uid), userProfileDetails, { merge: true });
                 await setDoc(doc(db, "users", uid), userProfileDetails, { merge: true });
                 console.log("Profile updated successfully");
 
+                // upload image to firebase storage
                 const imageRef = ref(storage, `users/${uid}/${fullName}`);
                 await uploadBytes(imageRef, file);
 
@@ -118,15 +114,10 @@ function Body() {
                     picUrl: downloadURL,
                     // Include any other fields captured from the form
                 };
-                //const imageDocRef = doc(db, 'images', fileName); // Assuming fileName is the document ID
-                //await setDoc(imageDocRef, {
-                //    name: fileName,
-                //    url: downloadURL,
-                //    createdAt: serverTimestamp()
-                //});
+                // upload downloadURL to firebase document
                 await setDoc(doc(db, "users", uid), userProfilePic, { merge: true });
                 alert('Image uploaded successfully!');
-                //handleUpload(uid);
+
                 alert("Profile updated.")
                 navigate('/swipe');
                 // Redirect or show success message as needed
@@ -227,7 +218,7 @@ function Body() {
                 </div>
                 <br></br>
                 <div>
-                    <button type="submit" value="Submit" disabled={!file || uploading}>{uploading ? 'Updating...' : 'Update'}</button>
+                    <button type="submit" value="Submit">{uploading ? 'Updating...' : 'Update'}</button>
                 </div>
             </form>
         </div>
