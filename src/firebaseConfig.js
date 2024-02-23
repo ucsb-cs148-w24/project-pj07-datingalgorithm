@@ -1,7 +1,8 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth";
 import { getFirestore, doc, setDoc, getDoc } from "firebase/firestore"; // Import Firestore and methods for document handling
-import { getStorage } from"firebase/storage";
+import { getStorage, ref } from"firebase/storage";
+
 
 const firebaseConfig = {
     apiKey: "AIzaSyBVz6ewF6axN18sp7wZuRZ0NLNMAWcytm4",
@@ -71,4 +72,4 @@ export const signOutUser = () => {
         });
 };
 
-export { auth, provider, db, storage };
+export { auth, provider, db, storage, ref };

@@ -1,38 +1,46 @@
-import React, {useState} from 'react';
+import React, {useState } from 'react';
 import './Body.css';
 import data from "./data";
-import { db, storage } from './firebaseConfig'; // Adjust the path as necessary
-import { doc, setDoc } from "firebase/firestore";
-import { auth } from './firebaseConfig';
+import { db } from '../firebaseConfig'; // Adjust the path as necessary
+import { collection, doc, setDoc, serverTimestamp } from "firebase/firestore";
+import { auth, storage, ref } from '../firebaseConfig';
 import { useNavigate } from 'react-router-dom';
-import { ref, uploadBytesResumable, getDownloadURL } from"firebase/storage";
+import { getDownloadURL, uploadBytes } from "firebase/storage";
 
 function Body() {
     const navigate = useNavigate();
-    const [file, setFile] = useState("");
-    const [seeImage, setImage] = useState();
+    const [file, setFile] = useState(null);
     const [percent, setPercent] = useState(0);
-//    function handleChange(e) {
-//        if (e.target.files.length !== 0) {
-//            setFile(URL.createObjectURL(e.target.files[0]));
-//        }
-//        else {
-//            setFile([]);
- //           alert("Image removed from upload.")
-//        }
- //   }
-
-    function handleChange(e) {
+    function handleFileChange(e) {
         if (e.target.files[0]) {
+            //setFile(URL.createObjectURL(e.target.files[0]));
             setFile(e.target.files[0]);
-            setImage(URL.createObjectURL(e.target.files[0]));
         }
         else {
             setFile([]);
-            setImage([]);
             alert("Image removed from upload.")
         }
     }
+    //const [image, setImage] = useState(null);
+      
+    //function handleChange(e) {
+    //    if (e.target.files[0]) {
+    //        setFile(e.target.files[0]);
+    //    }
+    //    else {
+    //        setFile([]);
+    //        alert("Image removed from upload.")
+    //    }
+    //};
+
+    //const [image, setImage] = useState(null);
+    const [uploading, setUploading] = useState(false);
+  
+    //const handleFileChange = (e) => {
+    //  const selectedFile = e.target.files[0];
+    //  setImage(selectedFile);
+    //};
+
 
     //store user's answers to questions with checkboxes
     const [allQues, setAllQues] = useState([]);
@@ -69,41 +77,19 @@ function Body() {
         else if (document.getElementById('bio').value === "") {
             alert("Please fill out the text box bio.")
         }
-        else if (!file) {
-            alert("Please upload an image first.");
-        }
         else {
-            const storageRef = ref(storage, `/files/${file.name}`);
- 
-            // progress can be paused and resumed. It also exposes progress updates.
-            // Receives the storage reference and the file to upload.
-            //const uploadResult = await storageRef.put(file);
-            const uploadTask = uploadBytesResumable(storageRef, file);
- 
-            uploadTask.on(
-                "state_changed",
-                (snapshot) => {
-                    const percent = Math.round(
-                        (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-                    );
-        
-                    // update progress
-                    setPercent(percent);
-                },
-                (err) => console.log(err),
-                () => {
-                    // download url
-                    getDownloadURL(uploadTask.snapshot.ref).then((url) => {
-                        console.log(url);
-                    });
-                }
-            ); 
-
+            setUploading(true);
             const firstName = document.getElementById('fname').value;
             const lastName = document.getElementById('lname').value;
             // Combine first name and last name with a space
             const fullName = `${firstName} ${lastName}`;
-        
+
+            const fileName = `${firstName}_${lastName}_${file.name}`;
+
+ 
+            // progress can be paused and resumed. It also exposes progress updates.
+            // Receives the storage reference and the file to upload.
+
             const userProfileDetails = {
                 name: fullName, // Use the combined name here
                 birthday: document.getElementById('bday').value,
@@ -117,15 +103,40 @@ function Body() {
             };
 
             try {
+                //await setDoc(doc(db, "users", uid), userProfileDetails, { merge: true });
                 await setDoc(doc(db, "users", uid), userProfileDetails, { merge: true });
                 console.log("Profile updated successfully");
+
+                const imageRef = ref(storage, `users/${uid}/${fullName}`);
+                await uploadBytes(imageRef, file);
+
+                // Get download URL of the uploaded image
+                const downloadURL = await getDownloadURL(imageRef);
+
+                // Save metadata to Firestore
+                const userProfilePic = {
+                    picUrl: downloadURL,
+                    // Include any other fields captured from the form
+                };
+                //const imageDocRef = doc(db, 'images', fileName); // Assuming fileName is the document ID
+                //await setDoc(imageDocRef, {
+                //    name: fileName,
+                //    url: downloadURL,
+                //    createdAt: serverTimestamp()
+                //});
+                await setDoc(doc(db, "users", uid), userProfilePic, { merge: true });
+                alert('Image uploaded successfully!');
+                //handleUpload(uid);
                 alert("Profile updated.")
                 navigate('/swipe');
                 // Redirect or show success message as needed
             } catch (error) {
                 console.error("Error updating profile:", error);
+                console.error('Error uploading image:', error);
+                alert('Failed to upload image.');
                 // Handle the error appropriately
             }
+            setUploading(false);
         }
     
         
@@ -211,12 +222,12 @@ function Body() {
                 <br></br>
                 <div>
                     <p><b>Add Image:</b></p>
-                    <input type="file" onChange={handleChange} accept="image/*" />
-                    <img style={{ width: "20%", height: "20%" }} src={seeImage} alt="" />
+                    <input type="file" onChange={handleFileChange} accept="image/*" />
+                    <img style={{ width: "20%", height: "20%" }} src={file} alt="" />
                 </div>
                 <br></br>
                 <div>
-                    <input type="submit" value="Submit"></input>
+                    <button type="submit" value="Submit" disabled={!file || uploading}>{uploading ? 'Updating...' : 'Update'}</button>
                 </div>
             </form>
         </div>

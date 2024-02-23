@@ -26,3 +26,14 @@ export const fetchUserIdByEmail = async (email) => {
     return null;
   }
 }
+
+export const fetchUserProfilePicById = async (uid) => {
+  const userDocRef = doc(db, "users", uid);
+  const userDocSnap = await getDoc(userDocRef);
+  if (userDocSnap.exists()) {
+    return userDocSnap.data().picUrl; // Assuming the field for the user's profile picture is 'profilePic'
+  } else {
+    console.log("No such user!");
+    return "https://example.com/default-profile-pic"; // Fallback profile picture
+  }
+};
