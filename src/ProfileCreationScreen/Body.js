@@ -1,23 +1,25 @@
-import React, {useState} from 'react';
+import React, {useState } from 'react';
 import './Body.css';
 import data from "./data";
-import { db } from '../firebaseConfig'; // Adjust the path as necessary
+import { auth, storage, ref, db } from '../firebaseConfig';
 import { doc, setDoc } from "firebase/firestore";
-import { auth } from '../firebaseConfig';
 import { useNavigate } from 'react-router-dom';
+import { getDownloadURL, uploadBytes } from "firebase/storage";
 
 function Body() {
     const navigate = useNavigate();
-    const [file, setFile] = useState();
-    function handleChange(e) {
-        if (e.target.files.length !== 0) {
-            setFile(URL.createObjectURL(e.target.files[0]));
+    const [file, setFile] = useState([]);
+    function handleFileChange(e) {
+        if (e.target.files[0]) {
+            setFile(e.target.files[0]);
         }
         else {
             setFile([]);
             alert("Image removed from upload.")
         }
     }
+
+    const [uploading, setUploading] = useState(false);
 
     //store user's answers to questions with checkboxes
     const [allQues, setAllQues] = useState([]);
@@ -38,28 +40,52 @@ function Body() {
 
         if (document.getElementById('fname').value === "") {
             alert("Please fill out first name.")
+            return;
         }
         else if (document.getElementById('lname').value === "") {
             alert("Please fill out last name.")
+            return;
         }
         else if (document.getElementById('bday').value === "") {
             alert("Please fill out birthday.")
+            return;
         }
         else if (document.getElementById('gender').value === "") {
             alert("Please fill out gender.")
+            return;
         }
         else if (document.getElementById('sexual_ori').value === "") {
             alert("Please fill out who you are interested in.")
+            return;
         }
         else if (document.getElementById('bio').value === "") {
             alert("Please fill out the text box bio.")
+            return;
+        }
+        else if (allHobbies.length === 0) {
+            alert("Please add at least one hobby.");
+            return;
+        }
+        else if (allTraits.length === 0) {
+            alert("Please add at least one trait.");
+            return;
+        }
+        else if (allLoveLang.length === 0) {
+            alert("Please add at least one love language.");
+            return;
+        }
+        else if (file.length === 0) {
+            alert("Please select an image before submitting.");
+            return;
         }
         else {
+            setUploading(true);
             const firstName = document.getElementById('fname').value;
             const lastName = document.getElementById('lname').value;
             // Combine first name and last name with a space
             const fullName = `${firstName} ${lastName}`;
-        
+
+
             const userProfileDetails = {
                 name: fullName, // Use the combined name here
                 birthday: document.getElementById('bday').value,
@@ -75,13 +101,33 @@ function Body() {
             try {
                 await setDoc(doc(db, "users", uid), userProfileDetails, { merge: true });
                 console.log("Profile updated successfully");
+
+                // upload image to firebase storage
+                const imageRef = ref(storage, `users/${uid}/${fullName}`);
+                await uploadBytes(imageRef, file);
+
+                // Get download URL of the uploaded image
+                const downloadURL = await getDownloadURL(imageRef);
+
+                // Save metadata to Firestore
+                const userProfilePic = {
+                    picUrl: downloadURL,
+                    // Include any other fields captured from the form
+                };
+                // upload downloadURL to firebase document
+                await setDoc(doc(db, "users", uid), userProfilePic, { merge: true });
+                alert('Image uploaded successfully!');
+
                 alert("Profile updated.")
                 navigate('/swipe');
                 // Redirect or show success message as needed
             } catch (error) {
                 console.error("Error updating profile:", error);
+                console.error('Error uploading image:', error);
+                alert('Failed to upload image.');
                 // Handle the error appropriately
             }
+            setUploading(false);
         }
     
         
@@ -167,12 +213,12 @@ function Body() {
                 <br></br>
                 <div>
                     <p><b>Add Image:</b></p>
-                    <input type="file" onChange={handleChange} accept="image/*" />
+                    <input type="file" onChange={handleFileChange} accept="image/*" />
                     <img style={{ width: "20%", height: "20%" }} src={file} alt="" />
                 </div>
                 <br></br>
                 <div>
-                    <input type="submit" value="Submit"></input>
+                    <button type="submit" value="Submit">{uploading ? 'Updating...' : 'Update'}</button>
                 </div>
             </form>
         </div>
