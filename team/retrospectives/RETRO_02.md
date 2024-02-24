@@ -6,11 +6,11 @@
 
 ## Action Item
     Goal: We should start doing more pull requests
-    Expriment: We should only have pushes to main if we're doing small edits. Everything else is dont through pull requests
+    Experiment: We should only have pushes to main if we're doing small edits. Everything else is done through pull requests
     Measurement: Count how many closed pull requests we have
 
     Goal: Continue using Kanban board more
-    Expiriment: Discuss tickets more. try to update kanban board more often
+    Experiment: Discuss tickets more. try to update kanban board more often
     Measurement: Check how up to date board is every lab meeting
 
 ## Retro Assessment
@@ -19,3 +19,6 @@ For our retro, we used the start/stop/continue method to figure out what has bee
 Our retro went very well and we heard lots of useful advice on how we can improve our development process. After our discussion, we decided on experiments to fix these issues during our next sprint cycle. 
 
 I would recommend the next person leading a retro to only listen and remain neutral the entire time. It is difficult to avoid voicing your opinion; however, it is very beneficial for the team to approach the issues from a neutral perspective.
+
+## Experiment/Change
+One of our experiments was to start doing more pull requests to make sure we were on track. This has improved our progress and we have decided to keep this change moving forward. 
