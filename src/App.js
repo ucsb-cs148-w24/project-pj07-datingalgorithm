@@ -1,15 +1,15 @@
 import React from 'react';
-import Home from './Home'; 
-import ProfileCreation from './ProfileCreation'; 
+import Home from './SignInScreen/Home'; 
+import ProfileCreation from './ProfileCreationScreen/ProfileCreation'; 
 import './App.css';
-import Cards from './Cards';
+import Cards from './SwipeScreen/Cards';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import ChatScreen from './ChatScreen';
-import Chat from './Chat';
-import Chats from './Chats';
+import ChatScreen from './ChatScreen/ChatScreen';
+import Chat from './ChatScreen/Chat';
+import Chats from './ChatScreen/Chats';
 import UserList from './UserList';
 import { collection, getDocs } from "firebase/firestore";
-import { db } from './firebase'; // Adjust the import path as necessary
+import { db } from './firebaseConfig'; // Adjust the import path as necessary
 import { useState, useEffect } from 'react';
 
 // Import your chat screen component here

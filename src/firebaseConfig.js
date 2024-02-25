@@ -1,6 +1,8 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth";
 import { getFirestore, doc, setDoc, getDoc } from "firebase/firestore"; // Import Firestore and methods for document handling
+import { getStorage, ref } from"firebase/storage";
+
 
 const firebaseConfig = {
     apiKey: "AIzaSyBVz6ewF6axN18sp7wZuRZ0NLNMAWcytm4",
@@ -16,6 +18,7 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app); // Initialize Firestore
 const provider = new GoogleAuthProvider();
+const storage = getStorage(app);
 
 // Force account selection on every sign-in attempt
 provider.setCustomParameters({
@@ -69,4 +72,4 @@ export const signOutUser = () => {
         });
 };
 
-export { auth, provider, db };
+export { auth, provider, db, storage, ref };

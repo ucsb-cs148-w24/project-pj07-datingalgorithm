@@ -57,6 +57,26 @@
     text-align: center;
 }
 
+.bio {
+    max-height: 100px; /* Adjust this value as needed */
+    margin-top: -150px;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    bottom: '90%'; 
+    margin-left: 100px;
+    max-width: 600px;
+    overflow: auto;
+    /* Other styles to fit your design */
+  }
+
+
+  .match_percent {
+    width: 800px; /* Example width */
+    margin-top: -10px;
+    /* Other styles to fit your design */
+  }
+
 /* .card > h3 {
     position: fixed;
     color: black;

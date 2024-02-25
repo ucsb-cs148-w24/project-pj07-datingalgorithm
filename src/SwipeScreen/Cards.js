@@ -1,12 +1,25 @@
 import React, {useEffect, useState} from "react";
 import TinderCard from "react-tinder-card";
 import "./Cards.css";
-import { db, auth, signInAnonymously } from './firebase';
-import Header from './Header';
-import {collection, onSnapshot, query, where, getDocs, doc, getDoc, addDoc} from "firebase/firestore";
+import { db, auth} from '../firebase';
+import Header from '../Header';
+import {collection, onSnapshot, query, where, getDocs, doc, getDoc, addDoc, updateDoc, arrayUnion, setDoc, arrayRemove} from "firebase/firestore";
 import { getAuth, onAuthStateChanged} from 'firebase/auth';
 import { useNavigate } from 'react-router-dom'; // Added import for useNavigate
 import "./ChatButton.css";
+
+
+function getAge(dateString) {
+    var today = new Date();
+    var birthDate = new Date(dateString);
+    var age = today.getFullYear() - birthDate.getFullYear();
+    var m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+    }
+    return age;
+}
+
 const Cards = () =>{
     const [people, setPeople] = useState([]);
     const [user, setUser] = useState(null); // Add state to track the current user
@@ -16,10 +29,15 @@ const Cards = () =>{
     // UseEffect to listen for auth state changes and set the user
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-            setUser(currentUser);
+          setUser(currentUser);
         });
-        return () => unsubscribe(); // Cleanup subscription
-    }, []);
+      
+        return () => {
+          if (typeof unsubscribe === 'function') {
+            unsubscribe();
+          }
+        };
+      }, []);
 
     // Update useEffect hooks to include user in their dependency arrays
     useEffect(() => {
@@ -40,26 +58,55 @@ const Cards = () =>{
         }
     }, [db, user]); // Include user in dependency array
 
-    const chatAlreadyExists = (recEmail) =>{
-        return(
-        !!userChats.find(
-            (chat)=>
-            chat.data().users.find((user) => user === recEmail)?.length > 0
-        )
-        )
-    }
+
+
+    // Function to handle swiping action
+    const handleSwipe = async (userAId, userBId) => {
+        // Add user B to the "likes" array within user A's document in the potentialMatches collection
+        const userADoc = doc(db, 'potentialMatches', userAId);
+        await setDoc(userADoc, {
+          likes: arrayUnion(userBId),
+        }, { merge: true });
+      
+        // Check if user A is also in user B's likes array
+        const userBDoc = doc(db, 'potentialMatches', userBId);
+        const userBDocument = await getDoc(userBDoc);
+        if (userBDocument.exists()) {
+          const userBData = userBDocument.data();
+          if (userBData.likes && userBData.likes.includes(userAId)) {
+            // Add both users to the "matched" array
+            await updateDoc(userADoc, {
+              matched: arrayUnion(userBId),
+            });
+            await updateDoc(userBDoc, {
+              matched: arrayUnion(userAId),
+            });
+
+            // remove user from likes array
+            await updateDoc(userADoc, {
+                likes: arrayRemove(userBId),
+            });
+            await updateDoc(userBDoc, {
+                likes: arrayRemove(userAId),
+            });
+      
+            // Create a new chat in the "chats" collection
+            const newChat = {
+                // the new chat contains an array caled users with the two user ids
+                users: [userAId, userBId],
+
+            };
+            const chatDocRef = await addDoc(collection(db, 'chats'), newChat);
+          }
+        }
+      };
+
+
     const onSwipe = async (direction, personEmail) => {
         if (direction === "right"){
-            // check if current chat already exists
-            const exists = chatAlreadyExists(personEmail);
-            if (exists){
-                console.log("Chat already exists");
-                return;
-            }
-            const docRef = await addDoc(collection(db, "chats"), {
-                users: [user?.email, personEmail]
-            });
-            console.log("You swiped: " + direction + " to " + personEmail + "from" + user?.email);
+            console.log("swiped right");
+            // handle swipe between user email and other email
+            handleSwipe(user.email, personEmail);
         }
         else if (direction === "left"){
             console.log("swiped left");
@@ -69,6 +116,7 @@ const Cards = () =>{
     const goToChatScreen = () => {
         navigate('/chats'); // Assuming your chat screen route is '/chat'
     };
+
 
     return (
         <div className="cards">
@@ -92,9 +140,11 @@ const Cards = () =>{
                             {person.name}
                         </h3>
                         <p>{person.tagline}</p>
-                        <p style={{fontSize: 150, position: "absolute", bottom: 40, left: 300}}>
+                        <p className="match_percent" style={{fontSize: 150}}>
                             {"90%"}
                         </p>
+                        <p className="bio" style={{fontSize: 26}}> Bio: {person.bio}</p>
+                        <p style={{fontSize: 50, position: "absolute", bottom: 0, left: 10}}> Age: {getAge(person.birthday)}</p>
                     </div>
                     
                 </TinderCard>
