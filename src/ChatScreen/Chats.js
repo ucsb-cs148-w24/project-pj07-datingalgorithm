@@ -4,6 +4,7 @@ import { collection, query, where, getDocs, orderBy, limit } from "firebase/fire
 import { useAuthState } from 'react-firebase-hooks/auth';
 import Chat from "./Chat";
 import { fetchUserName, fetchUserIdByEmail, fetchUserProfilePicById} from '../utils/userUtils';
+import NewMatches from './newMatches';
 import './Chat.css';
 import { useNavigate } from 'react-router-dom'; // Added import for useNavigate
 
@@ -69,6 +70,9 @@ function Chats() {
   return (
     <div className="chats">
       <button onClick={goToSwipeScreen} className="goToSwipeScreen">Keep swiping</button>
+
+      <NewMatches />
+
       {chatDetails.map((chat) => (
         <Chat
           key={chat.chatId}
