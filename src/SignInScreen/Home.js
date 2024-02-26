@@ -10,6 +10,10 @@ const Home = () => {
     // const [errorTimer, setErrorTimer] = useState(null);
     const navigate = useNavigate();
 
+    const handleAbout = () => {
+        navigate('./about');
+    }
+
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
             setUser(currentUser); // Set user if signed in, or null if signed out
@@ -58,12 +62,15 @@ const Home = () => {
                     {user ? 'Sign Out' : 'Sign In with Google'}
                 </button>
             </div>
+                <button onClick={handleAbout} className="about-button">About Us 
+                </button>
             {errorMessage && (
                 <div className="error-popup">
                     <p>{errorMessage}</p>
                 </div>
             )}
         </div>
+        
     );
 };
 

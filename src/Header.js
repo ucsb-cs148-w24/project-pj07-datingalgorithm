@@ -1,18 +1,22 @@
-// src/Header.js
-
 import React from 'react'
 import './Header.css';
 import logo from './images/eye-mask.png';
 import SignOutButton from './SignOutButton';
+import {Link} from 'react-router-dom';
 
 function Header() {
     return (
         <div className="Header">
-            <img src={logo} alt="Blindly Logo" className="logo" />
-            <h1>Blindly</h1>
+            <Link to={`/swipe`}>
+                <div className='logo'>
+                    <img src={logo} alt="Blindly Logo" className="logoImage" />
+                    <h1>Blindly</h1>
+                </div>
+            </Link>
+            
             <SignOutButton/>
         </div>
     )
-}
+  }
 
 export default Header

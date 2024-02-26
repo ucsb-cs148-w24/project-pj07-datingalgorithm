@@ -25,4 +25,4 @@ export const sendMessage = async (chatId, senderId, messageText) => {
     } catch (error) {
       console.error("Error sending message: ", error);
     }
-  };
+};
