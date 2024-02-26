@@ -119,20 +119,21 @@ const Cards = () =>{
 
 
     return (
-        <div className="cards">
-            <Header/>
+        <div>
+        <Header/>
+        <div className="cards"> 
             {people.map(person => (
                 <TinderCard
                     className="swipe"
                     key={person.name}
-                    preventSwipe={["up"]}
+                    preventSwipe={["up", "down"]}
+                    onSwipe={(dir) => onSwipe(dir, person.email)}
                 >
-                    <div 
+                    <div
                     className="card"
                     style = {{backgroundImage: `url(${person.picUrl})`}}
-                    >   
+                    >
                     </div>
-
                     <div
                         className="content"
                     >
@@ -144,12 +145,16 @@ const Cards = () =>{
                             {"90%"}
                         </p>
                         <p className="bio" style={{fontSize: 26}}> Bio: {person.bio}</p>
-                        <p style={{fontSize: 50, position: "absolute", bottom: 0, left: 10}}> Age: {getAge(person.birthday)}</p>
+                        <p>{person.tagline}</p>
+                        <p style={{fontSize: 50, position: "absolute", bottom: 0, left: 25}}> Age: {getAge(person.birthday)}</p>
                     </div>
-                    
                 </TinderCard>
             ))}
+            </div>
+            <button onClick={goToChatScreen} className="goToChatButton">Go to Chat</button>
         </div>
     )
-}
-export default Cards;
+    }
+    export default Cards;
+
+
