@@ -82,6 +82,33 @@ const data = [
         {id: 7, label: 'Love'},
         {id: 8, label: 'Health'}
       ]
+    },
+    {
+      group: "icks",
+      prompt: "Which do you find most unpleasant? Please select your top three choices.",
+      questions: [
+        {id: 1, label: 'Bad Hygiene'},
+        {id: 2, label: 'Bad Manners'},
+        {id: 3, label: 'Social Media Obsession'},
+        {id: 4, label: 'Emotional Manipulation'},
+        {id: 5, label: 'Big Ego'},
+        {id: 6, label: 'Controlling'},
+        {id: 7, label: 'Lack of Empathy'},
+        {id: 8, label: 'Lack of Ambition'}
+      ]
+    },
+    {
+      group: "superpower",
+      prompt: "If you could have any superpower, which would you pick? Please select your top choice.",
+      questions: [
+        {id: 1, label: 'Teleportation'},
+        {id: 2, label: 'Shape Shifting'},
+        {id: 3, label: 'Super Speed'},
+        {id: 4, label: 'Super Strength'},
+        {id: 5, label: 'Invisibility'},
+        {id: 6, label: 'Read/Control Minds'},
+        {id: 7, label: 'Healing & Immortality'}
+      ]
     }
   ];
 

@@ -30,6 +30,8 @@ function Body() {
     const [allVacation, setAllVacation] = useState([]);
     const [allGifts, setAllGifts] = useState([]);
     const [allPriority, setAllPriority] = useState([]);
+    const [allIcks, setAllIcks] = useState([]);
+    const [allSuperpowers, setAllSuperpowers] = useState([]);
 
     //Submit limits
     const handleSubmit = async (e) => {
@@ -90,6 +92,14 @@ function Body() {
             alert("Please add at least one priority.");
             return;
         }
+        else if (allIcks.length === 0) {
+            alert("Please add at least one unpleasant quality.");
+            return;
+        }
+        else if (allSuperpowers.length === 0) {
+            alert("Please add at least one superpower.");
+            return;
+        }
         else if (file.length === 0) {
             alert("Please select an image before submitting.");
             return;
@@ -114,7 +124,9 @@ function Body() {
                 dateideas: allDateIdeas,
                 vacation: allVacation,
                 gift: allGifts,
-                priority: allPriority
+                priority: allPriority,
+                icks: allIcks,
+                superpower: allSuperpowers
                 // Include any other fields captured from the form
             };
 
@@ -234,6 +246,10 @@ function Body() {
                             allGifts={allGifts}
                             setAllPriority={setAllPriority}
                             allPriority={allPriority}
+                            setAllIcks={setAllIcks}
+                            allIcks={allIcks}
+                            setAllSuperpowers={setAllSuperpowers}
+                            allSuperpowers={allSuperpowers}
 
                             />
                         );
@@ -256,7 +272,7 @@ function Body() {
 }
 
 
-const SingleGroup = ({ data, setAllQues, allQues, setAllHobbies, allHobbies, setAllTraits, allTraits, setAllLoveLang, allLoveLang, setAllDateIdeas, allDateIdeas, setAllVacation, allVacation, setAllGifts, allGifts, setAllPriority, allPriority}) => { //Checkbox limit
+const SingleGroup = ({ data, setAllQues, allQues, setAllHobbies, allHobbies, setAllTraits, allTraits, setAllLoveLang, allLoveLang, setAllDateIdeas, allDateIdeas, setAllVacation, allVacation, setAllGifts, allGifts, setAllPriority, allPriority, setAllIcks, allIcks, setAllSuperpowers, allSuperpowers}) => { //Checkbox limit
     const [values, setValues] = useState([]);
     const handleChange = (e) => {
         if (e.target.checked) {
@@ -297,7 +313,20 @@ const SingleGroup = ({ data, setAllQues, allQues, setAllHobbies, allHobbies, set
                 if (values.length < 1) {
                     setValues((prev) => [...prev, e.target.value]);
                     setAllQues((prev) => [...prev, e.target.value]);
-                    setAllDateIdeas((allDateIdeas) => [...allDateIdeas, e.target.value]);
+                    if (data.group === "date-ideas") {
+                        setAllDateIdeas((allDateIdeas) => [...allDateIdeas, e.target.value]);
+                    }
+                } else {
+                    e.target.checked = false;
+
+                    alert("You can select only 1 choice");
+                }
+            }
+            else if (data.group === "superpower") {
+                if (values.length < 1) {
+                    setValues((prev) => [...prev, e.target.value]);
+                    setAllQues((prev) => [...prev, e.target.value]);
+                    setAllSuperpowers((allSuperpowers) => [...allSuperpowers, e.target.value]);
                 } else {
                     e.target.checked = false;
 
@@ -313,6 +342,9 @@ const SingleGroup = ({ data, setAllQues, allQues, setAllHobbies, allHobbies, set
                     }
                     else if (data.group === "priority"){
                         setAllPriority((allPriority) => [...allPriority, e.target.value]);
+                    }
+                    else if (data.group === "icks"){
+                        setAllIcks((allIcks) => [...allIcks, e.target.value]);
                     }
                     else {
                         setAllTraits((allTraits) => [...allTraits, e.target.value]);
@@ -331,6 +363,12 @@ const SingleGroup = ({ data, setAllQues, allQues, setAllHobbies, allHobbies, set
         setAllHobbies(allHobbies.filter((item) => item !== e.target.value));
         setAllTraits(allTraits.filter((item) => item !== e.target.value));
         setAllLoveLang(allLoveLang.filter((item) => item !== e.target.value));
+        setAllDateIdeas(allDateIdeas.filter((item) => item !== e.target.value));
+        setAllVacation(allVacation.filter((item) => item !== e.target.value));
+        setAllGifts(allGifts.filter((item) => item !== e.target.value));
+        setAllPriority(allPriority.filter((item) => item !== e.target.value));
+        setAllIcks(allIcks.filter((item) => item !== e.target.value));
+        setAllSuperpowers(allSuperpowers.filter((item) => item !== e.target.value));
         }
     };
 
