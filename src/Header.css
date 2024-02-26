@@ -3,14 +3,21 @@
     width: 100%;
     display: flex;
     justify-content: left;
-
+    position: relative;
     
     padding: 1em;
     margin-bottom: 1em;
     background-color: grey;
     color: #000000;
     
-  }
+}
+
+.header-group {
+    display: flex;
+    align-items: center;
+    
+}
+
 
 .profile-header{
     margin-top: 0px; 

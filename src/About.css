@@ -1,0 +1,64 @@
+.about-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    text-align: center;
+  }
+
+  .about-back-btn {
+    position: fixed; 
+    left: 15px; 
+    top: 10px; 
+    background: white; 
+    border: none; 
+    color: black; 
+    font-size: 38px;
+    padding: 10px 20px; 
+    display: flex;
+    align-items: center; 
+  }
+  
+  .about-back-btn:hover {
+    color: grey;
+    cursor: pointer;
+  }
+
+  h1 {
+    font-size: 2em;
+    margin-bottom: 0.5em; 
+  }
+
+  p {
+    font-size: 1em; 
+    margin-bottom: 1em; 
+  }
+  
+  h2 {
+    font-size: 1.5em; 
+    margin-top: 3em; 
+  }
+
+  h3 {
+    font-size: 1.2em; 
+    margin-top: 1em; 
+  }
+  
+  .developer-profiles {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .developer-profile {
+    text-align: center;
+    max-width: 175px;
+  }
+  
+  .signature-line {
+    text-align: center;
+    display: block; 
+  }
+  

@@ -1,5 +1,6 @@
 import React from 'react';
 import Home from './SignInScreen/Home'; 
+import About from './About'
 import ProfileCreation from './ProfileCreationScreen/ProfileCreation'; 
 import './App.css';
 import Cards from './SwipeScreen/Cards';
@@ -36,6 +37,7 @@ function App() {
 
           <Route path="/" element={<Home />} />
 
+          <Route path='/about' element={<About/>}/>
           <Route path='/makeProfile' element={<ProfileCreation/>}/>
           <Route path="/chats" element={<Chats />} />
           <Route path="/chat" element={<Chat />} />
