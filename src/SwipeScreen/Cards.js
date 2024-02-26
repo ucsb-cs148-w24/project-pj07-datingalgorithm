@@ -6,19 +6,20 @@ import Header from '../Header';
 import {collection, onSnapshot, query, where, getDocs, doc, getDoc, addDoc, updateDoc, arrayUnion, setDoc, arrayRemove} from "firebase/firestore";
 import { getAuth, onAuthStateChanged} from 'firebase/auth';
 import { useNavigate } from 'react-router-dom'; // Added import for useNavigate
+import {getAge} from '../utils/userUtils';
 import "./ChatButton.css";
 
 
-function getAge(dateString) {
-    var today = new Date();
-    var birthDate = new Date(dateString);
-    var age = today.getFullYear() - birthDate.getFullYear();
-    var m = today.getMonth() - birthDate.getMonth();
-    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-        age--;
-    }
-    return age;
-}
+// function getAge(dateString) {
+//     var today = new Date();
+//     var birthDate = new Date(dateString);
+//     var age = today.getFullYear() - birthDate.getFullYear();
+//     var m = today.getMonth() - birthDate.getMonth();
+//     if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+//         age--;
+//     }
+//     return age;
+// }
 
 const Cards = () =>{
     const [people, setPeople] = useState([]);

@@ -25,10 +25,17 @@
     color: #000000;
 }
 
-.logo {
+.logoImage {
     width: 40px; 
     margin-right: 10px; 
     margin-top: 0px; 
     margin-bottom: 0px;
     float: left; 
+}
+
+.logo{
+    display: flex;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #e0e0e0;
 }

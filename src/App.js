@@ -8,6 +8,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import ChatScreen from './ChatScreen/ChatScreen';
 import Chat from './ChatScreen/Chat';
 import Chats from './ChatScreen/Chats';
+import UserProfile from './userProfile';
 import UserList from './UserList';
 import { collection, getDocs } from "firebase/firestore";
 import { db } from './firebaseConfig'; // Adjust the import path as necessary
@@ -42,6 +43,7 @@ function App() {
           <Route path="/chat" element={<Chat />} />
           <Route path="/chat/:chatId" element={<ChatScreen />} />
           <Route path="/users" element={<UserList users={users} />} />
+          <Route path="/profile/:userId" element={<UserProfile />} />
 
         </Routes>
       </Router>
