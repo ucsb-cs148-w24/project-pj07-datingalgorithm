@@ -26,6 +26,10 @@ function Body() {
     const [allHobbies, setAllHobbies] = useState([]);
     const [allTraits, setAllTraits] = useState([]);
     const [allLoveLang, setAllLoveLang] = useState([]);
+    const [allDateIdeas, setAllDateIdeas] = useState([]);
+    const [allVacation, setAllVacation] = useState([]);
+    const [allGifts, setAllGifts] = useState([]);
+    const [allPriority, setAllPriority] = useState([]);
 
     //Submit limits
     const handleSubmit = async (e) => {
@@ -74,6 +78,18 @@ function Body() {
             alert("Please add at least one love language.");
             return;
         }
+        else if (allDateIdeas.length === 0) {
+            alert("Please add one ideal date.");
+            return;
+        }
+        else if (allVacation.length === 0) {
+            alert("Please add one ideal vacation spot.");
+            return;
+        }
+        else if (allPriority.length === 0) {
+            alert("Please add at least one priority.");
+            return;
+        }
         else if (file.length === 0) {
             alert("Please select an image before submitting.");
             return;
@@ -95,6 +111,10 @@ function Body() {
                 hobbies: allHobbies,
                 traits: allTraits,
                 lovelang: allLoveLang,
+                dateideas: allDateIdeas,
+                vacation: allVacation,
+                gift: allGifts,
+                priority: allPriority
                 // Include any other fields captured from the form
             };
 
@@ -206,11 +226,21 @@ function Body() {
                             allTraits={allTraits}
                             setAllLoveLang={setAllLoveLang}
                             allLoveLang={allLoveLang}
+                            setAllDateIdeas={setAllDateIdeas}
+                            allDateIdeas={allDateIdeas}
+                            setAllVacation={setAllVacation}
+                            allVacation={allVacation}
+                            setAllGifts={setAllGifts}
+                            allGifts={allGifts}
+                            setAllPriority={setAllPriority}
+                            allPriority={allPriority}
+
                             />
                         );
                     })}
                 </div>
                 <br></br>
+                
                 <div>
                     <p><b>Add Image:</b></p>
                     <input type="file" onChange={handleFileChange} accept="image/*" />
@@ -226,7 +256,7 @@ function Body() {
 }
 
 
-const SingleGroup = ({ data, setAllQues, allQues, setAllHobbies, allHobbies, setAllTraits, allTraits, setAllLoveLang, allLoveLang }) => { //Checkbox limit
+const SingleGroup = ({ data, setAllQues, allQues, setAllHobbies, allHobbies, setAllTraits, allTraits, setAllLoveLang, allLoveLang, setAllDateIdeas, allDateIdeas, setAllVacation, allVacation, setAllGifts, allGifts, setAllPriority, allPriority}) => { //Checkbox limit
     const [values, setValues] = useState([]);
     const handleChange = (e) => {
         if (e.target.checked) {
@@ -241,12 +271,48 @@ const SingleGroup = ({ data, setAllQues, allQues, setAllHobbies, allHobbies, set
                     alert("You can select only 2 choices");
                 }
             }
+            else if (data.group === "vacation") {
+                if (values.length < 1) {
+                    setValues((prev) => [...prev, e.target.value]);
+                    setAllQues((prev) => [...prev, e.target.value]);
+                    setAllVacation((allVacation) => [...allVacation, e.target.value]);
+                } else {
+                    e.target.checked = false;
+
+                    alert("You can select only 1 choice");
+                }
+            }
+            else if (data.group === "gift") {
+                if (values.length < 1) {
+                    setValues((prev) => [...prev, e.target.value]);
+                    setAllQues((prev) => [...prev, e.target.value]);
+                    setAllGifts((allGifts) => [...allGifts, e.target.value]);
+                } else {
+                    e.target.checked = false;
+
+                    alert("You can select only 1 choice");
+                }
+            }
+            else if (data.group === "date-ideas") {
+                if (values.length < 1) {
+                    setValues((prev) => [...prev, e.target.value]);
+                    setAllQues((prev) => [...prev, e.target.value]);
+                    setAllDateIdeas((allDateIdeas) => [...allDateIdeas, e.target.value]);
+                } else {
+                    e.target.checked = false;
+
+                    alert("You can select only 1 choice");
+                }
+            }
             else {
                 if (values.length < 3) {
                     setValues((prev) => [...prev, e.target.value]);
                     setAllQues((prev) => [...prev, e.target.value]);
                     if (data.group === "hobbies") {
                         setAllHobbies((allHobbies) => [...allHobbies, e.target.value]);
+                    }
+                    else if (data.group === "priority"){
+                        setAllPriority((allPriority) => [...allPriority, e.target.value]);
                     }
                     else {
                         setAllTraits((allTraits) => [...allTraits, e.target.value]);

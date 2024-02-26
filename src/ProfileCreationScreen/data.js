@@ -37,6 +37,51 @@ const data = [
         {id: 20, label: 'Quality time'},
         {id: 21, label: 'Words of affirmation'},
       ]
+    },
+    {
+      group: "date-ideas",
+      prompt: "What would be your ideal first date? Please select your top choice.",
+      questions: [
+        {id: 1, label: 'Dinner & a Movie'},
+        {id: 2, label: 'Coffee/Drinks'},
+        {id: 3, label: 'Netflix & Chill'},
+        {id: 4, label: 'Fun Activity (bowling, ice skating, etc.)'}
+      ]
+    },
+    {
+      group: "vacation",
+      prompt: "Where would you travel for a vacation? Please select your top choice.",
+      questions: [
+        {id: 1, label: 'Paris'},
+        {id: 2, label: 'Maldives'},
+        {id: 3, label: 'Rome'},
+        {id: 4, label: 'New York City'},
+        {id: 5, label: 'Tokyo'}
+      ]
+    },
+    {
+      group: "gift",
+      prompt: "Which gift would you appreciate the most from your significant other? Please select your top choice.",
+      questions: [
+        {id: 1, label: 'Handmade Gift'},
+        {id: 2, label: 'Couples Vacation'},
+        {id: 3, label: 'Romatic Dinner'},
+        {id: 4, label: 'Jewelry/Watch'}
+      ]
+    },
+    {
+      group: "priority",
+      prompt: "What do you prioritize most in your life right now? Please select your top three choices.",
+      questions: [
+        {id: 1, label: 'Career'},
+        {id: 2, label: 'Family'},
+        {id: 3, label: 'Personal Growth'},
+        {id: 4, label: 'Friendships'},
+        {id: 5, label: 'Financial Stability'},
+        {id: 6, label: 'Life Experiences'},
+        {id: 7, label: 'Love'},
+        {id: 8, label: 'Health'}
+      ]
     }
   ];
 
