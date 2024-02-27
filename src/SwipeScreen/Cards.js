@@ -7,7 +7,7 @@ import {collection, onSnapshot, query, where, getDocs, doc, getDoc, addDoc, upda
 import { getAuth, onAuthStateChanged} from 'firebase/auth';
 import { useNavigate } from 'react-router-dom'; // Added import for useNavigate
 import {getAge} from '../utils/userUtils';
-import "./ChatButton.css";
+import ChatButton from "../chatButton";
 
 
 // function getAge(dateString) {
@@ -114,10 +114,6 @@ const Cards = () =>{
         }
     }
 
-    const goToChatScreen = () => {
-        navigate('/chats'); // Assuming your chat screen route is '/chat'
-    };
-
 
     return (
         <div className="cards">
@@ -145,11 +141,10 @@ const Cards = () =>{
                             {"90%"}
                         </p>
                         <p className="bio" style={{fontSize: 26}}> Bio: {person.bio}</p>
-                        <p style={{fontSize: 50, position: "absolute", bottom: 0, left: 10}}> Age: {getAge(person.birthday)}</p>
+                        <p style={{fontSize: 50, position: "absolute", bottom: 0, left: 10}}> Age: your{getAge(person.birthday)}</p>
                     </div>
                 </TinderCard>
             ))}
-            <button onClick={goToChatScreen} className="goToChatButton">Go to Chat</button>
         </div>
     )
 }
