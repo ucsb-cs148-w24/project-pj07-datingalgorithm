@@ -260,7 +260,7 @@ function Body() {
                 <div>
                     <p><b>Add Image:</b></p>
                     <input type="file" onChange={handleFileChange} accept="image/*" />
-                    <img style={{ width: "20%", height: "20%" }} src={file} alt="" />
+                    {file && <img style={{ width: "20%", height: "20%" }} src={URL.createObjectURL(file)} alt="" />}
                 </div>
                 <br></br>
                 <div>
