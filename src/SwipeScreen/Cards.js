@@ -43,7 +43,8 @@ const Cards = () =>{
 
     // Update useEffect hooks to include user in their dependency arrays
     useEffect(() => {
-        const getMatches = async () => {
+        
+        const getProfiles = async() => {
             // get array of matches users from potentialMatches collection
             const potentialMatchesDoc = doc(db, 'potentialMatches', user.email);
             const potentialMatchesDoc2 = await getDoc(potentialMatchesDoc);
@@ -52,9 +53,7 @@ const Cards = () =>{
             console.log("potential matches", potentialMatchesData.matched);
 
             setMatches(potentialMatchesData.matched);
-        }
-        
-        function getProfiles() {
+            
             const profilesQuery = query(collection(db, "users"));
 
             onSnapshot(profilesQuery, (querySnapshot) => {
@@ -66,19 +65,14 @@ const Cards = () =>{
                 // setPeople(querySnapshot.docs.map(doc => doc.data()).filter(profile => !matches.includes(profile.email)));
 
                 console.log("matches", matches);
-                const filteredPeople = querySnapshot.docs.map(doc => doc.data()).filter(person => !matches.includes(person.email));
+                const filteredPeople = querySnapshot.docs.map(doc => doc.data()).filter(person => !potentialMatchesData.matched.includes(person.email));
                 console.log("filtered people", filteredPeople);
                 setPeople(filteredPeople);
             });
         }
 
-        const fetchData = async () => {
-            await getMatches();
-            await getProfiles();
-        }
-
         if (user) { // Check if user is loaded
-            fetchData();
+            getProfiles();
         }
     }, [db, user]); // Include user in dependency array
 
