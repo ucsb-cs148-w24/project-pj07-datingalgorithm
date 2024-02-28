@@ -17,7 +17,7 @@ vedant
 
 Xinyan
     - brainstorming
-    - helping with Design doc; startgin user manual
+    - helping with Design doc; starting user manual
     - no blocks
 
 Nirmit
