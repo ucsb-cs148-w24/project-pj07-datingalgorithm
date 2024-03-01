@@ -60,15 +60,14 @@ const UserProfile = () => {
             <button onClick={goBackToChatList}>Back to Chats</button>
             
             <h1>User Profile</h1>
-            <h2>Name: {userName}</h2>
-            <h2>Bio: {userBio}</h2>
-            <h2>Age: {userAge}</h2>
-            <h2>Interests: {userInterests}</h2>
-            <h2>Gender: {userGender}</h2>
-            <h2>Hobbies: {userHobbies}</h2>
-            <h2>Traits: {userTraits}</h2>
-
-            <img src={userProfilePic} alt="Profile Picture" />
+            <img style={{ width: "20%", height: "20%" }} src={userProfilePic} alt="" />
+            <p>Name: {userName}</p>
+            <p>Bio: {userBio}</p>
+            <p>Age: {userAge}</p>
+            <p>Interests: {userInterests}</p>
+            <p>Gender: {userGender}</p>
+            <p>Hobbies: {userHobbies}</p>
+            <p>Traits: {userTraits}</p>
 
         </div>
     )

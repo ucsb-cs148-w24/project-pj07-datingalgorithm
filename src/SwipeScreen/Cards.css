@@ -66,6 +66,12 @@
     margin-left: 100px;
     max-width: 600px;
     overflow: auto;
+    color: white; /* Set the text color to white */
+    text-shadow: 
+      -1px -1px 0 black,  
+       1px -1px 0 black,
+      -1px  1px 0 black,
+       1px  1px 0 black;
     /* Other styles to fit your design */
   }
 
@@ -73,6 +79,12 @@
   .match_percent {
     width: 800px; /* Example width */
     margin-top: -10px;
+    color: white; /* Set the text color to white */
+    text-shadow: 
+      -1px -1px 0 black,  
+       1px -1px 0 black,
+      -1px  1px 0 black,
+       1px  1px 0 black;
     /* Other styles to fit your design */
   }
 

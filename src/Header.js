@@ -10,7 +10,7 @@ function Header() {
             <Link to={`/swipe`}>
                 <div className='logo'>
                     <img src={logo} alt="Blindly Logo" className="logoImage" />
-                    <h1>Blindly</h1>
+                    <h1 className="header_name">Blindly</h1>
                 </div>
             </Link>
             

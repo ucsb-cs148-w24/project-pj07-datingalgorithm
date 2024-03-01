@@ -31,7 +31,7 @@ const Home = () => {
             signInWithGoogle()
                 .then(() => {
                     console.log("User signed in");
-                    navigate('/makeProfile')
+                    //navigate('/makeProfile')
                 
                     // Additional sign-in logic here if necessary
 

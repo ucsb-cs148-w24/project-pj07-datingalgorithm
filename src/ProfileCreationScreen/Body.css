@@ -13,11 +13,23 @@
 /* Assuming .input-group is inside .Body and you want to style #bio differently */
 .Body .input-group #bio {
     height: 200px;
+    width: 40%;
     vertical-align: top;
     /* The other properties are inherited from the input[type="text"] and select style above */
 }
 
 .Body input[type="submit"] {
+    width: 20%;
+    background-color: rgb(219, 203, 234);
+    color: rgb(0, 0, 0);
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.submit {
     width: 20%;
     background-color: rgb(219, 203, 234);
     color: rgb(0, 0, 0);

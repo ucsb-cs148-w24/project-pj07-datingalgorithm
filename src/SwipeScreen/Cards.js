@@ -10,17 +10,6 @@ import {getAge} from '../utils/userUtils';
 import "./ChatButton.css";
 
 
-// function getAge(dateString) {
-//     var today = new Date();
-//     var birthDate = new Date(dateString);
-//     var age = today.getFullYear() - birthDate.getFullYear();
-//     var m = today.getMonth() - birthDate.getMonth();
-//     if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-//         age--;
-//     }
-//     return age;
-// }
-
 const Cards = () =>{
     const [people, setPeople] = useState([]);
     const [matches, setMatches] = useState([]);
@@ -160,6 +149,10 @@ const Cards = () =>{
         navigate('/chats'); // Assuming your chat screen route is '/chat'
     };
 
+    const goToProfile = () => {
+        navigate('/makeProfile'); // Assuming your chat screen route is '/chat'
+    };
+
 
     return (
         <div>
@@ -194,7 +187,12 @@ const Cards = () =>{
                 </TinderCard>
             ))}
             </div>
-            <button onClick={goToChatScreen} className="goToChatButton">Go to Chat</button>
+            <button onClick={goToChatScreen} className="goToChatButton">
+                Go to Chat
+            </button>
+            <button onClick={goToProfile} className="goToProfileButton">
+                Edit Profile
+            </button>
         </div>
     )
     }
