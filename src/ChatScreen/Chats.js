@@ -77,6 +77,7 @@ function Chats() {
           message={chat.lastMessage}
           timestamp={chat.lastTimestamp}
           profilePic={chat.otherUserProfilePic}
+          otherUserId={chat.otherUserId}
         />
       ))}
     </div>

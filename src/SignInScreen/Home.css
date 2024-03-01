@@ -15,8 +15,8 @@
         to bottom,
         rgba(0,0,0,0.65) 0%,
         rgba(0,0,0,0) 100%
-    ),  no-repeat center center fixed; /* Centers the background image and prevents repeating */
-    background-size: cover; /* Ensures the image covers the entire element */
+    ), url('/src/images/blindly3.png') no-repeat center center fixed; /* Centers the background image and prevents repeating */
+    background-size: 100% auto; /* Ensures the image covers the entire element */
     
 }
 .primary-button{
@@ -36,7 +36,7 @@
 .text1{
     position: absolute; /* or 'relative' to a positioned container */
     font-size: 5vmin; /* Scales with the viewport, adjust as needed */
-    top: 20vh; /* Position the element in relation to the heart's position */
+    top: 10vh; /* Position the element in relation to the heart's position */
     left: 50vw; /* Adjust 'top' and 'left' as needed */
     transform: translate(-50%, -50%); /* Center `h2` on the specified point */
     color: azure;
@@ -50,6 +50,7 @@
     font-size: 3vmin; /* Adjust font size */
     position: absolute;
     top: 65vh;
+    left: 50vw;
     transform: translate(-50%, -50%); /* Center `h2` on the specified point */
 
     
@@ -57,7 +58,8 @@
 
 /* Add a hover effect for the button */
 .primary-button:hover {
-    background-color: black; /* Change background color on hover */
+    background-color: grey; /* Change background color on hover */
+    cursor: pointer;
 }
 .error-popup {
     position: fixed;
@@ -70,6 +72,25 @@
     top: 40%;
 
 }
+
+.about-button{
+
+    position: fixed; /* Or absolute, depending on your layout */
+    right: 50px; /* Distance from the right edge */
+    top: 25px; /* Distance from the bottom */
+    background: none; /* Removes the default background */
+    border: none; /* Removes the default border */
+    color: white; /* Or any color you prefer for the text */
+    font-size: 18px;
+
+}
+
+.about-button:hover{
+    background-color: transparent;
+    color: grey;
+    cursor: pointer;
+}
+
 
 @keyframes fadeOut {
     0% {
