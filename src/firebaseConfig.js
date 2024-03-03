@@ -36,6 +36,8 @@ export const signInWithGoogle = () => {
                 const potentialMatchesDoc = doc(db, 'potentialMatches', user.email);
                 const potentialMatchesSnap = await getDoc(potentialMatchesDoc);
                 console.log("potentialMatchesDoc: ", potentialMatchesSnap);
+
+                // check that newMatches, matched, and likes arrays exist in potentialMatches collection
                 if (!potentialMatchesSnap.exists()) {
                     console.log("potential matches doc doesn't exist, creating...");
                     await setDoc(potentialMatchesDoc, {
