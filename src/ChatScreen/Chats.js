@@ -83,6 +83,8 @@ function Chats() {
   return (
     <div>
       <Header showGoToSwipeButton={true}/>
+      <NewMatches />
+
       <div className="chats">
         {chatDetails.length === 0 ? (
           <p>Loading Chats...</p>
