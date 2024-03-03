@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { useNavigate } from 'react-router-dom';
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 import {db, auth} from './firebase';
 import "./ChatButton.css";
 
@@ -24,7 +24,19 @@ const ChatButton = () => {
             
     
             const userDoc = doc(db, 'potentialMatches', user.email);
-            const userSnap = await getDoc(userDoc);
+
+            // if there is no doc, then create one
+            if (! await getDoc(userDoc)) {
+                await setDoc(userDoc, {
+                    newMatches: [],
+                    matched: [],    
+                    likes: [],
+                })
+            }
+
+            
+            const newUserDoc = doc(db, 'potentialMatches', user.email);
+            const userSnap = await getDoc(newUserDoc);
     
             const userNewEmails = userSnap.data().newMatches;
 

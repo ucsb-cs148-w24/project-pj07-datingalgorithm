@@ -1,6 +1,6 @@
 import React, { useEffect , useState } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 import NewMatchCard from './newMatchCard';
 import {db, auth} from '../firebase';
 import { useNavigate } from 'react-router-dom';

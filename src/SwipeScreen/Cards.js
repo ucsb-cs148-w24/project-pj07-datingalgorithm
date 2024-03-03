@@ -47,6 +47,7 @@ const Cards = () =>{
         const getProfiles = async() => {
             // get array of matches users from potentialMatches collection
             const potentialMatchesDoc = doc(db, 'potentialMatches', user.email);
+
             const potentialMatchesDoc2 = await getDoc(potentialMatchesDoc);
             const potentialMatchesData = potentialMatchesDoc2.data();
 
@@ -65,7 +66,7 @@ const Cards = () =>{
                 // setPeople(querySnapshot.docs.map(doc => doc.data()).filter(profile => !matches.includes(profile.email)));
 
                 console.log("matches", matches);
-                const filteredPeople = querySnapshot.docs.map(doc => doc.data()).filter(person => !potentialMatchesData.matched.includes(person.email));
+                const filteredPeople = querySnapshot.docs.map(doc => doc.data()).filter(person => !potentialMatchesData.matched.includes(person.email) && !potentialMatchesData.newMatches.includes(person.email) && !potentialMatchesData.likes.includes(person.email) && person.email !== user.email);
                 console.log("filtered people", filteredPeople);
                 setPeople(filteredPeople);
             });
@@ -184,7 +185,7 @@ const Cards = () =>{
                 </TinderCard>
             ))}
             </div>
-            <button onClick={goToChatScreen} className="goToChatButton">Go to Chat</button>
+            {/* <button onClick={goToChatScreen} className="goToChatButton">Go to Chat</button> */}
         </div>
     )
     }
