@@ -23,6 +23,7 @@ import ChatButton from "../chatButton";
 
 const Cards = () =>{
     const [people, setPeople] = useState([]);
+    const [matches, setMatches] = useState([]);
     const [user, setUser] = useState(null); // Add state to track the current user
     const [userChats, setUserChats] = useState([]);
     const navigate = useNavigate(); // Initialize useNavigate
@@ -42,11 +43,36 @@ const Cards = () =>{
 
     // Update useEffect hooks to include user in their dependency arrays
     useEffect(() => {
-        if (user) { // Check if user is loaded
+        
+        const getProfiles = async() => {
+            // get array of matches users from potentialMatches collection
+            const potentialMatchesDoc = doc(db, 'potentialMatches', user.email);
+            const potentialMatchesDoc2 = await getDoc(potentialMatchesDoc);
+            const potentialMatchesData = potentialMatchesDoc2.data();
+
+            console.log("potential matches", potentialMatchesData.matched);
+
+            setMatches(potentialMatchesData.matched);
+            
             const profilesQuery = query(collection(db, "users"));
+
             onSnapshot(profilesQuery, (querySnapshot) => {
-                setPeople(querySnapshot.docs.map(doc => doc.data()));
+
+                // setPeople(querySnapshot.docs.map(doc => doc.data()));
+
+                // only include other users who the current user isn't already matched with
+                // wait until the setMatches is run
+                // setPeople(querySnapshot.docs.map(doc => doc.data()).filter(profile => !matches.includes(profile.email)));
+
+                console.log("matches", matches);
+                const filteredPeople = querySnapshot.docs.map(doc => doc.data()).filter(person => !potentialMatchesData.matched.includes(person.email));
+                console.log("filtered people", filteredPeople);
+                setPeople(filteredPeople);
             });
+        }
+
+        if (user) { // Check if user is loaded
+            getProfiles();
         }
     }, [db, user]); // Include user in dependency array
 
@@ -63,6 +89,12 @@ const Cards = () =>{
 
     // Function to handle swiping action
     const handleSwipe = async (userAId, userBId) => {
+        // if user A and user B are already matched, return
+        if (userAId === userBId) {
+            return;
+        }
+
+
         // Add user B to the "likes" array within user A's document in the potentialMatches collection
         // if user B isn't in user A's likes array already
 
@@ -120,8 +152,9 @@ const Cards = () =>{
 
 
     return (
-        <div className="cards">
-            <Header/>
+        <div>
+        <Header/>
+        <div className="cards"> 
             {people.map(person => (
                 <TinderCard
                     className="swipe"
@@ -145,11 +178,16 @@ const Cards = () =>{
                             {"90%"}
                         </p>
                         <p className="bio" style={{fontSize: 26}}> Bio: {person.bio}</p>
-                        <p style={{fontSize: 50, position: "absolute", bottom: 0, left: 10}}> Age: your{getAge(person.birthday)}</p>
+                        <p>{person.tagline}</p>
+                        <p style={{fontSize: 50, position: "absolute", bottom: 0, left: 25}}> Age: {getAge(person.birthday)}</p>
                     </div>
                 </TinderCard>
             ))}
+            </div>
+            <button onClick={goToChatScreen} className="goToChatButton">Go to Chat</button>
         </div>
     )
-}
-export default Cards;
+    }
+    export default Cards;
+
+

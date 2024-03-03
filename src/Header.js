@@ -1,5 +1,3 @@
-// src/Header.js
-
 import React from 'react'
 import './Header.css';
 import logo from './images/eye-mask.png';
@@ -22,6 +20,6 @@ function Header() {
             <SignOutButton/>
         </div>
     )
-}
+  }
 
 export default Header

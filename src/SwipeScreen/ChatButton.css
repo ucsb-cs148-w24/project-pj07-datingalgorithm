@@ -1,5 +1,4 @@
-.sign-out-btn {
-    
+.goToChatButton {
     background-color: black;
     color: white;
     border: none;
@@ -10,16 +9,14 @@
     transition: background-color 0.2s ease-in-out;
     position: absolute;
     top: 5vh;
-    right: 10vh;
-    
-
+    right: 30vh;
 }
 
-.sign-out-btn:hover {
+.goToChatButton:hover {
     background-color: grey; 
 }
 
-.sign-out-btn:focus {
+.goToChatButton:focus {
     outline: none;
     box-shadow: 0 0 0 2px rgba(0,123,255,0.5); 
 }
