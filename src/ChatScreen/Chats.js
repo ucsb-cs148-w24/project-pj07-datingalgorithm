@@ -8,6 +8,7 @@ import './Chat.css';
 import { useNavigate } from 'react-router-dom'; // Added import for useNavigate
 import Header from '../Header';
 import "../SwipeScreen/ChatButton.css";
+import showGoToSwipeButton from '../Header.js';
 
 function Chats() {
   const [user, loading, error] = useAuthState(auth);
@@ -70,11 +71,8 @@ function Chats() {
 
   return (
     <div>
-    <Header/>
-    <div className="chats">
-      <button onClick={goToSwipeScreen} className="goToSwipeButton">
-        Keep swiping
-      </button>
+      <Header showGoToSwipeButton={true}/>
+      <div className="chats">
       {chatDetails.map((chat) => (
         <Chat
           key={chat.chatId}
@@ -86,7 +84,7 @@ function Chats() {
           otherUserId={chat.otherUserId}
         />
       ))}
-    </div>
+      </div>
     </div>
   );
 }
