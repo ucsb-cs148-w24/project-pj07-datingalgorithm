@@ -3,12 +3,14 @@ import { useAuthState } from 'react-firebase-hooks/auth'
 import { doc, getDoc } from "firebase/firestore";
 import NewMatchCard from './newMatchCard';
 import {db, auth} from '../firebase';
+import { useNavigate } from 'react-router-dom';
 
 import './newMatches.css'
 
 const NewMatches = () => {
     const [newEmails, setNewEmails] = useState([]);
     const [user, loading, error] = useAuthState(auth);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchNewMatches = async () => {

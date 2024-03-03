@@ -13,12 +13,15 @@ const ChatButton = () => {
     useEffect(() => {
 
         const fetchNewMatches = async () => {
+            // wait until user is loaded
             if (loading) {
-                console.log("Loading user");
+                return;
+
             }
             if (!user) {
-                console.log("No user");
+                return;
             }
+            
     
             const userDoc = doc(db, 'potentialMatches', user.email);
             const userSnap = await getDoc(userDoc);
