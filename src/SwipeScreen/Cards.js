@@ -150,7 +150,7 @@ const Cards = () =>{
     };
 
     const goToProfile = () => {
-        navigate('/makeProfile'); // Assuming your chat screen route is '/chat'
+        navigate('/editProfile'); // Assuming your chat screen route is '/chat'
     };
 
 
@@ -182,7 +182,7 @@ const Cards = () =>{
                         </p>
                         <p className="bio" style={{fontSize: 26}}> Bio: {person.bio}</p>
                         <p>{person.tagline}</p>
-                        <p style={{fontSize: 50, position: "absolute", bottom: 0, left: 25}}> Age: {getAge(person.birthday)}</p>
+                        <p style={{fontSize: 50, position: "absolute", bottom: -15, left: 25}}> Age: {getAge(person.birthday)}</p>
                     </div>
                 </TinderCard>
             ))}
