@@ -23,31 +23,31 @@ const About = () => {
         <div className="developer-profiles">
           <div className="developer-profile">
             <h3>Koray Kondakci</h3>
-            <p>3rd year Computer Science major at UCSB, passionate about creating user-friendly applications.</p>
+            <p>3rd year Computer Science major at UCSB, worked mainly on the development of home screen and log in feature.</p>
           </div>
           <div className="developer-profile">
             <h3>Emre Cikisir</h3>
-            <p>3rd year Computer Science major at UCSB, passionate about creating user-friendly applications.</p>
+            <p>3rd year Computer Science major at UCSB, worked mainly on the development of home screen and log in feature.</p>
           </div>
           <div className="developer-profile">
             <h3>Palvi Sabherwal</h3>
-            <p>3rd year Computer Science major at UCSB, passionate about creating user-friendly applications.</p>
+            <p>3rd year Computer Science major at UCSB, worked mainly on profile creation page and creating the questionnaire.</p>
           </div>
           <div className="developer-profile">
             <h3>Emily Thai</h3>
-            <p>3rd year Computer Science major at UCSB, passionate about creating user-friendly applications.</p>
+            <p>3rd year Computer Science major at UCSB, worked mainly on profile creation page and creating the questionnaire.</p>
           </div>
           <div className="developer-profile">
             <h3>Vedant Shah</h3>
-            <p>3rd year Computer Science major at UCSB, passionate about creating user-friendly applications.</p>
+            <p>3rd year Computer Science major at UCSB, worked mainly on the swipe screen and chat feature.</p>
           </div>
           <div className="developer-profile">
             <h3>Nirmit Ashar</h3>
-            <p>4th year Computer Science major at UCSB, passionate about creating user-friendly applications.</p>
+            <p>4th year Computer Science major at UCSB, worked mainly on the swipe screen and chat feature.</p>
           </div>
           <div className="developer-profile">
             <h3>Xinyan Zhao</h3>
-            <p>3rd year Computer Science major at UCSB, passionate about creating user-friendly applications.</p>
+            <p>3rd year Computer Science major at UCSB, worked mainly on the swipe screen and chat feature.</p>
           </div>
         </div>
         </div><button onClick={backToHome} className="about-back-btn">&#8592; 
@@ -55,4 +55,3 @@ const About = () => {
     );
   };
 export default About;
-

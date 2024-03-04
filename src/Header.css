@@ -5,9 +5,9 @@
     justify-content: left;
     position: relative;
     
-    padding: 1em;
+    padding: 1.5em;
     margin-bottom: 1em;
-    background-color: grey;
+    background-color: rgb(219, 203, 234);
     color: #000000;
     
 }
@@ -37,5 +37,16 @@
     display: flex;
   align-items: center;
   padding: 10px;
-  border-bottom: 1px solid #e0e0e0;
+  /*border-bottom: 1px solid #e0e0e0; */
+}
+
+.header_name {
+    margin-top: 0px; 
+    margin-bottom: 0px;
+    color: #000000;
+    transition: color 0.2s ease-in-out;
+}
+
+.header_name:hover {
+    color: grey;
 }
