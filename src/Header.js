@@ -5,12 +5,7 @@ import SignOutButton from './SignOutButton';
 import {useNavigate} from 'react-router-dom';
 import {Link} from 'react-router-dom';
 
-
-function Header({showGoToSwipeButton = false}) {
-    const navigate = useNavigate();
-
-    const goToSwipeScreen = () => navigate('/swipe')
-
+function Header() {
     return (
         <div className="Header">
             <Link to={`/swipe`}>
