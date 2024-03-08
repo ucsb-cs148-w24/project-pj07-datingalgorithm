@@ -1,10 +1,12 @@
-import React, {useState, useRef} from 'react';
+import React, {useState, useRef, useEffect } from 'react';
 import './Profile.css';
 import data from '../ProfileCreationScreen/data';
 import { auth, storage, ref, db } from '../firebaseConfig';
-import { doc, setDoc } from "firebase/firestore";
-import { useNavigate } from 'react-router-dom';
+import { doc, setDoc, getDoc } from "firebase/firestore";
+import { useNavigate, useParams } from 'react-router-dom';
 import { getDownloadURL, uploadBytes } from "firebase/storage";
+import { useAuthState } from 'react-firebase-hooks/auth'
+import {getAge} from '../utils/userUtils';
 
 function Profile() {
     const navigate = useNavigate();

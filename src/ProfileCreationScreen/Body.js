@@ -105,7 +105,7 @@ function Body() {
             alert("Please add at least one superpower.");
             return;
         }
-        else if (file.length === 0) {
+        else if (file == null) {
             alert("Please select an image before submitting.");
             return;
         }

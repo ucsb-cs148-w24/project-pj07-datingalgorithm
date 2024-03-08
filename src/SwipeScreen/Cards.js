@@ -5,9 +5,10 @@ import { db, auth} from '../firebase';
 import Header from '../Header';
 import {collection, onSnapshot, query, where, getDocs, doc, getDoc, addDoc, updateDoc, arrayUnion, setDoc, arrayRemove} from "firebase/firestore";
 import { getAuth, onAuthStateChanged} from 'firebase/auth';
-import { useNavigate } from 'react-router-dom'; // Added import for useNavigate
+import { useNavigate, Link } from 'react-router-dom'; // Added import for useNavigate
 import {getAge} from '../utils/userUtils';
 import "./ChatButton.css";
+import {UserIcon, MessageIcon} from "../icons.js";
 
 
 const Cards = () =>{
@@ -16,6 +17,7 @@ const Cards = () =>{
     const [user, setUser] = useState(null); // Add state to track the current user
     const [userChats, setUserChats] = useState([]);
     const navigate = useNavigate(); // Initialize useNavigate
+    const uid = auth.currentUser ? auth.currentUser.uid : null;
 
     // UseEffect to listen for auth state changes and set the user
     useEffect(() => {
@@ -150,8 +152,10 @@ const Cards = () =>{
     };
 
     const goToProfile = () => {
-        navigate('/editProfile'); // Assuming your chat screen route is '/chat'
+        navigate(`/OwnProfile/${uid}`); // Assuming your chat screen route is '/chat'
     };
+
+
 
 
     return (
@@ -189,9 +193,11 @@ const Cards = () =>{
             </div>
             <button onClick={goToChatScreen} className="goToChatButton">
                 Go to Chat
+                <MessageIcon className="mr-2 h-5 w-5" />
             </button>
             <button onClick={goToProfile} className="goToProfileButton">
-                Edit Profile
+                Profile
+                <UserIcon className="mr-2 h-5 w-5" />
             </button>
         </div>
     )
