@@ -8,6 +8,7 @@ I also created the user profiles as well as the new Matches bar within the chart
 ## Emily Thai
 
 ## Xinyan Zhao
+I gave some suggestions about the questionnaire in our app. And wrote some front-end code for the chat part. Also I create a user manual for our project.
 
 ## Nirmit Ashar
 I wrote the back end code and some of the front end code for the chat screen. I also created tests (component, unit) for the app. I also helped out when other's asked for help on code. 
