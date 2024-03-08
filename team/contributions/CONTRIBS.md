@@ -13,7 +13,7 @@ I also created the user profiles as well as the new Matches bar within the chart
 I wrote the back end code and someo of the front end code for the chat screen. I also created tests (component, unit) for the app. I also helped out when other's asked for help on code. 
 
 ## Emre
-
+I designed the welcoming home screen with the project name, and the motto and built the sign-in button and the code that only accepts UCSB students to the app. Helped others with their problems too.
 ## Koray
 
 ## Palvi Sabherwal
