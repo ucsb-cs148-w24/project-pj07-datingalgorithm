@@ -1,7 +1,7 @@
 # Date of Retrospective: 03/08/2024
 
 * Led by: Emre Cikisir
-* Present: Koray, Nirmit, Palvi, Xinyan, Emily, Emre, Vedant (zoom)
+* Present: Koray, Nirmit, Palvi, Xinyan, Emily, Emre, Vedant
 
 
 ## Action Item
