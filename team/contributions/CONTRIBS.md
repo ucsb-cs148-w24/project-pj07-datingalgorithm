@@ -6,6 +6,7 @@ I wrote the code and designed the entire Swipe Screen. My code displayed the car
 I also created the user profiles as well as the new Matches bar within the chart page.
 
 ## Emily Thai
+I did pair programming with Palvi on the Profile creation and editting as well as refined some of the ui designs.
 
 ## Xinyan Zhao
 I gave some suggestions about the questionnaire in our app. And wrote some front-end code for the chat part. Also I create a user manual for our project.
