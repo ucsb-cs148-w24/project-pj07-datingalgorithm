@@ -21,4 +21,4 @@ I designed the welcoming home screen with the project name, and the motto and bu
 I helped Emre on building the sign-in button. I built the whole About page. I implemented the sign out buttons that we used in other pages that directs users back to home screen. I also designed and fixed the css issues with the buttons. I also helped other with their problems.
 
 ## Palvi Sabherwal
-I did pair programming with Emily on the Profile Creation.
+I did pair programming with Emily on the Profile Creation page. I worked on the questionnaire.
