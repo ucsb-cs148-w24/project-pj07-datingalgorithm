@@ -1,12 +1,14 @@
-import React, {useState, useRef} from 'react';
-import './Body.css';
-import data from "./data";
+import React, {useState, useRef, useEffect } from 'react';
+import './Profile.css';
+import data from '../ProfileCreationScreen/data';
 import { auth, storage, ref, db } from '../firebaseConfig';
-import { doc, setDoc } from "firebase/firestore";
-import { useNavigate } from 'react-router-dom';
+import { doc, setDoc, getDoc } from "firebase/firestore";
+import { useNavigate, useParams } from 'react-router-dom';
 import { getDownloadURL, uploadBytes } from "firebase/storage";
+import { useAuthState } from 'react-firebase-hooks/auth'
+import {getAge} from '../utils/userUtils';
 
-function Body() {
+function Profile() {
     const navigate = useNavigate();
     const [file, setFile] = useState(null);
     const hiddenFileInput = useRef(null);
@@ -105,7 +107,7 @@ function Body() {
             alert("Please add at least one superpower.");
             return;
         }
-        else if (file == null) {
+        else if (file.length === 0) {
             alert("Please select an image before submitting.");
             return;
         }
@@ -171,7 +173,7 @@ function Body() {
     };
     
     return (
-        <div className="Body">
+        <div className="Profile">
             <form action="/action_page.php" onSubmit={handleSubmit}>
                 <br></br>
                 <p><b>First Name</b></p>
@@ -405,4 +407,4 @@ const SingleGroup = ({ data, setAllQues, allQues, setAllHobbies, allHobbies, set
       );
     };
 
-export default Body
+export default Profile

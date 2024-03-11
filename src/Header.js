@@ -7,11 +7,14 @@ import {Link} from 'react-router-dom';
 
 
 
-function Header({showGoToSwipeButton = false}) {
+function Header({showGoToSwipeButton = false, showEditProfile = false}) {
+
     const navigate = useNavigate();
 
     const goToSwipeScreen = () => navigate('/swipe')
 
+
+    const goToEditProfile = () => navigate('/editProfile')
     return (
         <div className="Header">
             <Link to={`/swipe`}>
@@ -20,6 +23,13 @@ function Header({showGoToSwipeButton = false}) {
                     <h1 className="header_name">Blindly</h1>
                 </div>
             </Link>
+
+
+            {showEditProfile && (            
+            <button onClick={goToEditProfile} className="goToEditProfileButton">
+                Edit Profile
+            </button>)}
+
 
             {showGoToSwipeButton && (
                 <button onClick={goToSwipeScreen} className="goToSwipeButton">

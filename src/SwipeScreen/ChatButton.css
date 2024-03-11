@@ -48,8 +48,6 @@
     box-shadow: 0 0 0 2px rgba(0,123,255,0.5); 
 }
 
-
-
 .goToSwipeButton {
     background-color: black;
     color: white;
@@ -73,6 +71,29 @@
     box-shadow: 0 0 0 2px rgba(0,123,255,0.5); 
 }
 
+
+.goToEditProfileButton {
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-size: 3vmin;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+    position: absolute;
+    top: 5vh;
+    right: 32vh;
+}
+
+.goToEditProfileButton:hover {
+    background-color: grey; 
+}
+
+.goToEditProfileButton:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0,123,255,0.5); 
+
 .notificationCount {
     position: absolute;
     top: -5px;
@@ -86,4 +107,5 @@
     justify-content: center;
     align-items: center;
     font-size: 15px;
+
 }
