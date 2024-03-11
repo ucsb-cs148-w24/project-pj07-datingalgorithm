@@ -32,6 +32,21 @@ export const signInWithGoogle = () => {
             if (user.email.endsWith("@ucsb.edu")) {
                 const userRef = doc(db, "users", user.uid);
 
+                // create potential matches collection if it doesn't exist
+                const potentialMatchesDoc = doc(db, 'potentialMatches', user.email);
+                const potentialMatchesSnap = await getDoc(potentialMatchesDoc);
+                console.log("potentialMatchesDoc: ", potentialMatchesSnap);
+
+                // check that newMatches, matched, and likes arrays exist in potentialMatches collection
+                if (!potentialMatchesSnap.exists()) {
+                    console.log("potential matches doc doesn't exist, creating...");
+                    await setDoc(potentialMatchesDoc, {
+                        newMatches: [],
+                        matched: [],
+                        likes: [],
+                    }, { merge: true });
+                }
+
                 // Check if user document already exists
                 const docSnap = await getDoc(userRef);
                 if (docSnap.exists()) {

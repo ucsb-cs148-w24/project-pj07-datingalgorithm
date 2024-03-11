@@ -2,14 +2,18 @@
     background-color: black;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 10px;
     padding: 10px 20px;
     font-size: 3vmin;
     cursor: pointer;
     transition: background-color 0.2s ease-in-out;
+
+}
+
+.chatButtonContainer{
     position: absolute;
     top: 5vh;
-    right: 30vh;
+    right: 31.6vh;
 }
 
 .goToChatButton:hover {

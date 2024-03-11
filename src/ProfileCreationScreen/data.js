@@ -4,7 +4,7 @@ const data = [
       prompt: "What do you enjoy in your spare time? Please select your top three choices.",
       questions: [
         {id: 1, label: 'Reading'},
-        {id: 2, label: 'Watching to Movies'},
+        {id: 2, label: 'Watching Movies'},
         {id: 3, label: 'Listening to Music'},
         {id: 4, label: 'Playing Sports'},
         {id: 5, label: 'Cooking'},
@@ -65,7 +65,7 @@ const data = [
       questions: [
         {id: 1, label: 'Handmade Gift'},
         {id: 2, label: 'Couples Vacation'},
-        {id: 3, label: 'Romatic Dinner'},
+        {id: 3, label: 'Romantic Dinner'},
         {id: 4, label: 'Jewelry/Watch'}
       ]
     },

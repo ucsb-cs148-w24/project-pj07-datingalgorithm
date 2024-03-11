@@ -1,4 +1,4 @@
-import React, {useState } from 'react';
+import React, {useState, useRef} from 'react';
 import './Body.css';
 import data from "./data";
 import { auth, storage, ref, db } from '../firebaseConfig';
@@ -8,16 +8,21 @@ import { getDownloadURL, uploadBytes } from "firebase/storage";
 
 function Body() {
     const navigate = useNavigate();
-    const [file, setFile] = useState([]);
+    const [file, setFile] = useState(null);
+    const hiddenFileInput = useRef(null);
     function handleFileChange(e) {
         if (e.target.files[0]) {
             setFile(e.target.files[0]);
         }
         else {
-            setFile([]);
+            setFile(null);
             alert("Image removed from upload.")
         }
     }
+
+    function handleClick () {
+        hiddenFileInput.current.click();
+      };
 
     const [uploading, setUploading] = useState(false);
 
@@ -170,15 +175,17 @@ function Body() {
             <form action="/action_page.php" onSubmit={handleSubmit}>
                 <br></br>
                 <p><b>First Name</b></p>
-                <div className="input-group">
+                <div class="row">
+                <div class="col s12">
                     <input type="text" id="fname" name="firstname" placeholder="First Name"/>
                 </div>
                 <br></br>
                 <p><b>Last Name</b></p>
-                <div className="input-group">
+                <div class="col s12">
                     <input type="text" id="lname" name="lastname" placeholder="Last Name"/>
                 </div>
                 <br></br>
+                </div>
                 <p><b>Birthday</b></p>
                 <div className="input-group">
                     <input type="date" id="bday" /> 
@@ -259,12 +266,15 @@ function Body() {
                 
                 <div>
                     <p><b>Add Image:</b></p>
-                    <input type="file" onChange={handleFileChange} accept="image/*" />
-                    <img style={{ width: "20%", height: "20%" }} src={file} alt="" />
+                    <button type="button" className="button-upload" onClick={handleClick}>
+                        Choose Picture
+                    </button>
+                    <input type="file" onChange={handleFileChange} accept="image/*" ref={hiddenFileInput} style={{ display: "none" }} />
+                    {file && <img style={{ width: "20%", height: "20%" }} src={URL.createObjectURL(file)} alt="" />}
                 </div>
                 <br></br>
                 <div>
-                    <button type="submit" value="Submit">{uploading ? 'Updating...' : 'Update'}</button>
+                    <button className="submit" type="submit" value="Submit" disabled={uploading}>{uploading ? 'Submitting...' : 'Submit'}</button>
                 </div>
             </form>
         </div>
