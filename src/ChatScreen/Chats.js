@@ -4,10 +4,13 @@ import { collection, query, where, getDocs, orderBy, limit } from "firebase/fire
 import { useAuthState } from 'react-firebase-hooks/auth';
 import Chat from "./Chat";
 import { fetchUserName, fetchUserIdByEmail, fetchUserProfilePicById} from '../utils/userUtils';
+import NewMatches from './newMatches';
 import './Chat.css';
 import { useNavigate } from 'react-router-dom'; // Added import for useNavigate
 import Header from '../Header';
 import "../SwipeScreen/ChatButton.css";
+import showGoToSwipeButton from '../Header.js';
+
 
 function Chats() {
   const [user, loading, error] = useAuthState(auth);
@@ -64,25 +67,42 @@ function Chats() {
     fetchChats();
   }, [user, loading]);
 
-  const goToSwipeScreen = () => {
-    navigate('/swipe');
+  // function to convert the timestamp to a readable format (_ days/months ago)
+  const convertTimestamp = (timestamp) => {
+    if (!timestamp) {
+      return ""
+    }
+    const date = new Date(timestamp);
+    const options = {
+      month: 'short',
+      day: 'numeric',
+    };
+    return date.toLocaleString('en-US', options);
   }
+
 
   return (
     <div>
       <Header showGoToSwipeButton={true}/>
+
+      <NewMatches />
+
       <div className="chats">
-      {chatDetails.map((chat) => (
-        <Chat
-          key={chat.chatId}
-          id={chat.chatId}
-          name={chat.otherUserName}
-          message={chat.lastMessage}
-          timestamp={chat.lastTimestamp}
-          profilePic={chat.otherUserProfilePic}
-          otherUserId={chat.otherUserId}
-        />
-      ))}
+        {chatDetails.length === 0 ? (
+          <p>Loading Chats...</p>
+        ) : (
+          chatDetails.map((chat) => (
+            <Chat
+              key={chat.chatId}
+              id={chat.chatId}
+              name={chat.otherUserName}
+              message={chat.lastMessage}
+              timestamp={convertTimestamp(chat.lastTimestamp)}
+              profilePic={chat.otherUserProfilePic}
+              otherUserId={chat.otherUserId}
+            />
+          ))
+        )}
       </div>
     </div>
   );

@@ -6,13 +6,15 @@ import {useNavigate} from 'react-router-dom';
 import {Link} from 'react-router-dom';
 
 
+
 function Header({showGoToSwipeButton = false, showEditProfile = false}) {
+
     const navigate = useNavigate();
 
     const goToSwipeScreen = () => navigate('/swipe')
 
-    const goToEditProfile = () => navigate('/editProfile')
 
+    const goToEditProfile = () => navigate('/editProfile')
     return (
         <div className="Header">
             <Link to={`/swipe`}>
@@ -22,10 +24,12 @@ function Header({showGoToSwipeButton = false, showEditProfile = false}) {
                 </div>
             </Link>
 
+
             {showEditProfile && (            
             <button onClick={goToEditProfile} className="goToEditProfileButton">
                 Edit Profile
             </button>)}
+
 
             {showGoToSwipeButton && (
                 <button onClick={goToSwipeScreen} className="goToSwipeButton">

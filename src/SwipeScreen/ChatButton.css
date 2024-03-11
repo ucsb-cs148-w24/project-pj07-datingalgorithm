@@ -7,6 +7,10 @@
     font-size: 3vmin;
     cursor: pointer;
     transition: background-color 0.2s ease-in-out;
+
+}
+
+.chatButtonContainer{
     position: absolute;
     top: 5vh;
     right: 31.6vh;
@@ -32,7 +36,7 @@
     transition: background-color 0.2s ease-in-out;
     position: absolute;
     top: 5vh;
-    right: 54.5vh;
+    right: 52vh;
 }
 
 .goToProfileButton:hover {
@@ -67,6 +71,7 @@
     box-shadow: 0 0 0 2px rgba(0,123,255,0.5); 
 }
 
+
 .goToEditProfileButton {
     background-color: black;
     color: white;
@@ -88,4 +93,19 @@
 .goToEditProfileButton:focus {
     outline: none;
     box-shadow: 0 0 0 2px rgba(0,123,255,0.5); 
+
+.notificationCount {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 15px;
+
 }
