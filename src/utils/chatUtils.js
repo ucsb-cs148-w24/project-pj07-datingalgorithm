@@ -26,24 +26,3 @@ export const sendMessage = async (chatId, senderId, messageText) => {
       console.error("Error sending message: ", error);
     }
 };
-
-// export const fetchNewMatches = async () => {
-//             // wait until user is loaded
-//             if (loading) {
-//                 return;
-
-//             }
-//             if (!user) {
-//                 return;
-//             }
-            
-    
-//             const userDoc = doc(db, 'potentialMatches', user.email);
-//             const userSnap = await getDoc(userDoc);
-    
-//             const userNewEmails = userSnap.data().newMatches;
-
-//             console.log('new matches', userNewEmails);
-
-//             setNotificationCount(userNewEmails.length);
-//         }

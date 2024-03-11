@@ -10,17 +10,6 @@ import {getAge} from '../utils/userUtils';
 import "./ChatButton.css";
 
 
-// function getAge(dateString) {
-//     var today = new Date();
-//     var birthDate = new Date(dateString);
-//     var age = today.getFullYear() - birthDate.getFullYear();
-//     var m = today.getMonth() - birthDate.getMonth();
-//     if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-//         age--;
-//     }
-//     return age;
-// }
-
 const Cards = () =>{
     const [people, setPeople] = useState([]);
     const [matches, setMatches] = useState([]);
@@ -47,7 +36,6 @@ const Cards = () =>{
         const getProfiles = async() => {
             // get array of matches users from potentialMatches collection
             const potentialMatchesDoc = doc(db, 'potentialMatches', user.email);
-
             const potentialMatchesDoc2 = await getDoc(potentialMatchesDoc);
             const potentialMatchesData = potentialMatchesDoc2.data();
 
@@ -66,7 +54,7 @@ const Cards = () =>{
                 // setPeople(querySnapshot.docs.map(doc => doc.data()).filter(profile => !matches.includes(profile.email)));
 
                 console.log("matches", matches);
-                const filteredPeople = querySnapshot.docs.map(doc => doc.data()).filter(person => !potentialMatchesData.matched.includes(person.email) && !potentialMatchesData.newMatches.includes(person.email) && !potentialMatchesData.likes.includes(person.email) && person.email !== user.email);
+                const filteredPeople = querySnapshot.docs.map(doc => doc.data()).filter(person => !potentialMatchesData.matched.includes(person.email));
                 console.log("filtered people", filteredPeople);
                 setPeople(filteredPeople);
             });
@@ -97,20 +85,20 @@ const Cards = () =>{
 
 
         // Add user B to the "likes" array within user A's document in the potentialMatches collection
-        // if user B isn't in user A's likes array already
+        // only if user isn't already in the matched array
 
         const userADoc = doc(db, 'potentialMatches', userAId);
+
         const userADocument = await getDoc(userADoc);
         if (userADocument.exists()) {
             const userAData = userADocument.data();
-
-            if (userAData.likes && !userAData.likes.includes(userBId)) {
-                await setDoc(userADoc, {
-                    likes: arrayUnion(userBId),
-                }, { merge: true }
-                );
+            if (userAData.matched && userAData.matched.includes(userBId)) {
+                return;
             }
         }
+        await setDoc(userADoc, {
+          likes: arrayUnion(userBId),
+        }, { merge: true });
       
         // Check if user A is also in user B's likes array
         const userBDoc = doc(db, 'potentialMatches', userBId);
@@ -120,10 +108,10 @@ const Cards = () =>{
           if (userBData.likes && userBData.likes.includes(userAId)) {
             // Add both users to the "matched" array
             await updateDoc(userADoc, {
-              newMatches: arrayUnion(userBId),
+              matched: arrayUnion(userBId),
             });
             await updateDoc(userBDoc, {
-              newMatches: arrayUnion(userAId),
+              matched: arrayUnion(userAId),
             });
 
             // remove user from likes array
@@ -134,7 +122,13 @@ const Cards = () =>{
                 likes: arrayRemove(userAId),
             });
       
-            
+            // Create a new chat in the "chats" collection
+            const newChat = {
+                // the new chat contains an array caled users with the two user ids
+                users: [userAId, userBId],
+
+            };
+            const chatDocRef = await addDoc(collection(db, 'chats'), newChat);
           }
         }
       };
@@ -193,7 +187,12 @@ const Cards = () =>{
                 </TinderCard>
             ))}
             </div>
-            <button onClick={goToChatScreen} className="goToChatButton">Go to Chat</button>
+            <button onClick={goToChatScreen} className="goToChatButton">
+                Go to Chat
+            </button>
+            <button onClick={goToProfile} className="goToProfileButton">
+                Edit Profile
+            </button>
         </div>
     )
     }

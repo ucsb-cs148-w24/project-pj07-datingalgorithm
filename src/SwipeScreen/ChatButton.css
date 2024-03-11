@@ -7,10 +7,6 @@
     font-size: 3vmin;
     cursor: pointer;
     transition: background-color 0.2s ease-in-out;
-
-}
-
-.chatButtonContainer{
     position: absolute;
     top: 5vh;
     right: 31.6vh;
@@ -21,6 +17,52 @@
 }
 
 .goToChatButton:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0,123,255,0.5); 
+}
+
+.goToProfileButton {
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-size: 3vmin;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+    position: absolute;
+    top: 5vh;
+    right: 52vh;
+}
+
+.goToProfileButton:hover {
+    background-color: grey; 
+}
+
+.goToProfileButton:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0,123,255,0.5); 
+}
+
+.goToSwipeButton {
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-size: 3vmin;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+    position: absolute;
+    top: 5vh;
+    right: 34.3vh;
+}
+
+.goToSwipeButton:hover {
+    background-color: grey; 
+}
+
+.goToSwipeButton:focus {
     outline: none;
     box-shadow: 0 0 0 2px rgba(0,123,255,0.5); 
 }
