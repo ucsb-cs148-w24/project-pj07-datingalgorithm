@@ -10,6 +10,8 @@ import Chat from './ChatScreen/Chat';
 import Chats from './ChatScreen/Chats';
 import UserProfile from './userProfile';
 import UserList from './UserList';
+import EditProfile from './EditProfile/EditProfile'; 
+import CurrUserProfile from './EditProfile/CurrUserProfile'; 
 import { collection, getDocs } from "firebase/firestore";
 import { db } from './firebaseConfig'; // Adjust the import path as necessary
 import { useState, useEffect } from 'react';
@@ -44,6 +46,8 @@ function App() {
           <Route path="/chat/:chatId" element={<ChatScreen />} />
           <Route path="/users" element={<UserList users={users} />} />
           <Route path="/profile/:userId" element={<UserProfile />} />
+          <Route path="/ownProfile/:userId" element={<CurrUserProfile />} />
+          <Route path='/editProfile' element={<EditProfile/>}/>
 
         </Routes>
       </Router>
