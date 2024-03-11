@@ -6,7 +6,7 @@ import Header from '../Header';
 import {collection, onSnapshot, query, where, getDocs, doc, getDoc, addDoc, updateDoc, arrayUnion, setDoc, arrayRemove} from "firebase/firestore";
 import { getAuth, onAuthStateChanged} from 'firebase/auth';
 import { useNavigate } from 'react-router-dom'; // Added import for useNavigate
-import {getAge} from '../utils/userUtils';
+import {getAge, getCompatabilityScore} from '../utils/userUtils';
 import "./ChatButton.css";
 
 
@@ -159,6 +159,17 @@ const Cards = () =>{
         navigate('/makeProfile'); // Assuming your chat screen route is '/chat'
     };
 
+    const getUserData = async (userName) => {
+        const userDocRef = doc(db, "users", userName);
+        const userDoc = await getDoc(userDocRef);
+        if (userDoc.exists()) {
+            return userDoc.data();
+        } else {
+            console.log("No such user!");
+            return null;
+        }
+    }
+
 
     return (
         <div>
@@ -184,7 +195,7 @@ const Cards = () =>{
                         </h3>
                         <p>{person.tagline}</p>
                         <p className="match_percent" style={{fontSize: 150}}>
-                            {"90%"}
+                            {getCompatabilityScore(getUserData(user.uid), person) + "%"}
                         </p>
                         <p className="bio" style={{fontSize: 26}}> Bio: {person.bio}</p>
                         <p>{person.tagline}</p>
