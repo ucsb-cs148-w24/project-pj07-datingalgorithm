@@ -22,12 +22,6 @@ import "./ChatButton.css";
 import ChatButton from './ChatButton';
 import { MessageIcon, UserIcon } from "../icons";
 
-import {collection, onSnapshot, query, where, getDocs, doc, getDoc, addDoc, updateDoc, arrayUnion, setDoc, arrayRemove} from "firebase/firestore";
-import { getAuth, onAuthStateChanged} from 'firebase/auth';
-import { useNavigate } from 'react-router-dom'; // Added import for useNavigate
-import {getAge, getCompatabilityScore} from '../utils/userUtils';
-import "./ChatButton.css";
-
 
 
 
