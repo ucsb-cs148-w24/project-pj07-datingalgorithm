@@ -64,10 +64,9 @@ const UserProfile = () => {
             <p>Name: {userName}</p>
             <p>Bio: {userBio}</p>
             <p>Age: {userAge}</p>
-            <p>Interests: {userInterests}</p>
             <p>Gender: {userGender}</p>
-            <p>Hobbies: {userHobbies}</p>
-            <p>Traits: {userTraits}</p>
+            <p>Hobbies: {userHobbies.join(', ')}</p>
+            <p>Traits: {userTraits.join(', ')}</p>
 
         </div>
     )

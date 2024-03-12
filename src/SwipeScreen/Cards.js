@@ -151,6 +151,7 @@ const Cards = () =>{
         <div>
             <Header />
             <div className="cards">
+                {people.length === 0 && <h1>No more potential matches</h1>}
                 {people.map(person => (
                     <TinderCard
                         className="swipe"
