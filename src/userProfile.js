@@ -6,6 +6,9 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { doc, getDoc } from "firebase/firestore"; // Ensure this import is added
 import {getAge} from './utils/userUtils';
 
+// import about.css
+import './About.css';
+
 const UserProfile = () => {
     const [user] = useAuthState(auth)
     const userId = useParams().userId;
@@ -54,9 +57,13 @@ const UserProfile = () => {
         navigate("/chats");
     }
 
+    const backToChats = () => {
+        navigate('/chats');
+    }
+
     return (
         <div>
-            <Header />
+            <Header showGoToSwipeButton />
             <button onClick={goBackToChatList}>Back to Chats</button>
             
             <h1>User Profile</h1>
