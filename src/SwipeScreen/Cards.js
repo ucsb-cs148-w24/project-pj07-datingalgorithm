@@ -30,8 +30,31 @@ const Cards = () =>{
     const [matches, setMatches] = useState([]);
     const [user, setUser] = useState(null);
     const [userChats, setUserChats] = useState([]);
+    const [userData, setUserData] = useState(null);
     const navigate = useNavigate();
     const uid = auth.currentUser ? auth.currentUser.uid : null;
+
+    const getUserData = async (userName) => {
+        const userDocRef = doc(db, "users", userName);
+        const userDoc = await getDoc(userDocRef);
+        if (userDoc.exists()) {
+            return userDoc.data();
+        } else {
+            console.log("No such user!");
+            return null;
+        }
+    }
+
+    useEffect(() => {
+        const fetchUserData = async () => {
+            const data = await getUserData(user.uid);
+            setUserData(data);
+        };
+    
+        if (user) {
+            fetchUserData();
+        }
+    }, [user]);
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -124,18 +147,6 @@ const Cards = () =>{
         navigate(`/profile/${uid}`); // Adjusted this to a more generic route. You should replace `/profile/${uid}` with your actual route.
     };
 
-    const getUserData = async (userName) => {
-        const userDocRef = doc(db, "users", userName);
-        const userDoc = await getDoc(userDocRef);
-        if (userDoc.exists()) {
-            return userDoc.data();
-        } else {
-            console.log("No such user!");
-            return null;
-        }
-    }
-
-
     return (
         <div>
             <Header />
@@ -152,7 +163,7 @@ const Cards = () =>{
                         <div className="content">
                             <h3 style={{ fontSize: 50 }}>{person.name}</h3>
                             <p>{person.tagline}</p>
-                            <p className="match_percent" style={{ fontSize: 150 }}>{"90%"}</p>
+                            <p className="match_percent" style={{ fontSize: 150 }}>{getCompatabilityScore(userData, person)}</p>
                             <p className="bio" style={{ fontSize: 26 }}>Bio: {person.bio}</p>
                             <p>{person.tagline}</p>
                             <p style={{ fontSize: 50, position: "absolute", bottom: -15, left: 25 }}>Age: {getAge(person.birthday)}</p>

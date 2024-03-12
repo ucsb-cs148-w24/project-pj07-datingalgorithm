@@ -52,20 +52,21 @@ export const getAge = (dateString) => {
 export const getCompatabilityScore = (user1, user2) => {
 
   // console.log('user 2 city:', user2.vacation);
-  console.log('user 1 city:', user1.email);
+  console.log('user 1 city:', user1.vacation.at(0), 'user 2 city:', user2);
 
   // create variable number that we can keep inreasing
   // add up the compatability scores for each of the users
   // return that
   let score = 50;
 
-  if (user1.vacation && user2.vacation && user1.vacation === user2.vacation) {
+
+  if (user1.vacation && user2.vacation && user1.vacation.at(0) == user2.vacation.at(0)) {
     score += 1;
   }
 
-  if (user1.dateIdea && user2.dateIdea && user1.dateIdea === user2.dateIdea) {
-    score += 1;
-  }
+  // if (user1.dateIdea && user2.dateIdea && user1.dateIdea === user2.dateIdea) {
+  //   score += 1;
+  // }
 
   return score;
 }
