@@ -144,7 +144,7 @@ const Cards = () =>{
     };
 
     const goToProfile = () => {
-        navigate(`/profile/${uid}`); // Adjusted this to a more generic route. You should replace `/profile/${uid}` with your actual route.
+        navigate(`/ownProfile/${uid}`); // Adjusted this to a more generic route. You should replace `/profile/${uid}` with your actual route.
     };
 
     return (

@@ -20,8 +20,6 @@ const CurrUserProfile = () => {
     const [userHobbies, setUserHobbies] = useState([]);
     const [userTraits, setUserTraits] = useState([]);
 
-    const navigate = useNavigate();
-
     // ensure we're on a valid page
     useEffect(() => {
         // if(!user || !userId){
@@ -52,14 +50,6 @@ const CurrUserProfile = () => {
         fetchUserInfo();
     })
 
-    const goBackToSwiping = () => {
-        navigate("/swipe");
-    }
-
-    const goEditProfile = () => {
-        navigate("/editProfile");
-    }
-
     return (
         <div>
             <Header showEditProfile = {true}/>
@@ -69,10 +59,9 @@ const CurrUserProfile = () => {
             <p>Name: {userName}</p>
             <p>Bio: {userBio}</p>
             <p>Age: {userAge}</p>
-            <p>Interests: {userInterests}</p>
             <p>Gender: {userGender}</p>
-            <p>Hobbies: {userHobbies}</p>
-            <p>Traits: {userTraits}</p>
+            <p>Hobbies: {userHobbies.join(', ')}</p>
+            <p>Traits: {userTraits.join(', ')}</p>
 
         </div>
     )
