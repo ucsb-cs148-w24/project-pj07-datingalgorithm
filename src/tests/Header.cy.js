@@ -1,6 +1,6 @@
 import { mount } from 'cypress/react18';
 import { MemoryRouter } from 'react-router-dom'; // Import MemoryRouter
-import Header from '../../src/Header.js';
+import Header from '../Header.js';
 
 describe('App Component', () => {
   it('successfully displays the logo text', () => {
