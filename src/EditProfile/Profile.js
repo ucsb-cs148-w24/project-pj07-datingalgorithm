@@ -9,6 +9,18 @@ import { useAuthState } from 'react-firebase-hooks/auth'
 import {getAge} from '../utils/userUtils';
 
 function Profile() {
+    const uid = auth.currentUser ? auth.currentUser.uid : null;
+    const [user] = useAuthState(auth)
+    const userId = useParams().userId;
+    const [userName, setUserName] = useState("");
+    const [userProfilePic, setUserProfilePic] = useState("");
+    const [userBio, setUserBio] = useState("");
+    const [userAge, setUserAge] = useState("");
+    const [userInterests, setUserInterests] = useState([]);
+    const [userGender, setUserGender] = useState("");
+    const [userHobbies, setUserHobbies] = useState([]);
+    const [userTraits, setUserTraits] = useState([]);
+
     const navigate = useNavigate();
     const [file, setFile] = useState(null);
     const hiddenFileInput = useRef(null);
@@ -40,25 +52,41 @@ function Profile() {
     const [allIcks, setAllIcks] = useState([]);
     const [allSuperpowers, setAllSuperpowers] = useState([]);
 
+
+    // fetch info about the user page we're on based on the user id
+    useEffect(() => {
+        const fetchUserInfo = async () => {
+            const docRef = doc(db, "users", uid);
+            const docSnap = await getDoc(docRef);
+            if (docSnap.exists()) {
+                const data = docSnap.data();
+                setUserName(data.name);
+                setUserProfilePic(data.picUrl);
+                setUserBio(data.bio);
+                setUserAge(data.birthday);
+                setUserInterests(data.interestedIn);
+                setUserGender(data.gender);
+                setUserHobbies(data.hobbies);
+                setUserTraits(data.traits);
+            } else {
+                console.log("No such document!");
+            }
+        }
+
+        fetchUserInfo();
+    })
+
     //Submit limits
     const handleSubmit = async (e) => {
         e.preventDefault();
         
         // Retrieve the current user's UID
-        const uid = auth.currentUser ? auth.currentUser.uid : null;
-        if (!uid) {
-            console.error("No user signed in");
-            return;
-        }
 
         if (document.getElementById('fname').value === "") {
             alert("Please fill out first name.")
             return;
         }
-        else if (document.getElementById('lname').value === "") {
-            alert("Please fill out last name.")
-            return;
-        }
+
         else if (document.getElementById('bday').value === "") {
             alert("Please fill out birthday.")
             return;
@@ -176,27 +204,22 @@ function Profile() {
         <div className="Profile">
             <form action="/action_page.php" onSubmit={handleSubmit}>
                 <br></br>
-                <p><b>First Name</b></p>
+                <p><b>Name</b></p>
                 <div class="row">
                 <div class="col s12">
-                    <input type="text" id="fname" name="firstname" placeholder="First Name"/>
-                </div>
-                <br></br>
-                <p><b>Last Name</b></p>
-                <div class="col s12">
-                    <input type="text" id="lname" name="lastname" placeholder="Last Name"/>
+                    <input type="text" id="fname" name="firstname" placeholder={userName}/>
                 </div>
                 <br></br>
                 </div>
                 <p><b>Birthday</b></p>
                 <div className="input-group">
-                    <input type="date" id="bday" /> 
+                    <input type="date" id="bday" placeholder={userAge} /> 
                     <br></br>   
                 </div>
                 <br></br>
                 <p><b>Gender</b></p>
                 <select id="gender" name="gender">
-                    <option value="" disabled selected>Select</option>
+                    <option value="" disabled selected>{userGender}</option>
                     <option value="man">Man</option>
                     <option value="woman">Woman</option>
                     <option value="agender">Agender</option>
@@ -221,7 +244,7 @@ function Profile() {
                 <p><b>Interested in</b></p>
                 <div>
                     <select id="sexual_ori" name="sexual_ori">
-                        <option value="" disabled selected>Select</option>
+                        <option value="" disabled selected>{userInterests}</option>
                         <option value="men">Men</option>
                         <option value="women">Women</option>
                         <option value="everyone">Everyone</option>
@@ -230,7 +253,7 @@ function Profile() {
                 <br></br>
                 <p><b>Tell me about yourself</b></p>
                 <div className="input-group">
-                    <textarea id="bio" name="bio" placeholder="What would you like your potential matches to know about you?"></textarea>
+                    <textarea id="bio" name="bio" placeholder={userBio}></textarea>
                 </div>
                 <br></br>
                 <div className="checkbox">
