@@ -162,12 +162,12 @@ const Cards = () =>{
                         <div className="card" style={{ backgroundImage: `url(${person.picUrl})` }}>
                         </div>
                         <div className="content">
-                            <h3 style={{ fontSize: 50 }}>{person.name}</h3>
+                            <h3 className="name" style={{ fontSize: 50}}>{person.name}</h3>
                             <p>{person.tagline}</p>
-                            <p className="match_percent" style={{ fontSize: 150 }}>{getCompatabilityScore(userData, person)}</p>
+                            <p className="match_percent" style={{ fontSize: 150 }}>{getCompatabilityScore(userData, person)}%</p>
                             <p className="bio" style={{ fontSize: 26 }}>Bio: {person.bio}</p>
                             <p>{person.tagline}</p>
-                            <p style={{ fontSize: 50, position: "absolute", bottom: -15, left: 25 }}>Age: {getAge(person.birthday)}</p>
+                            <p className="age" style={{ fontSize: 50, position: "absolute", bottom: 0, left: 25 }}>Age: {getAge(person.birthday)}</p>
                         </div>
                     </TinderCard>
                 ))}
