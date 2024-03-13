@@ -46,15 +46,20 @@ const Cards = () =>{
     }
 
     useEffect(() => {
-        const fetchUserData = async () => {
-            const data = await getUserData(user.uid);
-            setUserData(data);
-        };
+        const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+            setUser(currentUser);
+            if (currentUser) {
+                const data = await getUserData(currentUser.uid);
+                setUserData(data);
+            }
+        });
     
-        if (user) {
-            fetchUserData();
-        }
-    }, [user]);
+        return () => {
+            if (typeof unsubscribe === 'function') {
+                unsubscribe();
+            }
+        };
+    }, []);
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -164,7 +169,7 @@ const Cards = () =>{
                         <div className="content">
                             <h3 className="name" style={{ fontSize: 50}}>{person.name}</h3>
                             <p>{person.tagline}</p>
-                            <p className="match_percent" style={{ fontSize: 150 }}>{getCompatabilityScore(userData, person)}%</p>
+                            {userData && <p className="match_percent" style={{ fontSize: 150 }}>{getCompatabilityScore(userData, person)}</p>}
                             <p className="bio" style={{ fontSize: 26 }}>Bio: {person.bio}</p>
                             <p>{person.tagline}</p>
                             <p className="age" style={{ fontSize: 50, position: "absolute", bottom: 0, left: 25 }}>Age: {getAge(person.birthday)}</p>
