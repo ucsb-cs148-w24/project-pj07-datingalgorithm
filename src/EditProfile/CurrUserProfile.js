@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from 'react'
-import Header from './Header'
+import Header from '../Header'
 import { useAuthState } from 'react-firebase-hooks/auth'
-import { db, auth } from './firebase'
+import { db, auth } from '../firebase'
 import { useNavigate, useParams } from 'react-router-dom';
 import { doc, getDoc } from "firebase/firestore"; // Ensure this import is added
-import {getAge} from './utils/userUtils';
+import {getAge} from '../utils/userUtils';
+import "./CurrUserProfile.css"
+import "../SwipeScreen/ChatButton.css";
 
-// import about.css
-import './About.css';
-
-const UserProfile = () => {
+const CurrUserProfile = () => {
     const [user] = useAuthState(auth)
     const userId = useParams().userId;
     const [userName, setUserName] = useState("");
@@ -53,30 +52,30 @@ const UserProfile = () => {
         fetchUserInfo();
     })
 
-    const goBackToChatList = () => {
-        navigate("/chats");
+    const goBackToSwiping = () => {
+        navigate("/swipe");
     }
 
-    const backToChats = () => {
-        navigate('/chats');
+    const goEditProfile = () => {
+        navigate("/editProfile");
     }
 
     return (
         <div>
-            <Header showGoToSwipeButton />
-            <button onClick={goBackToChatList}>Back to Chats</button>
+            <Header showEditProfile = {true}/>
             
             <h1>User Profile</h1>
             <img style={{ width: "20%", height: "20%" }} src={userProfilePic} alt="" />
             <p>Name: {userName}</p>
             <p>Bio: {userBio}</p>
             <p>Age: {userAge}</p>
+            <p>Interests: {userInterests}</p>
             <p>Gender: {userGender}</p>
-            <p>Hobbies: {userHobbies.join(', ')}</p>
-            <p>Traits: {userTraits.join(', ')}</p>
+            <p>Hobbies: {userHobbies}</p>
+            <p>Traits: {userTraits}</p>
 
         </div>
     )
 }
 
-export default UserProfile
+export default CurrUserProfile

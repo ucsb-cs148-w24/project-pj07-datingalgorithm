@@ -68,10 +68,14 @@
     overflow: auto;
     color: white; /* Set the text color to white */
     text-shadow: 
-      -1px -1px 0 black,  
-       1px -1px 0 black,
-      -1px  1px 0 black,
-       1px  1px 0 black;
+
+      -0.7px -0.7px 0 black,  
+       0.7px -0.7px 0 black,
+      -0.7px  0.7px 0 black,
+       0.7px  0.7px 0 black;
+    word-spacing: 1px;
+    font-weight: 440;
+
     /* Other styles to fit your design */
   }
 
@@ -81,10 +85,12 @@
     margin-top: -10px;
     color: white; /* Set the text color to white */
     text-shadow: 
-      -1px -1px 0 black,  
-       1px -1px 0 black,
-      -1px  1px 0 black,
-       1px  1px 0 black;
+
+      -0.7px -0.7px 0 black,  
+       0.7px -0.7px 0 black,
+      -0.7px  0.7px 0 black,
+       0.7px  0.7px 0 black;
+
     /* Other styles to fit your design */
   }
 
