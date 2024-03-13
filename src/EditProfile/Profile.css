@@ -1,0 +1,49 @@
+.Profile input[type="text"],
+.Profile input[type="date"],
+.Profile select {
+    width: 40%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+/* Assuming .input-group is inside .Body and you want to style #bio differently */
+.Profile .input-group #bio {
+    height: 200px;
+    width: 40%;
+    vertical-align: top;
+    /* The other properties are inherited from the input[type="text"] and select style above */
+}
+
+.Profile input[type="submit"] {
+    width: 20%;
+    background-color: rgb(219, 203, 234);
+    color: rgb(0, 0, 0);
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.submit {
+    width: 20%;
+    background-color: rgb(219, 203, 234);
+    color: rgb(0, 0, 0);
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.Profile img {
+    display: block;
+    width: 100px;
+    height: 100px;
+    margin: auto;
+    filter: blur(5px);
+}

@@ -10,7 +10,6 @@ import { useNavigate } from 'react-router-dom'; // Added import for useNavigate
 import Header from '../Header';
 import "../SwipeScreen/ChatButton.css";
 import showGoToSwipeButton from '../Header.js';
-
 function Chats() {
   const [user, loading, error] = useAuthState(auth);
   const [chatDetails, setChatDetails] = useState([]);
@@ -83,6 +82,7 @@ function Chats() {
   return (
     <div>
       <Header showGoToSwipeButton={true}/>
+
       <NewMatches />
 
       <div className="chats">
