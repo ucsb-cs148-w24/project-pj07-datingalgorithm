@@ -172,7 +172,6 @@ const Cards = () =>{
                             {userData && <p className="match_percent" style={{ fontSize: 150 }}>{getCompatabilityScore(userData, person)}%</p>}
                             <p className="bio" style={{ fontSize: 26 }}>Bio: {person.bio}</p>
                             <p>{person.tagline}</p>
-                            <p style={{ fontSize: 50, position: "absolute", bottom: -15, left: 25 }}>Age: {getAge(person.birthday)}</p>
                             <p>{person.traits.join(', ')}</p>
                             <p>Hobbies: {person.hobbies.join(', ')}</p>
                             <p>Love Language: {person.lovelang.join(', ')}</p> 
