@@ -41,7 +41,7 @@ const UserProfile = () => {
                 setUserProfilePic(data.picUrl);
                 setUserBio(data.bio);
                 setUserAge(getAge(data.birthday));
-                setUserInterests(data.interests);
+                setUserInterests(data.interestedIn);
                 setUserGender(data.gender);
                 setUserHobbies(data.hobbies);
                 setUserTraits(data.traits);
@@ -72,6 +72,7 @@ const UserProfile = () => {
             <p>Bio: {userBio}</p>
             <p>Age: {userAge}</p>
             <p>Gender: {userGender}</p>
+            <p>Interested In: {userInterests}</p>
             <p>Hobbies: {userHobbies.join(', ')}</p>
             <p>Traits: {userTraits.join(', ')}</p>
 
