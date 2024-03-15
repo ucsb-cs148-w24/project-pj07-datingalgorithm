@@ -94,6 +94,22 @@
     /* Other styles to fit your design */
   }
 
+  .age {
+    text-shadow: 
+    -0.7px -0.7px 0 black,  
+    0.7px -0.7px 0 black,
+   -0.7px  0.7px 0 black,
+    0.7px  0.7px 0 black;
+  }
+
+  .name {
+    text-shadow: 
+    -0.7px -0.7px 0 black,  
+    0.7px -0.7px 0 black,
+   -0.7px  0.7px 0 black,
+    0.7px  0.7px 0 black;
+  }
+
 /* .card > h3 {
     position: fixed;
     color: black;

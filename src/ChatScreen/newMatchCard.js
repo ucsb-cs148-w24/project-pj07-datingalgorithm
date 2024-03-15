@@ -71,7 +71,7 @@ const NewMatchCard = ({newMatch}) => {
         <div className="newMatchCard">
             <div className="newMatchCard__body" onClick={() => createNewChat(newMatch)}>
                 <img className="newMatchCard__pic"src={userPic} alt="" />
-                <h3 classNmae="newMatchCard__name">{userName}</h3>
+                <p className="newMatchCard__name">{userName}</p>
             </div>
         </div>
     )
