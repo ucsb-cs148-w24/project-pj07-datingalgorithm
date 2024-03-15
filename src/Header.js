@@ -4,7 +4,7 @@ import logo from './images/eye-mask.png';
 import SignOutButton from './SignOutButton';
 import {useNavigate} from 'react-router-dom';
 import {Link} from 'react-router-dom';
-
+import { HomeIcon } from "./icons";
 
 
 function Header({showGoToSwipeButton = false, showEditProfile = false}) {
@@ -33,7 +33,7 @@ function Header({showGoToSwipeButton = false, showEditProfile = false}) {
 
             {showGoToSwipeButton && (
                 <button onClick={goToSwipeScreen} className="goToSwipeButton">
-                    Keep Swiping
+                    <HomeIcon className="icon" />
                 </button>
             )}
             

@@ -39,10 +39,30 @@
     border: none;
 }
 
-.chatScreen__inputButton {
+.chatScreen_inputButton {
     border: none;
-    margin-right: 20px;
-    background-color: white;
-    font-weight: bolder;
-    color: #fe3d71;
+    margin-right: 10px;
+    background-color: rgb(87, 178, 247);
+    color: rgb(255, 255, 255);
+    border: none;
+    border-radius: 10px;
+    padding: 10px 15px;
+    font-weight: 440;
+}
+
+.goBackToChatList{
+    position: absolute;
+    left: 10px;
+    background-color: rgb(255, 255, 255);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-size: 3vmin;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.goBackToChatList:hover{
+    background-color: rgb(226, 223, 223); 
 }

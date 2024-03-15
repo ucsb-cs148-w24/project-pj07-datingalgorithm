@@ -20,7 +20,7 @@ import { useNavigate } from 'react-router-dom';
 import { getAge, getCompatabilityScore } from '../utils/userUtils';
 import "./ChatButton.css";
 import ChatButton from './ChatButton';
-import { MessageIcon, UserIcon } from "../icons";
+import { UserIcon } from "../icons";
 
 
 
@@ -169,7 +169,7 @@ const Cards = () =>{
                         <div className="content">
                             <h3 className="name" style={{ fontSize: 50}}>{person.name}</h3>
                             <p>{person.tagline}</p>
-                            {userData && <p className="match_percent" style={{ fontSize: 150 }}>{getCompatabilityScore(userData, person)}</p>}
+                            {userData && <p className="match_percent" style={{ fontSize: 150 }}>{getCompatabilityScore(userData, person)}%</p>}
                             <p className="bio" style={{ fontSize: 26 }}>Bio: {person.bio}</p>
                             <p>{person.tagline}</p>
                             <p className="age" style={{ fontSize: 50, position: "absolute", bottom: 0, left: 25 }}>Age: {getAge(person.birthday)}</p>
@@ -179,7 +179,6 @@ const Cards = () =>{
             </div>
             <ChatButton onClick={goToChatScreen} />
             <button onClick={goToProfile} className="goToProfileButton">
-                Profile
                 <UserIcon className="mr-2 h-5 w-5" />
             </button>
         </div>

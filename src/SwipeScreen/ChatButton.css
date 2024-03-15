@@ -1,23 +1,23 @@
 .goToChatButton {
-    background-color: black;
+    background-color: rgb(207, 180, 233);
     color: white;
     border: none;
     border-radius: 10px;
     padding: 10px 20px;
     font-size: 3vmin;
     cursor: pointer;
-    transition: background-color 0.2s ease-in-out;
+    transition: background-color 0.3s ease-in-out;
 
 }
 
 .chatButtonContainer{
     position: absolute;
     top: 4vh;
-    right: 26.5vh;
+    right: 27vh;
 }
 
 .goToChatButton:hover {
-    background-color: grey; 
+    background-color: rgb(203, 110, 231); 
 }
 
 .goToChatButton:focus {
@@ -26,21 +26,21 @@
 }
 
 .goToProfileButton {
-    background-color: black;
+    background-color: rgb(207, 180, 233);
     color: white;
     border: none;
     border-radius: 10px;
     padding: 10px 20px;
     font-size: 3vmin;
     cursor: pointer;
-    transition: background-color 0.2s ease-in-out;
+    transition: background-color 0.3s ease-in-out;
     position: absolute;
     top: 4vh;
-    right: 47.2vh;
+    right: 37vh;
 }
 
 .goToProfileButton:hover {
-    background-color: grey; 
+    background-color: rgb(203, 110, 231); 
 }
 
 .goToProfileButton:focus {
@@ -49,21 +49,21 @@
 }
 
 .goToSwipeButton {
-    background-color: black;
+    background-color: rgb(207, 180, 233);
     color: white;
     border: none;
     border-radius: 10px;
     padding: 10px 20px;
     font-size: 3vmin;
     cursor: pointer;
-    transition: background-color 0.2s ease-in-out;
+    transition: background-color 0.3s ease-in-out;
     position: absolute;
     top: 4vh;
-    right: 26.5vh;
+    right: 27vh;
 }
 
 .goToSwipeButton:hover {
-    background-color: grey; 
+    background-color: rgb(203, 110, 231); 
 }
 
 .goToSwipeButton:focus {
@@ -73,21 +73,22 @@
 
 
 .goToEditProfileButton {
-    background-color: black;
-    color: white;
+    background-color: rgb(207, 180, 233);
+    color: black;
     border: none;
     border-radius: 10px;
     padding: 10px 20px;
     font-size: 3vmin;
     cursor: pointer;
-    transition: backgrsound-color 0.2s ease-in-out;
+    transition: background-color 0.3s ease-in-out;
     position: absolute;
     top: 4vh;
-    right: 26.5vh;
+    right: 27vh;
+    font-weight: 440;
 }
 
 .goToEditProfileButton:hover {
-    background-color: grey; 
+    background-color: rgb(203, 110, 231); 
 }
 
 .goToEditProfileButton:focus {
