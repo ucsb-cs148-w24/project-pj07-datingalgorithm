@@ -6,8 +6,9 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { doc, getDoc } from "firebase/firestore"; // Ensure this import is added
 import {getAge} from './utils/userUtils';
 
-// import about.css
+import './userProfile.css';
 import './About.css';
+
 
 const UserProfile = () => {
     const [user] = useAuthState(auth)
@@ -60,22 +61,24 @@ const UserProfile = () => {
 
 
     return (
-        <><div>
+        <div>
             <Header showGoToSwipeButton />
-            
-            <h1>User Profile</h1>
-            <img style={{ width: "20%", height: "20%" }} src={userProfilePic} alt="" />
-            <p>Name: {userName}</p>
-            <p>Bio: {userBio}</p>
-            <p>Age: {userAge}</p>
-            <p>Gender: {userGender}</p>
-            <p>Hobbies: {userHobbies.join(', ')}</p>
-            <p>Traits: {userTraits.join(', ')}</p>
-
-
-        </div><button onClick={goBackToChatList} className="goBackToChatList">&#8592;</button></>
-            
+            <div className="profileHeader">
+                <button onClick={goBackToChatList} className="goBackToChatList">&#8592;</button>
+                <div className="profileInfo">
+                    <h1>User Profile</h1>
+                    <img style={{ width: "20%", height: "20%" }} src={userProfilePic} alt="" />
+                    <p>Name: {userName}</p>
+                    <p>Bio: {userBio}</p>
+                    <p>Age: {userAge}</p>
+                    <p>Gender: {userGender}</p>
+                    <p>Hobbies: {userHobbies.join(', ')}</p>
+                    <p>Traits: {userTraits.join(', ')}</p>
+                </div>
+            </div>
+        </div>  
     )
+    
 }
 
 export default UserProfile

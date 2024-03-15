@@ -1,0 +1,9 @@
+.profileHeader {
+    justify-content: center;
+}
+
+.profileInfo {
+    margin: 0 auto;
+    align-items: center;
+    transform: translateY(-50px);
+}

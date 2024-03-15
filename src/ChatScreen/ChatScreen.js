@@ -94,7 +94,7 @@ function ChatScreen() {
   return (
     <div className="chatScreen">
       <div className="chatScreen__header">
-        <button onClick={goBackToChatList} className="goBackToChatList" style={{top: '20px'}}>&#8592;</button>
+        <button onClick={goBackToChatList} className="goBackToChatList" style={{position: 'absolute', top: '10px'}}>&#8592;</button>
       </div>
 
       <p className="chatScreen__timestamp">You matched with {otherUserName || "Loading..."}</p>
