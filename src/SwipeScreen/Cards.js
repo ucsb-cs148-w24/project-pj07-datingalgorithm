@@ -173,6 +173,8 @@ const Cards = () =>{
                             <p className="bio" style={{ fontSize: 26 }}>Bio: {person.bio}</p>
                             <p>{person.tagline}</p>
                             <p style={{ fontSize: 50, position: "absolute", bottom: -15, left: 25 }}>Age: {getAge(person.birthday)}</p>
+                            <p>Hobbies: {person.hobbies.join(', ')}</p> // Add this line
+                            <p>Interests: {person.lovelang.join(', ')}</p> // Add this line
                         </div>
                     </TinderCard>
                 ))}
