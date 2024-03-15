@@ -20,7 +20,7 @@ import { useNavigate } from 'react-router-dom';
 import { getAge, getCompatabilityScore } from '../utils/userUtils';
 import "./ChatButton.css";
 import ChatButton from './ChatButton';
-import { MessageIcon, UserIcon } from "../icons";
+import { UserIcon } from "../icons";
 
 
 
@@ -149,7 +149,7 @@ const Cards = () =>{
     };
 
     const goToProfile = () => {
-        navigate(`/profile/${uid}`); // Adjusted this to a more generic route. You should replace `/profile/${uid}` with your actual route.
+        navigate(`/ownProfile/${uid}`); // Adjusted this to a more generic route. You should replace `/profile/${uid}` with your actual route.
     };
 
     return (
@@ -167,7 +167,7 @@ const Cards = () =>{
                         <div className="card" style={{ backgroundImage: `url(${person.picUrl})` }}>
                         </div>
                         <div className="content">
-                            <h3 style={{ fontSize: 50 }}>{person.name}</h3>
+                            <h3 className="name" style={{ fontSize: 50}}>{person.name}</h3>
                             <p>{person.tagline}</p>
                             {userData && <p className="match_percent" style={{ fontSize: 150 }}>{getCompatabilityScore(userData, person)}%</p>}
                             <p className="bio" style={{ fontSize: 26 }}>Bio: {person.bio}</p>
@@ -176,13 +176,15 @@ const Cards = () =>{
                             <p>{person.traits.join(', ')}</p>
                             <p>Hobbies: {person.hobbies.join(', ')}</p>
                             <p>Love Language: {person.lovelang.join(', ')}</p> 
+
+                            <p className="age" style={{ fontSize: 50, position: "absolute", bottom: 0, left: 25 }}>Age: {getAge(person.birthday)}</p>
+
                         </div>
                     </TinderCard>
                 ))}
             </div>
             <ChatButton onClick={goToChatScreen} />
             <button onClick={goToProfile} className="goToProfileButton">
-                Profile
                 <UserIcon className="mr-2 h-5 w-5" />
             </button>
         </div>

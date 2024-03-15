@@ -48,7 +48,9 @@ const NewMatches = () => {
                     <NewMatchCard key={email} newMatch={email}/>
                 ))}
             </div>
-            
+            <p className='Messages__header'>
+                Current Chats:
+            </p>
         </div>
     )
 }

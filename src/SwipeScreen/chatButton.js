@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import {db, auth} from '../firebase';
 import "./ChatButton.css";
+import { MessageIcon } from "../icons";
 
 const ChatButton = () => {
     const navigate = useNavigate();
@@ -48,7 +49,7 @@ const ChatButton = () => {
     return (
         <div className='chatButtonContainer'>
             <button onClick={goToChatScreen} className="goToChatButton">
-                Go to Chat
+            <MessageIcon className="icon" />
             </button>
             <div className="notificationCount"> {notificationCount} </div>
         </div>

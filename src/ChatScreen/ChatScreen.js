@@ -6,6 +6,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { doc, getDoc } from "firebase/firestore"; // Ensure this import is added
 import "./ChatScreen.css";
 import { fetchUserName, fetchUserIdByEmail } from '../utils/userUtils';
+import { ArrowLeftIcon } from "../icons";
 
 function ChatScreen() {
   const [user] = useAuthState(auth);
@@ -94,7 +95,9 @@ function ChatScreen() {
   return (
     <div className="chatScreen">
       <div className="chatScreen__header">
-        <button onClick={goBackToChatList} className="goBackToChatList">Back</button>
+        <button onClick={goBackToChatList} className="goBackToChatList">
+          <ArrowLeftIcon className="icon"/>
+        </button>
       </div>
 
       <p className="chatScreen__timestamp">You matched with {otherUserName || "Loading..."}</p>
