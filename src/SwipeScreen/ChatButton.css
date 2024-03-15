@@ -12,8 +12,8 @@
 
 .chatButtonContainer{
     position: absolute;
-    top: 5vh;
-    right: 31.6vh;
+    top: 4vh;
+    right: 26.5vh;
 }
 
 .goToChatButton:hover {
@@ -35,8 +35,8 @@
     cursor: pointer;
     transition: background-color 0.2s ease-in-out;
     position: absolute;
-    top: 5vh;
-    right: 52vh;
+    top: 4vh;
+    right: 47.2vh;
 }
 
 .goToProfileButton:hover {
@@ -58,8 +58,8 @@
     cursor: pointer;
     transition: background-color 0.2s ease-in-out;
     position: absolute;
-    top: 5vh;
-    right: 34.3vh;
+    top: 4vh;
+    right: 26.5vh;
 }
 
 .goToSwipeButton:hover {
@@ -80,10 +80,10 @@
     padding: 10px 20px;
     font-size: 3vmin;
     cursor: pointer;
-    transition: background-color 0.2s ease-in-out;
+    transition: backgrsound-color 0.2s ease-in-out;
     position: absolute;
-    top: 5vh;
-    right: 32vh;
+    top: 4vh;
+    right: 26.5vh;
 }
 
 .goToEditProfileButton:hover {
