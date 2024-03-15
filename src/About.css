@@ -14,7 +14,8 @@
     background: white; 
     border: none; 
     color: black; 
-    font-size: 38px;
+    font-size: 50px;
+    font-weight: bold;
     padding: 10px 20px; 
     display: flex;
     align-items: center; 

@@ -19,7 +19,7 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { getAge, getCompatabilityScore } from '../utils/userUtils';
 import "./ChatButton.css";
-import ChatButton from './ChatButton';
+import ChatButton from './chatButton';
 import { MessageIcon, UserIcon } from "../icons";
 
 

@@ -94,7 +94,7 @@ function ChatScreen() {
   return (
     <div className="chatScreen">
       <div className="chatScreen__header">
-        <button onClick={goBackToChatList} className="goBackToChatList">Back</button>
+        <button onClick={goBackToChatList} className="goBackToChatList" style={{top: '20px'}}>&#8592;</button>
       </div>
 
       <p className="chatScreen__timestamp">You matched with {otherUserName || "Loading..."}</p>
@@ -117,7 +117,7 @@ function ChatScreen() {
           placeholder="Type a message..."
           type="text"
         />
-        <button type="submit" className="chatScreen_inputButton">SEND</button>
+        <button type="submit" className="chatScreen__inputButton">SEND</button>
       </form>
     </div>
   );

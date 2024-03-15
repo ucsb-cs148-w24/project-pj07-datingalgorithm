@@ -57,14 +57,11 @@ const UserProfile = () => {
         navigate("/chats");
     }
 
-    const backToChats = () => {
-        navigate('/chats');
-    }
+
 
     return (
-        <div>
+        <><div>
             <Header showGoToSwipeButton />
-            <button onClick={goBackToChatList}>Back to Chats</button>
             
             <h1>User Profile</h1>
             <img style={{ width: "20%", height: "20%" }} src={userProfilePic} alt="" />
@@ -75,7 +72,9 @@ const UserProfile = () => {
             <p>Hobbies: {userHobbies.join(', ')}</p>
             <p>Traits: {userTraits.join(', ')}</p>
 
-        </div>
+
+        </div><button onClick={goBackToChatList} className="goBackToChatList">&#8592;</button></>
+            
     )
 }
 

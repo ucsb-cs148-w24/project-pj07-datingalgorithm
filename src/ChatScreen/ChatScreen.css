@@ -1,7 +1,11 @@
+.chatScreen {
+    padding-bottom: 60px;
+}
+
 .chatScreen__message {
     display: flex;
     align-items: center;
-    padding: 20px;
+    padding: 15px;
 }
 .chatScreen__text {
     margin-left: 10px;
@@ -35,14 +39,39 @@
 
 .chatScreen_inputField {
     flex: 1;
-    padding: 10px;
+    padding: 15px;
     border: none;
 }
 
 .chatScreen__inputButton {
     border: none;
-    margin-right: 20px;
+    margin-right: 30px;
     background-color: white;
     font-weight: bolder;
-    color: #fe3d71;
+    font-size: 18px;
+    color: black;
+}
+
+.chatScreen__inputButton:hover {
+    color: grey;
+    cursor: pointer;
+}
+
+.goBackToChatList {
+    position: absolute; 
+    left: 15px; 
+    top: 120px; 
+    background: transparent;
+    border: none; 
+    color: black; 
+    font-size: 50px;
+    font-weight: bold;
+    padding: 10px 20px; 
+    display: flex;
+    align-items: center; 
+  }
+
+  .goBackToChatList:hover {
+    color: grey;
+    cursor: pointer;
 }
