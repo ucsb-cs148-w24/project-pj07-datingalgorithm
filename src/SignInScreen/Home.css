@@ -13,9 +13,9 @@
     height: 100%;
     background: linear-gradient(
         to bottom,
-        rgba(0,0,0,0.65) 0%,
+        rgba(250, 170, 248, 0.622) 0%,
         rgba(0,0,0,0) 100%
-    ), url('/src/images/blindly3.png') no-repeat center center fixed; /* Centers the background image and prevents repeating */
+    ), url('/src/images/blindy4.png') no-repeat center center fixed; /* Centers the background image and prevents repeating */
     background-size: 100% auto; /* Ensures the image covers the entire element */
     
 }
@@ -23,9 +23,9 @@
     position: absolute;
 }
 .home-h1{
-    font-size: 48px;
+    font-size: 80px;
     font-weight: 700;
-    color: azure;
+    color: black;
     position: absolute;
     top: 20vh; /* Center vertically */
     left: 50vw; /* Center horizontally */
@@ -36,29 +36,30 @@
 .text1{
     position: absolute; /* or 'relative' to a positioned container */
     font-size: 5vmin; /* Scales with the viewport, adjust as needed */
-    top: 10vh; /* Position the element in relation to the heart's position */
+    top: 20vh; /* Position the element in relation to the heart's position */
     left: 50vw; /* Adjust 'top' and 'left' as needed */
     transform: translate(-50%, -50%); /* Center `h2` on the specified point */
-    color: azure;
+    color: black;
 }
 .primary-button {
-    background-color: black; /* Button background color */
-    color: white; /* Text color */
-    border: none; /* Remove button border */
+    background-color: white; /* Button background color */
+    color: black; /* Text color */
+    border: 1px solid black; /* Remove button border */
     border-radius: 5px; /* Add rounded corners */
-    padding: 10px 20px; /* Add some padding around the text */
+    padding: 10px 15px; /* Add some padding around the text */
     font-size: 3vmin; /* Adjust font size */
     position: absolute;
     top: 65vh;
     left: 50vw;
     transform: translate(-50%, -50%); /* Center `h2` on the specified point */
+    transition: background-color 0.3s ease-in-out;
 
     
 }
 
 /* Add a hover effect for the button */
 .primary-button:hover {
-    background-color: grey; /* Change background color on hover */
+    background-color: rgb(190, 190, 190); /* Change background color on hover */
     cursor: pointer;
 }
 .error-popup {
@@ -80,7 +81,7 @@
     top: 25px; /* Distance from the bottom */
     background: none; /* Removes the default background */
     border: none; /* Removes the default border */
-    color: white; /* Or any color you prefer for the text */
+    color: black; /* Or any color you prefer for the text */
     font-size: 18px;
 
 }
@@ -89,6 +90,14 @@
     background-color: transparent;
     color: grey;
     cursor: pointer;
+}
+
+.googleicon {
+    width: 24px;
+    height: 24px;
+    position: relative;
+    top: 4.5px;
+    right: 5.5px;
 }
 
 

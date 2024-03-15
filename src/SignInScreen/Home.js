@@ -3,6 +3,7 @@ import { auth, signInWithGoogle, signOutUser } from '../firebaseConfig';
 import { onAuthStateChanged } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import './Home.css';
+import googleIcon from "../images/googleicon.png";
 
 const Home = () => {
     const [user, setUser] = useState(null); // Track user state
@@ -56,9 +57,14 @@ const Home = () => {
     return (
         <div className='overlay'>
             <div className="container">
-                <h1 className='home-h1'>Blindly</h1>
+                <p className='home-h1'>Blindly</p>
                 <h2 className='text1'>Love Blindly, Meet Truly</h2>
                 <button onClick={handleAuthAction} className="primary-button">
+                <img
+                        src= {googleIcon} // Replace "image-url.jpg" with the URL or path to your image
+                        alt=""
+                        className= "googleicon"// Set the width and height of the image
+                    />
                     {user ? 'Sign Out' : 'Sign In with Google'}
                 </button>
             </div>

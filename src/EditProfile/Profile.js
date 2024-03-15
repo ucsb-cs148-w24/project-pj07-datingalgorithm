@@ -13,13 +13,10 @@ function Profile() {
     const [user] = useAuthState(auth)
     const userId = useParams().userId;
     const [userName, setUserName] = useState("");
-    const [userProfilePic, setUserProfilePic] = useState("");
     const [userBio, setUserBio] = useState("");
-    const [userAge, setUserAge] = useState("");
     const [userInterests, setUserInterests] = useState([]);
     const [userGender, setUserGender] = useState("");
-    const [userHobbies, setUserHobbies] = useState([]);
-    const [userTraits, setUserTraits] = useState([]);
+    const [userProfilePic, setUserProfilePic] = useState("");
 
     const navigate = useNavigate();
     const [file, setFile] = useState(null);
@@ -36,21 +33,9 @@ function Profile() {
 
     function handleClick () {
         hiddenFileInput.current.click();
-      };
+    };
 
     const [uploading, setUploading] = useState(false);
-
-    //store user's answers to questions with checkboxes
-    const [allQues, setAllQues] = useState([]);
-    const [allHobbies, setAllHobbies] = useState([]);
-    const [allTraits, setAllTraits] = useState([]);
-    const [allLoveLang, setAllLoveLang] = useState([]);
-    const [allDateIdeas, setAllDateIdeas] = useState([]);
-    const [allVacation, setAllVacation] = useState([]);
-    const [allGifts, setAllGifts] = useState([]);
-    const [allPriority, setAllPriority] = useState([]);
-    const [allIcks, setAllIcks] = useState([]);
-    const [allSuperpowers, setAllSuperpowers] = useState([]);
 
 
     // fetch info about the user page we're on based on the user id
@@ -63,11 +48,8 @@ function Profile() {
                 setUserName(data.name);
                 setUserProfilePic(data.picUrl);
                 setUserBio(data.bio);
-                setUserAge(data.birthday);
                 setUserInterests(data.interestedIn);
                 setUserGender(data.gender);
-                setUserHobbies(data.hobbies);
-                setUserTraits(data.traits);
             } else {
                 console.log("No such document!");
             }
@@ -87,10 +69,6 @@ function Profile() {
             return;
         }
 
-        else if (document.getElementById('bday').value === "") {
-            alert("Please fill out birthday.")
-            return;
-        }
         else if (document.getElementById('gender').value === "") {
             alert("Please fill out gender.")
             return;
@@ -103,65 +81,14 @@ function Profile() {
             alert("Please fill out the text box bio.")
             return;
         }
-        else if (allHobbies.length === 0) {
-            alert("Please add at least one hobby.");
-            return;
-        }
-        else if (allTraits.length === 0) {
-            alert("Please add at least one trait.");
-            return;
-        }
-        else if (allLoveLang.length === 0) {
-            alert("Please add at least one love language.");
-            return;
-        }
-        else if (allDateIdeas.length === 0) {
-            alert("Please add one ideal date.");
-            return;
-        }
-        else if (allVacation.length === 0) {
-            alert("Please add one ideal vacation spot.");
-            return;
-        }
-        else if (allPriority.length === 0) {
-            alert("Please add at least one priority.");
-            return;
-        }
-        else if (allIcks.length === 0) {
-            alert("Please add at least one unpleasant quality.");
-            return;
-        }
-        else if (allSuperpowers.length === 0) {
-            alert("Please add at least one superpower.");
-            return;
-        }
-        else if (file.length === 0) {
-            alert("Please select an image before submitting.");
-            return;
-        }
         else {
             setUploading(true);
-            const firstName = document.getElementById('fname').value;
-            const lastName = document.getElementById('lname').value;
-            // Combine first name and last name with a space
-            const fullName = `${firstName} ${lastName}`;
-
 
             const userProfileDetails = {
-                name: fullName, // Use the combined name here
-                birthday: document.getElementById('bday').value,
+                name: document.getElementById('fname').value, // Use the combined name here
                 gender: document.getElementById('gender').value,
                 interestedIn: document.getElementById('sexual_ori').value,
                 bio: document.getElementById('bio').value,
-                hobbies: allHobbies,
-                traits: allTraits,
-                lovelang: allLoveLang,
-                dateideas: allDateIdeas,
-                vacation: allVacation,
-                gift: allGifts,
-                priority: allPriority,
-                icks: allIcks,
-                superpower: allSuperpowers
                 // Include any other fields captured from the form
             };
 
@@ -170,7 +97,7 @@ function Profile() {
                 console.log("Profile updated successfully");
 
                 // upload image to firebase storage
-                const imageRef = ref(storage, `users/${uid}/${fullName}`);
+                const imageRef = ref(storage, `users/${uid}/${document.getElementById('fname').value}`);
                 await uploadBytes(imageRef, file);
 
                 // Get download URL of the uploaded image
@@ -209,12 +136,6 @@ function Profile() {
                 <div class="col s12">
                     <input type="text" id="fname" name="firstname" placeholder={userName}/>
                 </div>
-                <br></br>
-                </div>
-                <p><b>Birthday</b></p>
-                <div className="input-group">
-                    <input type="date" id="bday" placeholder={userAge} /> 
-                    <br></br>   
                 </div>
                 <br></br>
                 <p><b>Gender</b></p>
@@ -256,39 +177,6 @@ function Profile() {
                     <textarea id="bio" name="bio" placeholder={userBio}></textarea>
                 </div>
                 <br></br>
-                <div className="checkbox">
-                    {data.map((ques, index) => {
-                        return (
-                            <SingleGroup
-                            key={index}
-                            data={ques}
-                            setAllQues={setAllQues}
-                            allQues={allQues}
-                            setAllHobbies={setAllHobbies}
-                            allHobbies={allHobbies}
-                            setAllTraits={setAllTraits}
-                            allTraits={allTraits}
-                            setAllLoveLang={setAllLoveLang}
-                            allLoveLang={allLoveLang}
-                            setAllDateIdeas={setAllDateIdeas}
-                            allDateIdeas={allDateIdeas}
-                            setAllVacation={setAllVacation}
-                            allVacation={allVacation}
-                            setAllGifts={setAllGifts}
-                            allGifts={allGifts}
-                            setAllPriority={setAllPriority}
-                            allPriority={allPriority}
-                            setAllIcks={setAllIcks}
-                            allIcks={allIcks}
-                            setAllSuperpowers={setAllSuperpowers}
-                            allSuperpowers={allSuperpowers}
-
-                            />
-                        );
-                    })}
-                </div>
-                <br></br>
-                
                 <div>
                     <p><b>Add Image:</b></p>
                     <button type="button" className="button-upload" onClick={handleClick}>
@@ -306,128 +194,5 @@ function Profile() {
     );
 }
 
-
-const SingleGroup = ({ data, setAllQues, allQues, setAllHobbies, allHobbies, setAllTraits, allTraits, setAllLoveLang, allLoveLang, setAllDateIdeas, allDateIdeas, setAllVacation, allVacation, setAllGifts, allGifts, setAllPriority, allPriority, setAllIcks, allIcks, setAllSuperpowers, allSuperpowers}) => { //Checkbox limit
-    const [values, setValues] = useState([]);
-    const handleChange = (e) => {
-        if (e.target.checked) {
-            if (data.group === "love-lang") {
-                if (values.length < 2) {
-                    setValues((prev) => [...prev, e.target.value]);
-                    setAllQues((prev) => [...prev, e.target.value]);
-                    setAllLoveLang((allLoveLang) => [...allLoveLang, e.target.value]);
-                } else {
-                    e.target.checked = false;
-
-                    alert("You can select only 2 choices");
-                }
-            }
-            else if (data.group === "vacation") {
-                if (values.length < 1) {
-                    setValues((prev) => [...prev, e.target.value]);
-                    setAllQues((prev) => [...prev, e.target.value]);
-                    setAllVacation((allVacation) => [...allVacation, e.target.value]);
-                } else {
-                    e.target.checked = false;
-
-                    alert("You can select only 1 choice");
-                }
-            }
-            else if (data.group === "gift") {
-                if (values.length < 1) {
-                    setValues((prev) => [...prev, e.target.value]);
-                    setAllQues((prev) => [...prev, e.target.value]);
-                    setAllGifts((allGifts) => [...allGifts, e.target.value]);
-                } else {
-                    e.target.checked = false;
-
-                    alert("You can select only 1 choice");
-                }
-            }
-            else if (data.group === "date-ideas") {
-                if (values.length < 1) {
-                    setValues((prev) => [...prev, e.target.value]);
-                    setAllQues((prev) => [...prev, e.target.value]);
-                    if (data.group === "date-ideas") {
-                        setAllDateIdeas((allDateIdeas) => [...allDateIdeas, e.target.value]);
-                    }
-                } else {
-                    e.target.checked = false;
-
-                    alert("You can select only 1 choice");
-                }
-            }
-            else if (data.group === "superpower") {
-                if (values.length < 1) {
-                    setValues((prev) => [...prev, e.target.value]);
-                    setAllQues((prev) => [...prev, e.target.value]);
-                    setAllSuperpowers((allSuperpowers) => [...allSuperpowers, e.target.value]);
-                } else {
-                    e.target.checked = false;
-
-                    alert("You can select only 1 choice");
-                }
-            }
-            else {
-                if (values.length < 3) {
-                    setValues((prev) => [...prev, e.target.value]);
-                    setAllQues((prev) => [...prev, e.target.value]);
-                    if (data.group === "hobbies") {
-                        setAllHobbies((allHobbies) => [...allHobbies, e.target.value]);
-                    }
-                    else if (data.group === "priority"){
-                        setAllPriority((allPriority) => [...allPriority, e.target.value]);
-                    }
-                    else if (data.group === "icks"){
-                        setAllIcks((allIcks) => [...allIcks, e.target.value]);
-                    }
-                    else {
-                        setAllTraits((allTraits) => [...allTraits, e.target.value]);
-                    }
-                } else {
-                    e.target.checked = false;
-
-                    alert("You can select only 3 choices");
-                }
-            }
-        } else {
-        let newArr = values.filter((d) => d !== e.target.value);
-        setValues(newArr);
-        let rm = allQues.filter((item) => item !== e.target.value);
-        setAllQues(rm);
-        setAllHobbies(allHobbies.filter((item) => item !== e.target.value));
-        setAllTraits(allTraits.filter((item) => item !== e.target.value));
-        setAllLoveLang(allLoveLang.filter((item) => item !== e.target.value));
-        setAllDateIdeas(allDateIdeas.filter((item) => item !== e.target.value));
-        setAllVacation(allVacation.filter((item) => item !== e.target.value));
-        setAllGifts(allGifts.filter((item) => item !== e.target.value));
-        setAllPriority(allPriority.filter((item) => item !== e.target.value));
-        setAllIcks(allIcks.filter((item) => item !== e.target.value));
-        setAllSuperpowers(allSuperpowers.filter((item) => item !== e.target.value));
-        }
-    };
-
-    return (
-        <div>
-        <br></br>
-          <p><b>{data.prompt}</b></p>
-          {data.questions.map((ques, index) => {
-            return (
-              <label key={index}>
-                <p>
-                <input
-                  type="checkbox"
-                  name={ques.label}
-                  value={ques.label}
-                  onChange={(e) => handleChange(e)}
-                />
-                {ques.label}
-                </p>
-              </label>
-            );
-          })}
-        </div>
-      );
-    };
 
 export default Profile
