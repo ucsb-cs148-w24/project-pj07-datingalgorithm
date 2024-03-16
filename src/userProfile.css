@@ -1,0 +1,40 @@
+.header {
+    text-align: left;
+    font-size: 30px;
+    font-weight: 600;
+}
+.picture{
+    width: 20%;
+    height: 20%;
+    float: none;
+    left: -200px;
+}
+.username {
+    margin-right: 900px;
+    margin-top: 40px;
+    border-radius:3px;
+}
+.user_bio {
+    margin-right: 900px;
+    margin-left: 10px;
+}
+.user_age {
+    margin-right: 900px;
+    margin-left: 10px;
+}
+.gender {
+    margin-right: 900px;
+    margin-left: 10px;
+}
+.interest {
+    margin-right: 900px;
+    margin-left: 10px;
+}
+.hobbies {
+    margin-right: 900px;
+    margin-left: 10px;
+}
+.traits {
+    margin-right: 900px;
+    margin-left: 10px;
+}

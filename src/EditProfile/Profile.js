@@ -1,17 +1,13 @@
 import React, {useState, useRef, useEffect } from 'react';
 import './Profile.css';
-import data from '../ProfileCreationScreen/data';
 import { auth, storage, ref, db } from '../firebaseConfig';
 import { doc, setDoc, getDoc } from "firebase/firestore";
 import { useNavigate, useParams } from 'react-router-dom';
 import { getDownloadURL, uploadBytes } from "firebase/storage";
 import { useAuthState } from 'react-firebase-hooks/auth'
-import {getAge} from '../utils/userUtils';
 
 function Profile() {
     const uid = auth.currentUser ? auth.currentUser.uid : null;
-    const [user] = useAuthState(auth)
-    const userId = useParams().userId;
     const [userName, setUserName] = useState("");
     const [userBio, setUserBio] = useState("");
     const [userInterests, setUserInterests] = useState([]);
