@@ -18,7 +18,7 @@ const About = () => {
                 Our mission is to help UCSB students find meaningful relationships without the biases
                 of physical appearance. 
             </p>
-            <div className="signature-line">Love Blindly, Meet Truly!</div>
+            <div className="signature-line">Meet Blindly, Love Truly!</div>
             <h2>Meet the Team</h2>
         <div className="developer-profiles">
           <div className="developer-profile">
