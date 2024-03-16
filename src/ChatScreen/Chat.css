@@ -18,6 +18,7 @@ align-items: flex-start;
 width: 70px; /* Adjust the width of the profile picture */
 height: 70px; /* Adjust the height of the profile picture */
 border-radius: 50%; /* Make the profile picture round */
+border: 2px solid black;
 }
 
 a {
@@ -39,6 +40,6 @@ a {
 .chat__timestamp {
     color: lightgray;
     position: relative;
-    right: -2vh;
+    right: 2vh;
     top: -3vh;
 }
