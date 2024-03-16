@@ -5,6 +5,8 @@ import { db, auth } from './firebase'
 import { useNavigate, useParams } from 'react-router-dom';
 import { doc, getDoc } from "firebase/firestore"; // Ensure this import is added
 import {getAge} from './utils/userUtils';
+import ChatButton from './SwipeScreen/ChatButton.js';
+import "./userProfile.css"
 
 // import about.css
 import './About.css';
@@ -53,22 +55,18 @@ const UserProfile = () => {
         fetchUserInfo();
     })
 
-    const goBackToChatList = () => {
-        navigate("/chats");
-    }
-
-    const backToChats = () => {
+    const goToChatScreen = () => {
         navigate('/chats');
-    }
+    };
 
     return (
         <div>
-            <Header showGoToSwipeButton />
-            <button onClick={goBackToChatList}>Back to Chats</button>
+            <Header />
+            <ChatButton onClick={goToChatScreen} />
             
             <h1>User Profile</h1>
-            <img style={{ width: "20%", height: "20%" }} src={userProfilePic} alt="" />
-            <p>Name: {userName}</p>
+            <img style={{width: "20%", height: "20%"}} src={userProfilePic} alt=""/>
+            <p> Name: {userName}</p>
             <p>Bio: {userBio}</p>
             <p>Age: {userAge}</p>
             <p>Gender: {userGender}</p>

@@ -58,7 +58,7 @@ const Home = () => {
         <div className='overlay'>
             <div className="container">
                 <p className='home-h1'>Blindly</p>
-                <h2 className='text1'>Love Blindly, Meet Truly</h2>
+                <h2 className='text1'>Meet Blindly, Love Truly</h2>
                 <button onClick={handleAuthAction} className="primary-button">
                 <img
                         src= {googleIcon} // Replace "image-url.jpg" with the URL or path to your image
