@@ -74,18 +74,16 @@ const Cards = () =>{
     }, []);
 
     useEffect(() => {
-        if (user && userData
-            ) {
+        console.log("userdata", userData)
+        if (user) {
             const getProfiles = async () => {
                 const potentialMatchesDoc = doc(db, 'potentialMatches', user.email);
                 const potentialMatchesDoc2 = await getDoc(potentialMatchesDoc);
                 const potentialMatchesData = potentialMatchesDoc2.data();
 
-                console.log("potential matches", potentialMatchesData.matched);
                 setMatches(potentialMatchesData.matched);
 
                 const profilesQuery = query(collection(db, "users"));
-                console.log(userData);
                 onSnapshot(profilesQuery, (querySnapshot) => {
                     console.log("matches", matches);
                     const filteredPeople = querySnapshot.docs.map(doc => doc.data()).filter(person =>
@@ -93,8 +91,9 @@ const Cards = () =>{
                         !potentialMatchesData.newMatches.includes(person.email) &&
                         !potentialMatchesData.likes.includes(person.email) &&
                         person.email !== user.email &&
-                        getAge(person.birthday) >= 18 && 
-                        (person.gender[0] === userData.interestedIn[0] || userData.interestedIn === "everyone") );
+                        getAge(person.birthday) >= 18 
+                        //&& (person.gender[0] === userData.interestedIn[0] || userData.interestedIn === "everyone") 
+                        );
                     console.log("filtered people", filteredPeople);
                     setPeople(filteredPeople);
                 });
