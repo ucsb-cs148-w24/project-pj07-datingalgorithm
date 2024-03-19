@@ -18,7 +18,7 @@ I wrote the back end code and some of the front end code for the chat screen. I 
 I designed the welcoming home screen with the project name, and the motto and built the sign-in button and the code that only accepts UCSB students to the app. Helped others with their problems too.
 
 ## Koray
-I helped Emre on building the sign-in button. I built the whole About page. I implemented the sign out buttons that we used in other pages that directs users back to home screen. I also designed and fixed the css issues with the buttons. I also helped others with their problems.
+I helped Emre on building the sign-in button and built the About page. I implemented the sign out buttons that we used in other pages that directs users back to home screen. I also designed and fixed some css issues with the buttons.
 
 ## Palvi Sabherwal
 I did pair programming with Emily on the Profile Creation page. I worked on the questionnaire, implemented the text boxes for the questions, and worked on the UI for these features. I also worked on the presentations, slides, and filmed app demo.
