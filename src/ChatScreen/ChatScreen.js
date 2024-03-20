@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { db, auth, signInWithGoogle } from '../firebase';
-import { collection, addDoc, query, orderBy, onSnapshot, where } from "firebase/firestore";
+import { db, auth } from '../firebase';
+import { collection, addDoc, query, orderBy, onSnapshot } from "firebase/firestore";
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useNavigate, useParams } from 'react-router-dom';
 import { doc, getDoc } from "firebase/firestore"; // Ensure this import is added
@@ -12,7 +12,6 @@ function ChatScreen() {
   const [user] = useAuthState(auth);
   const navigate = useNavigate();
   const { chatId } = useParams();
-  const [userNames, setUserNames] = useState({}); // New state to store user names
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState([]);
   const [otherUserName, setOtherUserName] = useState(""); // Add state for otherUserName
@@ -46,7 +45,6 @@ function ChatScreen() {
           names[message.uid] = await fetchUserName(message.uid);
         }
       }
-      setUserNames(names);
     };
 
     if (messages.length > 0) {

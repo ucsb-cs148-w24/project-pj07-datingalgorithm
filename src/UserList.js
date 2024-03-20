@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { auth, db } from './firebase'; // Adjust the import path as necessary
+import { auth } from './firebase'; // Adjust the import path as necessary
 import { createChat } from './utils/chatUtils'; // Adjust the import path as necessary
 import { useNavigate } from 'react-router-dom';
 

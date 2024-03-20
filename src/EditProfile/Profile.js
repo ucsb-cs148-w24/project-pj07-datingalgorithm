@@ -2,17 +2,14 @@ import React, {useState, useRef, useEffect } from 'react';
 import './Profile.css';
 import { auth, storage, ref, db } from '../firebaseConfig';
 import { doc, setDoc, getDoc } from "firebase/firestore";
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { getDownloadURL, uploadBytes } from "firebase/storage";
-import { useAuthState } from 'react-firebase-hooks/auth'
-
 function Profile() {
     const uid = auth.currentUser ? auth.currentUser.uid : null;
     const [userName, setUserName] = useState("");
     const [userBio, setUserBio] = useState("");
     const [userInterests, setUserInterests] = useState([]);
     const [userGender, setUserGender] = useState("");
-    const [userProfilePic, setUserProfilePic] = useState("");
 
     const navigate = useNavigate();
     const [file, setFile] = useState(null);
@@ -42,7 +39,6 @@ function Profile() {
             if (docSnap.exists()) {
                 const data = docSnap.data();
                 setUserName(data.name);
-                setUserProfilePic(data.picUrl);
                 setUserBio(data.bio);
                 setUserInterests(data.interestedIn);
                 setUserGender(data.gender);

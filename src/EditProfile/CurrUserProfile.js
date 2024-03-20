@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Header from '../Header'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { db, auth } from '../firebase'
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { doc, getDoc } from "firebase/firestore"; // Ensure this import is added
 import {getAge} from '../utils/userUtils';
 import "./CurrUserProfile.css"
