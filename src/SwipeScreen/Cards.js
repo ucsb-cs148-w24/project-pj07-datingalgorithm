@@ -7,7 +7,6 @@ import {
     collection,
     onSnapshot,
     query,
-    where,
     getDoc,
     doc,
     setDoc,

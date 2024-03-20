@@ -6,7 +6,6 @@ import Chat from "./Chat";
 import { fetchUserName, fetchUserIdByEmail, fetchUserProfilePicById} from '../utils/userUtils';
 import NewMatches from './newMatches';
 import './Chat.css';
-import { useNavigate } from 'react-router-dom'; // Added import for useNavigate
 import Header from '../Header';
 import "../SwipeScreen/ChatButton.css";
 function Chats() {
