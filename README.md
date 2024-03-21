@@ -22,6 +22,6 @@ We have decided to use React.js and Node.js for our project. This will help us m
 ## User Roles and Permissions:
 - User/Love Seeker: Users will be able to swipe right or left meaning yes or no to other users to match with them.
 
-## Installation:
+## Deployment:
 Link: https://project-pj07-datingalgorithm.vercel.app/
 
