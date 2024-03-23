@@ -7,7 +7,6 @@ import {
     collection,
     onSnapshot,
     query,
-    where,
     getDoc,
     doc,
     setDoc,
@@ -29,7 +28,6 @@ const Cards = () =>{
     const [people, setPeople] = useState([]);
     const [matches, setMatches] = useState([]);
     const [user, setUser] = useState(null);
-    const [userChats, setUserChats] = useState([]);
     const [userData, setUserData] = useState(null);
     const navigate = useNavigate();
     const uid = auth.currentUser ? auth.currentUser.uid : null;
@@ -100,16 +98,7 @@ const Cards = () =>{
             };
             getProfiles();
         }
-    }, [db, user]);
-
-    useEffect(() => {
-        if (user) {
-            const usersQuery = query(collection(db, 'chats'), where('users', 'array-contains', user.email));
-            onSnapshot(usersQuery, snapshot => {
-                setUserChats(snapshot.docs);
-            });
-        }
-    }, [db, user]);
+    }, [user, userData, matches]);
 
     const handleSwipe = async (userAId, userBId) => {
         if (userAId === userBId) {

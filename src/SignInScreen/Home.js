@@ -42,12 +42,6 @@ const Home = () => {
                     console.error("Error during sign-in:", error);
                     // Show the error message
                     setErrorMessage("Only UCSB students are accepted");
-
-                    // Clear the error message after 2 seconds
-                    const timer = setTimeout(() => {
-                        setErrorMessage(null);
-                    }, 2000);
-
                     // Save the timer ID to clear it if needed (e.g., if the user closes the pop-up)
 
                 });

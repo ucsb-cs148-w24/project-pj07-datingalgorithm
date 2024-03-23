@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { useNavigate } from 'react-router-dom';
-import { doc, getDoc, setDoc } from "firebase/firestore";
+import { doc, getDoc } from "firebase/firestore";
 import {db, auth} from '../firebase';
 import "./ChatButton.css";
 import { MessageIcon } from "../icons";
@@ -22,10 +22,7 @@ const ChatButton = () => {
             if (!user) {
                 return;
             }
-            
-    
-            const userDoc = doc(db, 'potentialMatches', user.email);
-            
+
             const newUserDoc = doc(db, 'potentialMatches', user.email);
             const userSnap = await getDoc(newUserDoc);
     
